@@ -1,4 +1,5 @@
-﻿namespace FreeParkingSystem.Common.Models
+﻿// ReSharper disable CheckNamespace
+namespace FreeParkingSystem.Common.Models
 {
     public interface IRole : IBaseModel
     {

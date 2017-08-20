@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace FreeParkingSystem.Common.Models.Interfaces
+// ReSharper disable CheckNamespace
+namespace FreeParkingSystem.Common.Models
 {
     public interface IDaySchedule
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace FreeParkingSystem.Common.Models.Interfaces
+// ReSharper disable CheckNamespace
+namespace FreeParkingSystem.Common.Models
 {
     public interface IPaidParkingSpace : IParkingSpace
     {

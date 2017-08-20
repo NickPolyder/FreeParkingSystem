@@ -4,14 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.API", "FreeParkingSystem.API\FreeParkingSystem.API.csproj", "{7368E1E4-C552-444C-BCC6-5490474FCA57}"
+	ProjectSection(ProjectDependencies) = postProject
+		{92F0F56B-9E59-407F-AC01-2DA7DD65D52E} = {92F0F56B-9E59-407F-AC01-2DA7DD65D52E}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0EBC1148-1600-48AD-BD14-B5AA96ED2143}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common", "Common\FreeParkingSystem.Common.csproj", "{92F0F56B-9E59-407F-AC01-2DA7DD65D52E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common", "Common\FreeParkingSystem.Common.csproj", "{92F0F56B-9E59-407F-AC01-2DA7DD65D52E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.API.Tests", "FreeParkingSystem.API.Tests\FreeParkingSystem.API.Tests.csproj", "{064E7C95-C993-4ADD-8637-53731E7A62B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.API.Tests", "FreeParkingSystem.API.Tests\FreeParkingSystem.API.Tests.csproj", "{064E7C95-C993-4ADD-8637-53731E7A62B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Tests", "FreeParkingSystem.Common.Tests\FreeParkingSystem.Common.Tests.csproj", "{9521A0A7-B653-4F64-9874-95BA20671BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Tests", "FreeParkingSystem.Common.Tests\FreeParkingSystem.Common.Tests.csproj", "{9521A0A7-B653-4F64-9874-95BA20671BEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

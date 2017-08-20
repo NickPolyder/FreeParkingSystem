@@ -39,8 +39,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Is_Open_Now_Returns_True_Because_Of_The_Open_Hour_Range()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((DateTimeOffset.Now.AddHours(-1).TimeOfDay, DateTimeOffset.Now.AddHours(5).TimeOfDay));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (DateTimeOffset.Now.AddHours(-1).TimeOfDay, DateTimeOffset.Now.AddHours(5).TimeOfDay)
+            };
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
 
@@ -54,8 +56,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Is_Open_Now_Returns_False_Because_Of_The_Open_Hour_Range()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((DateTimeOffset.Now.AddHours(1).TimeOfDay, DateTimeOffset.Now.AddHours(2).TimeOfDay));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (DateTimeOffset.Now.AddHours(1).TimeOfDay, DateTimeOffset.Now.AddHours(2).TimeOfDay)
+            };
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
 
@@ -69,8 +73,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Throws_ExceptionsBecauseOfInvalidTimeRange()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 8, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 8, 0, 0))
+            };
 
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
@@ -85,8 +91,7 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Does_Not_Add_Time_Collapsed_Open_Hours()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)> {(new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0))};
             var openHourListCount = openHourList.Count;
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
@@ -99,8 +104,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 4, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 4, 0, 0))
+            };
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
 
@@ -113,8 +120,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Updates_End_Time_Instead_Of_Adding_A_New_One()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0))
+            };
             var openHourListCount = openHourList.Count;
             var endTime = new TimeSpan(0, 15, 0, 0);
             // act  
@@ -130,8 +139,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Updates_Start_Time_Instead_Of_Adding_A_New_One()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0))
+            };
             var openHourListCount = openHourList.Count;
             var startTime = new TimeSpan(0, 1, 0, 0);
             var endTime = new TimeSpan(0, 12, 0, 0);
@@ -148,8 +159,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Start_Time_Equals_End_Time()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 6, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 6, 0, 0))
+            };
             var openHourListCount = openHourList.Count;
             var startTime = new TimeSpan(0, 6, 0, 0);
             var endTime = new TimeSpan(0, 12, 0, 0);
@@ -166,8 +179,10 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_End_Time_Equals_Start_Time()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)>();
-            openHourList.Add((new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 6, 0, 0)));
+            var openHourList = new List<(TimeSpan, TimeSpan)>
+            {
+                (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 6, 0, 0))
+            };
             var openHourListCount = openHourList.Count;
             var startTime = new TimeSpan(0, 0, 0, 0);
             var endTime = new TimeSpan(0, 2, 0, 0);

@@ -38,10 +38,12 @@ namespace FreeParkingSystem.Common.Tests
         [Fact]
         public void Is_Open_Now_Returns_True_Because_Of_The_Open_Hour_Range()
         {
+
             // arrange  
+
             var openHourList = new List<(TimeSpan, TimeSpan)>
             {
-                (DateTimeOffset.Now.AddHours(-1).TimeOfDay, DateTimeOffset.Now.AddHours(5).TimeOfDay)
+                ( DateTimeOffset.Now.AddSeconds(-1).TimeOfDay,  DateTimeOffset.Now.AddSeconds(1).TimeOfDay )
             };
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);
@@ -91,7 +93,7 @@ namespace FreeParkingSystem.Common.Tests
         public void Add_Open_Hours_Does_Not_Add_Time_Collapsed_Open_Hours()
         {
             // arrange  
-            var openHourList = new List<(TimeSpan, TimeSpan)> {(new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0))};
+            var openHourList = new List<(TimeSpan, TimeSpan)> { (new TimeSpan(0, 2, 0, 0), new TimeSpan(0, 12, 0, 0)) };
             var openHourListCount = openHourList.Count;
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);

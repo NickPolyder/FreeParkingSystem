@@ -1,6 +1,6 @@
-﻿namespace FreeParkingSystem.Common.Services
+﻿namespace FreeParkingSystem.Common.Services.Validation
 {
-    public interface IValidatationComponent
+    public interface IvalidationComponent
     {
         /// <summary>
         /// Validates the given object 

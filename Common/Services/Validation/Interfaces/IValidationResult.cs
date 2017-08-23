@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FreeParkingSystem.Common.Services
+namespace FreeParkingSystem.Common.Services.Validation
 {
     public interface IValidationResult
     {

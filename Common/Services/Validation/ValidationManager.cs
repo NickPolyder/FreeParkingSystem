@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FreeParkingSystem.Common.Helpers;
 
-namespace FreeParkingSystem.Common.Services
+namespace FreeParkingSystem.Common.Services.Validation
 {
-    public class ValidationManager : IValidatationComponent
+    public class ValidationManager : IvalidationComponent
     {
-        private List<IValidatationComponent> _validations;
+        private List<IvalidationComponent> _validations;
 
         public ValidationManager() : this(_defaultValidation())
         { }
 
-        public ValidationManager(IEnumerable<IValidatationComponent> validationRules)
+        public ValidationManager(IEnumerable<IvalidationComponent> validationRules)
         {
-            _validations = new List<IValidatationComponent>(validationRules);
-            _validations = _validations.Union(_defaultValidation()).ToList();
+            _validations = new List<IvalidationComponent>(validationRules);
+            var defaultRules = _defaultValidation();
+            _validations = _validations.Union(defaultRules, new ValidationComponentComparer()).ToList();
         }
 
         ///<inheritdoc />
@@ -32,7 +34,7 @@ namespace FreeParkingSystem.Common.Services
             return new ValidationResult(validationResults.SelectMany(tt => tt.Errors));
         }
 
-        public void Add(IValidatationComponent composite)
+        public void Add(IvalidationComponent composite)
         {
             if (_validations.IndexOf(composite) < 0)
             {
@@ -40,16 +42,16 @@ namespace FreeParkingSystem.Common.Services
             }
         }
 
-        public bool Remove(IValidatationComponent composite)
+        public bool Remove(IvalidationComponent composite)
         {
             return _validations.Remove(composite);
         }
 
-        private static IEnumerable<IValidatationComponent> _defaultValidation()
+        private static IEnumerable<IvalidationComponent> _defaultValidation()
         {
-            return new List<IValidatationComponent>
+            return new List<IvalidationComponent>
             {
-
+                new DataAnnotationValidation()
             };
         }
     }

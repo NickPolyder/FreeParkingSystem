@@ -31,7 +31,7 @@ namespace FreeParkingSystem.Common.Services.Validation
                 validationResults.Add(composite.Validate(obj));
             });
 
-            return new ValidationResult(validationResults.SelectMany(tt => tt.Errors));
+            return new ValidationResult(validationResults.Where(tt => tt.Errors != null).SelectMany(tt => tt.Errors));
         }
 
         public void Add(IvalidationComponent composite)

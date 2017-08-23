@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FreeParkingSystem.Common.Services.Validation.Attributes;
 
 namespace FreeParkingSystem.Common.Models
 {
@@ -10,8 +11,7 @@ namespace FreeParkingSystem.Common.Models
         [Required]
         public string LastName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [ValidateEmail]
         public string Email { get; set; }
 
         public string Password { get; set; }

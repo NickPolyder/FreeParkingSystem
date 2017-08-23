@@ -11,4 +11,24 @@
     <PackageReference Include="X.PagedList" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Services\Validation\Attributes\Resources\ValidationMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Services\Validation\Attributes\Resources\ValidationMessages.el-gr.resx">
+      <CustomToolNamespace>Res</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Services\Validation\Attributes\Resources\ValidationMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Res</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

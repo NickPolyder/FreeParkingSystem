@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FreeParkingSystem.Common.Services
+namespace FreeParkingSystem.Common.Services.Validation
 {
     public struct ValidationResult : IValidationResult
     {
@@ -18,8 +18,13 @@ namespace FreeParkingSystem.Common.Services
 
         public ValidationResult(IEnumerable<Exception> errors)
         {
-            IsValid = errors?.Count() > 0;
+            IsValid = errors?.Count() <= 0;
             Errors = errors;
+        }
+
+        public static ValidationResult CreateSuccessResult()
+        {
+            return new ValidationResult(true);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace FreeParkingSystem.Common.Services.Validation
         {
             var validationContext = new ValidationContext(obj);
             var validationResults = new Collection<System.ComponentModel.DataAnnotations.ValidationResult>();
-            if (Validator.TryValidateObject(obj, validationContext, validationResults))
+            if (Validator.TryValidateObject(obj, validationContext, validationResults,true))
             {
                 return ValidationResult.CreateSuccessResult();
             }

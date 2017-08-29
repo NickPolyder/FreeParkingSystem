@@ -11,7 +11,6 @@ namespace FreeParkingSystem.Common.Services.Validation.Attributes
 
         }
 
-
         public override bool IsValid(object value)
         {
             var str = value as string;

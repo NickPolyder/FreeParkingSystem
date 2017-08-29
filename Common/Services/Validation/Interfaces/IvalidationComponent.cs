@@ -1,4 +1,5 @@
-﻿namespace FreeParkingSystem.Common.Services.Validation
+﻿// ReSharper disable once CheckNamespace
+namespace FreeParkingSystem.Common.Services.Validation
 {
     public interface IValidationComponent
     {

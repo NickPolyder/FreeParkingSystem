@@ -103,5 +103,25 @@ namespace FreeParkingSystem.Common.Tests
             Assert.Equal(1, result.Errors?.Count() ?? 0);
         }
 
+        [Fact]
+        public void Validation_Manager_Returns_CanValidate_True()
+        {
+            // arrange  
+            var user = new User
+            {
+                Active = true,
+                FirstName = "Nick",
+                LastName = "Pol"
+            };
+            user.CreatedAt = user.UpdatedAt = DateTime.Now;
+            var validationManager = new ValidationManager();
+            // act  
+
+            var result = validationManager.CanValidate(user);
+
+            // assert  
+            Assert.Equal(true, result);
+        }
+
     }
 }

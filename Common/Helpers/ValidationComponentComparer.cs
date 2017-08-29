@@ -4,7 +4,7 @@ using FreeParkingSystem.Common.Services.Validation;
 
 namespace FreeParkingSystem.Common.Helpers
 {
-    public class ValidationComponentComparer : IEqualityComparer<IvalidationComponent>
+    public class ValidationComponentComparer : IEqualityComparer<IValidationComponent>
     {
         private TypeEqualityComparer _comparer;
 
@@ -15,12 +15,12 @@ namespace FreeParkingSystem.Common.Helpers
         {
             _comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
         }
-        public bool Equals(IvalidationComponent x, IvalidationComponent y)
+        public bool Equals(IValidationComponent x, IValidationComponent y)
         {
             return _comparer.Equals(x, y);
         }
 
-        public int GetHashCode(IvalidationComponent obj)
+        public int GetHashCode(IValidationComponent obj)
         {
             return _comparer.GetHashCode(obj);
         }

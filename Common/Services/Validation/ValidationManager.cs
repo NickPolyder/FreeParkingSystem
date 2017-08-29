@@ -5,16 +5,16 @@ using FreeParkingSystem.Common.Helpers;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
-    public class ValidationManager : IvalidationComponent
+    public class ValidationManager : IValidationComponent
     {
-        private List<IvalidationComponent> _validations;
+        private List<IValidationComponent> _validations;
 
         public ValidationManager() : this(_defaultValidation())
         { }
 
-        public ValidationManager(IEnumerable<IvalidationComponent> validationRules)
+        public ValidationManager(IEnumerable<IValidationComponent> validationRules)
         {
-            _validations = new List<IvalidationComponent>(validationRules);
+            _validations = new List<IValidationComponent>(validationRules);
             var defaultRules = _defaultValidation();
             _validations = _validations.Union(defaultRules, new ValidationComponentComparer()).ToList();
         }
@@ -26,15 +26,20 @@ namespace FreeParkingSystem.Common.Services.Validation
                 throw new InvalidOperationException($"{nameof(_validations)} has zero elements");
 
             var validationResults = new List<IValidationResult>();
-            _validations.ForEach(composite =>
-            {
-                validationResults.Add(composite.Validate(obj));
-            });
+            _validations.Where(tt => tt.CanValidate(obj)).ToList().ForEach(composite =>
+              {
+                  validationResults.Add(composite.Validate(obj));
+              });
 
             return new ValidationResult(validationResults.Where(tt => tt.Errors != null).SelectMany(tt => tt.Errors));
         }
 
-        public void Add(IvalidationComponent composite)
+        public bool CanValidate(object obj)
+        {
+            return _validations.Any(tt => tt.CanValidate(obj));
+        }
+
+        public void Add(IValidationComponent composite)
         {
             if (_validations.IndexOf(composite) < 0)
             {
@@ -42,14 +47,14 @@ namespace FreeParkingSystem.Common.Services.Validation
             }
         }
 
-        public bool Remove(IvalidationComponent composite)
+        public bool Remove(IValidationComponent composite)
         {
             return _validations.Remove(composite);
         }
 
-        private static IEnumerable<IvalidationComponent> _defaultValidation()
+        private static IEnumerable<IValidationComponent> _defaultValidation()
         {
-            return new List<IvalidationComponent>
+            return new List<IValidationComponent>
             {
                 new DataAnnotationValidation()
             };

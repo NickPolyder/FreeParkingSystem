@@ -4,13 +4,18 @@ using System.Linq;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
-    public class DataAnnotationValidation : IvalidationComponent
+    public class DataAnnotationValidation : IValidationComponent
     {
+        public bool CanValidate(object obj)
+        {
+            return true;
+        }
+
         public IValidationResult Validate(object obj)
         {
             var validationContext = new ValidationContext(obj);
             var validationResults = new Collection<System.ComponentModel.DataAnnotations.ValidationResult>();
-            if (Validator.TryValidateObject(obj, validationContext, validationResults,true))
+            if (Validator.TryValidateObject(obj, validationContext, validationResults, true))
             {
                 return ValidationResult.CreateSuccessResult();
             }

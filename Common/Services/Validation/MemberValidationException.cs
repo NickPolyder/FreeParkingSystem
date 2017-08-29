@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
@@ -8,9 +7,9 @@ namespace FreeParkingSystem.Common.Services.Validation
     {
         public IEnumerable<string> MemberNames
         {
-            get { return Data[nameof(MemberNames)] as IEnumerable<string>; }
+            get => Data[nameof(MemberNames)] as IEnumerable<string>;
 
-            private set { Data[nameof(MemberNames)] = value; }
+            private set => Data[nameof(MemberNames)] = value;
         }
 
         /// <summary>
@@ -18,8 +17,8 @@ namespace FreeParkingSystem.Common.Services.Validation
         /// </summary>
         public Type ValidationType
         {
-            get { return Data[nameof(ValidationType)] as Type; }
-            private set { Data[nameof(ValidationType)] = value; }
+            get => Data[nameof(ValidationType)] as Type;
+            private set => Data[nameof(ValidationType)] = value;
         }
 
         /// <summary>
@@ -27,9 +26,9 @@ namespace FreeParkingSystem.Common.Services.Validation
         /// </summary>
         public object ValidationObject
         {
-            get { return Data[nameof(ValidationObject)]; }
+            get => Data[nameof(ValidationObject)];
 
-            private set { Data[nameof(ValidationObject)] = value; }
+            private set => Data[nameof(ValidationObject)] = value;
         }
 
         public MemberValidationException(object validationObject, string message,
@@ -40,6 +39,6 @@ namespace FreeParkingSystem.Common.Services.Validation
             ValidationType = validationObject?.GetType();
             MemberNames = memberNames;
         }
-
     }
 }
+

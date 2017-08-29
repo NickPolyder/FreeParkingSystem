@@ -5,9 +5,11 @@ using FreeParkingSystem.Common.Helpers;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
-    public class ValidationManager : IValidationComponent
+    public class ValidationManager : IValidationManager
     {
         private List<IValidationComponent> _validations;
+
+        private readonly ValidationComponentComparer _comparer = new ValidationComponentComparer();
 
         public ValidationManager() : this(_defaultValidation())
         { }
@@ -16,7 +18,7 @@ namespace FreeParkingSystem.Common.Services.Validation
         {
             _validations = new List<IValidationComponent>(validationRules);
             var defaultRules = _defaultValidation();
-            _validations = _validations.Union(defaultRules, new ValidationComponentComparer()).ToList();
+            _validations = _validations.Union(defaultRules, _comparer).ToList();
         }
 
         ///<inheritdoc />
@@ -41,15 +43,37 @@ namespace FreeParkingSystem.Common.Services.Validation
 
         public void Add(IValidationComponent composite)
         {
-            if (_validations.IndexOf(composite) < 0)
+            if (!_validations.Any(validation => _comparer.Equals(composite, validation)))
             {
                 _validations.Add(composite);
             }
         }
 
+        public void AddRange(IEnumerable<IValidationComponent> composites)
+        {
+            foreach (var composite in composites)
+            {
+                Add(composite);
+            }
+        }
+
         public bool Remove(IValidationComponent composite)
         {
-            return _validations.Remove(composite);
+            return _validations.RemoveAll(validation => _comparer.Equals(composite, validation)) > 0;
+        }
+
+        public int RemoveRange(IEnumerable<IValidationComponent> composites)
+        {
+            var counter = 0;
+            foreach (var composite in composites)
+            {
+                if (Remove(composite))
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
         }
 
         private static IEnumerable<IValidationComponent> _defaultValidation()

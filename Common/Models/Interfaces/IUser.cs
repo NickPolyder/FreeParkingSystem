@@ -1,4 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
+
+using System.Collections.Generic;
+
 namespace FreeParkingSystem.Common.Models
 {
     public interface IUser : IBaseModel
@@ -18,7 +21,13 @@ namespace FreeParkingSystem.Common.Models
 
         string FullName();
 
-        IRole Role { get; set; }
+        IList<IRole> Roles { get; set; }
+
+        void AddRole(IRole role);
+
+        void ReplaceRole(IRole toReplace, IRole target);
+
+        void RemoveRole(IRole role);
 
     }
 }

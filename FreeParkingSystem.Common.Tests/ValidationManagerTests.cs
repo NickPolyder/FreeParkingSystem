@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Services.Validation;
@@ -63,7 +64,7 @@ namespace FreeParkingSystem.Common.Tests
                 FirstName = "Nick",
                 LastName = "Pol",
                 Email = "MyNewEmail@mail.com",
-                Role = new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" }
+                Roles = new List<IRole> { new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" } }
 
             };
             user.CreatedAt = user.UpdatedAt = DateTime.Now;
@@ -87,7 +88,7 @@ namespace FreeParkingSystem.Common.Tests
                 FirstName = "Nick",
                 LastName = "Pol",
                 Email = "MyNewEmail",
-                Role = new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" }
+                Roles = new List<IRole> { new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" } }
 
             };
             user.CreatedAt = user.UpdatedAt = DateTime.Now;

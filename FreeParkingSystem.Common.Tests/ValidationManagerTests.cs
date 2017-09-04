@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Services.Validation;
 using Xunit;

@@ -221,7 +221,7 @@ namespace FreeParkingSystem.Common.Services.Helpers
         /// <returns>
         ///     <c>true</c> if the specified result is an <see cref="IEmptyServiceResult" />.; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNone(this IServiceResult result) => result is IEmptyServiceResult;
+        public static bool IsEmpty(this IServiceResult result) => result is IEmptyServiceResult;
 
         /// <summary>
         ///     Determines whether this instance is an <see cref="ISuccessServiceResult" />.

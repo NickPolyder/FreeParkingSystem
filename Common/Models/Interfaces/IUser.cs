@@ -27,7 +27,7 @@ namespace FreeParkingSystem.Common.Models
 
         void ReplaceRole(IRole toReplace, IRole target);
 
-        void RemoveRole(IRole role);
+        bool RemoveRole(IRole role);
 
     }
 }

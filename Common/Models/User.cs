@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using FreeParkingSystem.Common.Helpers;
 using FreeParkingSystem.Common.Services.Validation.Attributes;
 
 namespace FreeParkingSystem.Common.Models
@@ -66,14 +67,14 @@ namespace FreeParkingSystem.Common.Models
                 AddRole(target);
             }
 
-            if (!Roles.Remove(toReplace))
+            if (!RemoveRole(toReplace))
             {
                 throw new InvalidOperationException($"The {toReplace.AccessLevel}:{toReplace.Description} does not exist.");
             }
             Roles.Add(target);
         }
 
-        public void RemoveRole(IRole role)
+        public bool RemoveRole(IRole role)
         {
             if (role == null)
             {
@@ -82,10 +83,14 @@ namespace FreeParkingSystem.Common.Models
 
             if (Roles == null || Roles.Count == 0)
             {
-                return;
+                return false;
             }
 
-            Roles.Remove(role);
+            var index = Roles.GetIndex(rl => role.Id == rl.Id);
+            if (index < 0) return false;
+
+            Roles.RemoveAt(index);
+            return true;
         }
 
         public string FullName()

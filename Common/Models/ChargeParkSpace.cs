@@ -16,5 +16,29 @@ namespace FreeParkingSystem.Common.Models
             Hour = hour;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ChargeParkSpace)) return false;
+            var castedObj = (ChargeParkSpace)obj;
+            return Cost.Equals(castedObj.Cost) && Hour.Equals(castedObj.Hour);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Cost.GetHashCode() * 397) ^ Hour.GetHashCode();
+            }
+        }
+
+        public static bool operator ==(ChargeParkSpace left, ChargeParkSpace right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ChargeParkSpace left, ChargeParkSpace right)
+        {
+            return !(left == right);
+        }
     }
 }

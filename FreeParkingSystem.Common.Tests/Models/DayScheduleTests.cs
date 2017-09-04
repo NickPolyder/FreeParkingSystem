@@ -60,7 +60,7 @@ namespace FreeParkingSystem.Common.Tests
             // arrange  
             var openHourList = new List<(TimeSpan, TimeSpan)>
             {
-                (DateTimeOffset.Now.AddHours(1).TimeOfDay, DateTimeOffset.Now.AddHours(2).TimeOfDay)
+                (DateTimeOffset.Now.AddSeconds(2).TimeOfDay, DateTimeOffset.Now.AddSeconds(4).TimeOfDay)
             };
             // act  
             var daySched = new DaySchedule(DateTime.Now.DayOfWeek, openHourList);

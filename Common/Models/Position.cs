@@ -40,5 +40,15 @@ namespace FreeParkingSystem.Common.Models
                 return (Latitude.GetHashCode() * 397) ^ Longitude.GetHashCode();
             }
         }
+
+        public static bool operator ==(Position left, Position right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Position left, Position right)
+        {
+            return !(left == right);
+        }
     }
 }

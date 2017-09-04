@@ -9,5 +9,9 @@ namespace FreeParkingSystem.Common.Services.Models
 
         public ServiceResultException(string message, Exception innerException = null) : base(message, innerException)
         { }
+
+        public ServiceResultException(string message) : base(message)
+        {
+        }
     }
 }

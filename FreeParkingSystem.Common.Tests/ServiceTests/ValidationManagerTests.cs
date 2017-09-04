@@ -50,8 +50,7 @@ namespace FreeParkingSystem.Common.Tests
 
             // assert  
             Assert.Equal(false, result.IsValid);
-            //It will be 2 because i require email and Role and none is provided.
-            Assert.Equal(2, result.Errors?.Count() ?? 0);
+            Assert.Equal(1, result.Errors?.Count() ?? 0);
         }
 
         [Fact]

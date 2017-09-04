@@ -43,5 +43,10 @@ namespace FreeParkingSystem.Common.Models
         {
             return new Role(AccessLevel.Administrator);
         }
+
+        public static IRole Member()
+        {
+            return new Role(AccessLevel.Member);
+        }
     }
 }

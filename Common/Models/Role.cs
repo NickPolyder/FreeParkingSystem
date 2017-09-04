@@ -1,4 +1,6 @@
-﻿namespace FreeParkingSystem.Common.Models
+﻿using FreeParkingSystem.Common.Helpers;
+
+namespace FreeParkingSystem.Common.Models
 {
     public class Role : BaseModel, IRole
     {
@@ -22,6 +24,15 @@
             Description = description;
             CreatedAt = UpdatedAt = System.DateTimeOffset.Now;
         }
+
+        public override bool Equals(object obj) => RoleEqualityComparer.Current.Equals(this, obj as IRole);
+
+        public static bool operator ==(Role role1, Role role2) => RoleEqualityComparer.Current.Equals(role1, role2);
+
+        public static bool operator !=(Role role1, Role role2) => !RoleEqualityComparer.Current.Equals(role1, role2);
+
+        public override int GetHashCode() => RoleEqualityComparer.Current.GetHashCode(this);
+
 
         public static IRole Anonymous()
         {

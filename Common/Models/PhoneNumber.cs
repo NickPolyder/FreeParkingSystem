@@ -36,5 +36,15 @@ namespace FreeParkingSystem.Common.Models
         {
             return $"PhoneType: {PhoneType}\nNumber: {Number}";
         }
+
+        public static bool operator ==(PhoneNumber left, PhoneNumber right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(PhoneNumber left, PhoneNumber right)
+        {
+            return !(left == right);
+        }
     }
 }

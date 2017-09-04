@@ -4,14 +4,21 @@ using X.PagedList;
 
 namespace FreeParkingSystem.Common.Repositories
 {
-    public abstract class BasePagedRepository<TEntity> : BaseRepository<TEntity>, IBasePagedRepository<TEntity> where TEntity : IBaseModel, new()
+    public abstract class BasePagedRepository<TEntity> : BaseRepository<TEntity>, IBasePagedRepository<TEntity>
+        where TEntity : IBaseModel
     {
         public virtual IPagedList<TEntity> GetByFilter(Func<TEntity, bool> filter, int skip, int take)
         {
             throw new NotImplementedException();
         }
 
-        public virtual IPagedList<TEntity> GetByFilter<TKey>(Func<TEntity, bool> filter, Func<TEntity, TKey> orderBy, int skip, int take)
+        public virtual IPagedList<TEntity> GetByFilter<TKey>(Func<TEntity, bool> filter, Func<TEntity, TKey> orderBy,
+            int skip, int take)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPagedList<TEntity> GetAll<TKey>(Func<TEntity, TKey> orderBy, int skip, int take)
         {
             throw new NotImplementedException();
         }

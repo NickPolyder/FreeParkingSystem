@@ -6,13 +6,15 @@ using FreeParkingSystem.Common.Models;
 // ReSharper disable CheckNamespace
 namespace FreeParkingSystem.Common.Repositories
 {
-    public interface IBaseRepository<TEntity> where TEntity : IBaseModel, new()
+    public interface IBaseRepository<TEntity> where TEntity : IBaseModel
     {
         TEntity GetById(string id);
 
         TEntity GetOneByFilter(Func<TEntity, bool> filter);
 
-        IEnumerable<TEntity> GetByFilter(Func<TEntity, bool> filter);
+        IEnumerable<TEntity> GetByFilter<TKey>(Func<TEntity, bool> filter, Func<TEntity, TKey> orderPredicate = null);
+
+        IEnumerable<TEntity> GetAll<TKey>(Func<TEntity, TKey> orderPredicate = null);
 
         void Insert(TEntity item);
 

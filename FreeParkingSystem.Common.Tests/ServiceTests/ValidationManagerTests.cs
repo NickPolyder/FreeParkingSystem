@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Services.Validation;
 using Xunit;
@@ -51,8 +50,7 @@ namespace FreeParkingSystem.Common.Tests
 
             // assert  
             Assert.Equal(false, result.IsValid);
-            //It will be 2 because i require email and Role and none is provided.
-            Assert.Equal(2, result.Errors?.Count() ?? 0);
+            Assert.Equal(1, result.Errors?.Count() ?? 0);
         }
 
         [Fact]
@@ -65,7 +63,7 @@ namespace FreeParkingSystem.Common.Tests
                 FirstName = "Nick",
                 LastName = "Pol",
                 Email = "MyNewEmail@mail.com",
-                Role = new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" }
+                Roles = new List<IRole> { new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" } }
 
             };
             user.CreatedAt = user.UpdatedAt = DateTime.Now;
@@ -89,7 +87,7 @@ namespace FreeParkingSystem.Common.Tests
                 FirstName = "Nick",
                 LastName = "Pol",
                 Email = "MyNewEmail",
-                Role = new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" }
+                Roles = new List<IRole> { new Role() { AccessLevel = AccessLevel.Administrator, Description = "Administrator" } }
 
             };
             user.CreatedAt = user.UpdatedAt = DateTime.Now;

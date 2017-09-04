@@ -39,6 +39,18 @@ namespace FreeParkingSystem.Common.Services.Validation
             ValidationType = validationObject?.GetType();
             MemberNames = memberNames;
         }
+
+        public MemberValidationException()
+        {
+        }
+
+        public MemberValidationException(string message) : base(message)
+        {
+        }
+
+        public MemberValidationException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }
 

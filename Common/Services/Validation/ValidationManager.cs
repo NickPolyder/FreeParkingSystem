@@ -9,7 +9,7 @@ namespace FreeParkingSystem.Common.Services.Validation
     {
         private List<IValidationComponent> _validations;
 
-        private readonly ValidationComponentComparer _comparer = new ValidationComponentComparer();
+        private readonly ValidationComponentEqualityComparer _comparer = new ValidationComponentEqualityComparer();
 
         public ValidationManager() : this(_defaultValidation())
         { }

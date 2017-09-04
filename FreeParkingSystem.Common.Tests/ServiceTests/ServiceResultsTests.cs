@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Services;
 using FreeParkingSystem.Common.Services.Helpers;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace FreeParkingSystem.Common.Tests
 {
@@ -32,10 +27,35 @@ namespace FreeParkingSystem.Common.Tests
                 output.WriteLine("Exception: {0}", ex.Message);
                 return ex;
             });
-            // assert  
 
+            // assert  
             Assert.Equal(true, result.IsFailure());
             Assert.NotNull((result as IFailureServiceResult)?.Exception);
+        }
+
+        [Fact]
+        public void Returns_Empty_Result()
+        {
+            // arrange  
+
+            // act  
+            var result = ServiceResult.Return();
+
+            // assert  
+            Assert.Equal(true, result.IsEmpty());
+        }
+
+        [Fact]
+        public void Returns_Success_Result()
+        {
+            // arrange  
+
+            // act  
+            var result = ServiceResult.Return(1);
+            // assert  
+
+            Assert.Equal(true, result.IsSuccess());
+            Assert.Equal(1, (result as ISuccessServiceResult<int>).Value);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace FreeParkingSystem.Common.Services.Validation.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = true)]
-    public class ValidateEmailAttribute : ValidationAttribute
+    public sealed class ValidateEmailAttribute : ValidationAttribute
     {
         public ValidateEmailAttribute() : base(() => Res.ValidationMessages.ValidationEmailError)
         {

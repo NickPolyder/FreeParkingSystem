@@ -4,14 +4,14 @@ using FreeParkingSystem.Common.Services.Validation;
 
 namespace FreeParkingSystem.Common.Helpers
 {
-    public class ValidationComponentComparer : IEqualityComparer<IValidationComponent>
+    public class ValidationComponentEqualityComparer : IEqualityComparer<IValidationComponent>
     {
         private TypeEqualityComparer _comparer;
 
-        public ValidationComponentComparer() : this(new TypeEqualityComparer())
+        public ValidationComponentEqualityComparer() : this(new TypeEqualityComparer())
         { }
 
-        public ValidationComponentComparer(TypeEqualityComparer comparer)
+        public ValidationComponentEqualityComparer(TypeEqualityComparer comparer)
         {
             _comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
         }

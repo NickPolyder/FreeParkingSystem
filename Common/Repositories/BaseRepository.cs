@@ -7,7 +7,7 @@ using FreeParkingSystem.Common.Models;
 
 namespace FreeParkingSystem.Common.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : IBaseModel, new()
+    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : IBaseModel
     {
 
         public virtual TEntity GetById(string id)
@@ -20,7 +20,12 @@ namespace FreeParkingSystem.Common.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual IEnumerable<TEntity> GetByFilter(Func<TEntity, bool> filter)
+        public virtual IEnumerable<TEntity> GetByFilter<TKey>(Func<TEntity, bool> filter, Func<TEntity, TKey> orderPredicate = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual IEnumerable<TEntity> GetAll<TKey>(Func<TEntity, TKey> orderPredicate = null)
         {
             throw new NotImplementedException();
         }

@@ -233,6 +233,61 @@ namespace FreeParkingSystem.Common.Services.Helpers
         public static bool IsSuccess(this IServiceResult result) => result is ISuccessServiceResult;
 
         /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="ISuccessServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static ISuccessServiceResult<TEntity> AsSuccess<TEntity>(this IServiceResult<TEntity> result) =>
+            result as ISuccessServiceResult<TEntity>;
+
+        /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="IEmptyServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IEmptyServiceResult<TEntity> AsEmpty<TEntity>(this IServiceResult<TEntity> result) =>
+            result as IEmptyServiceResult<TEntity>;
+
+        /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="IFailureServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IFailureServiceResult<TEntity> AsFailure<TEntity>(this IServiceResult<TEntity> result) =>
+            result as IFailureServiceResult<TEntity>;
+
+
+        /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="ISuccessServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static ISuccessServiceResult<TEntity> AsSuccess<TEntity>(this IServiceResult result) =>
+            result as ISuccessServiceResult<TEntity>;
+
+        /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="IEmptyServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IEmptyServiceResult<TEntity> AsEmpty<TEntity>(this IServiceResult result) =>
+            result as IEmptyServiceResult<TEntity>;
+
+        /// <summary>
+        /// Casts the <paramref name="result"/> to <see cref="IFailureServiceResult{TEntity}"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IFailureServiceResult<TEntity> AsFailure<TEntity>(this IServiceResult result) =>
+            result as IFailureServiceResult<TEntity>;
+
+        /// <summary>
         ///     If the <paramref name="result" /> is <see cref="ISuccessServiceResult{T}" />, then the <paramref name="action" /> is
         ///     applied, otherwise no-op.
         /// </summary>

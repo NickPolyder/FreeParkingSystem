@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Repositories;
 using FreeParkingSystem.Common.Services.Helpers;
+using FreeParkingSystem.Common.Services.Validation;
 using X.PagedList;
 
 namespace FreeParkingSystem.Common.Services
@@ -11,9 +13,15 @@ namespace FreeParkingSystem.Common.Services
     {
         private readonly IBaseRepository<Role> _roleRepository;
 
-        public RoleService(IBaseRepository<Role> roleRepository)
+        private IValidationManager _validationManager;
+
+        public RoleService(IBaseRepository<Role> roleRepository) : this(roleRepository, new ValidationManager())
+        { }
+
+        public RoleService(IBaseRepository<Role> roleRepository, IValidationManager validationManager)
         {
             _roleRepository = roleRepository ?? throw new ArgumentNullException(nameof(roleRepository));
+            _validationManager = validationManager ?? new ValidationManager();
         }
 
         public IServiceResult<IRole> Find(string id)
@@ -77,8 +85,8 @@ namespace FreeParkingSystem.Common.Services
             return ServiceResult.Wrap(() =>
             {
                 var role = new Role(accessLevel, roleName, description);
-                _roleRepository.Insert(role);
-                return ServiceResult.Return<IRole>(role);
+
+                return Add(role);
             });
         }
 
@@ -86,6 +94,9 @@ namespace FreeParkingSystem.Common.Services
         {
             return ServiceResult.Wrap(() =>
             {
+                var validationResult = _validationManager.Validate(role);
+                if (!validationResult.IsValid) return _createErrorFromValidationResult(validationResult);
+
                 _roleRepository.Insert(role as Role);
                 return ServiceResult.Return(role);
             });
@@ -95,6 +106,9 @@ namespace FreeParkingSystem.Common.Services
         {
             return ServiceResult.Wrap(() =>
             {
+                var validationResult = _validationManager.Validate(role);
+                if (!validationResult.IsValid) return _createErrorFromValidationResult(validationResult);
+
                 _roleRepository.Update(role as Role);
                 return ServiceResult.Return(role);
             });
@@ -104,9 +118,21 @@ namespace FreeParkingSystem.Common.Services
         {
             return ServiceResult.Wrap(() =>
             {
-                _roleRepository.Delete(role as Role);
+                var validationResult = _validationManager.Validate(role);
+                if (!validationResult.IsValid) return _createErrorFromValidationResult(validationResult);
+
+                role.IsDeleted = true;
+                _roleRepository.Update(role as Role);
                 return ServiceResult.Return(role);
             });
+        }
+
+        private IServiceResult<IRole> _createErrorFromValidationResult(IValidationResult result)
+        {
+            var errorsArray = result.Errors.ToArray();
+            return ServiceResult.Return<IRole>(errorsArray.Length == 1
+                ? errorsArray[0]
+                : new AggregateException(errorsArray));
         }
     }
 }

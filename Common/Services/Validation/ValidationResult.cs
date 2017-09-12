@@ -23,11 +23,6 @@ namespace FreeParkingSystem.Common.Services.Validation
             Errors = errors;
         }
 
-        public static ValidationResult CreateSuccessResult()
-        {
-            return new ValidationResult(true);
-        }
-
         public override bool Equals(object obj)
         {
             if (!(obj is ValidationResult)) return false;
@@ -51,6 +46,21 @@ namespace FreeParkingSystem.Common.Services.Validation
         public static bool operator !=(ValidationResult left, ValidationResult right)
         {
             return !(left == right);
+        }
+
+        public static ValidationResult CreateSuccessResult()
+        {
+            return new ValidationResult(true);
+        }
+
+        public static ValidationResult CreateErrorResult(Exception ex)
+        {
+            return new ValidationResult(false, new[] { ex });
+        }
+
+        public static ValidationResult CreateErrorResult(IEnumerable<Exception> exceptions)
+        {
+            return new ValidationResult(false, exceptions);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace FreeParkingSystem.Common.Services.Validation
             }
             else
             {
-                return new ValidationResult(validationResults
+                return ValidationResult.CreateErrorResult(validationResults
                     .Select(tt => new MemberValidationException(obj, tt.ErrorMessage, tt.MemberNames)));
             }
         }

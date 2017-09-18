@@ -27,6 +27,7 @@ namespace FreeParkingSystem.Common.Models
 
         public bool Active { get; set; }
 
+        [ListCount(1)]
         public IList<IRole> Roles { get; set; }
 
         public void AddRole(IRole role)

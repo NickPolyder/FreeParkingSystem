@@ -120,4 +120,7 @@
   <data name="ValidationEmailError" xml:space="preserve">
     <value>Το πεδίο '{0}' δεν είναι e-mail. Παράδειγμα e-mail: info@microsoft.com</value>
   </data>
+  <data name="ValidationListCountError" xml:space="preserve">
+    <value>Το πεδίο '{0}' πρέπει να έχει τουλάχιστον {1} εγγραφές</value>
+  </data>
 </root>

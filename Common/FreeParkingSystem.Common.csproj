@@ -25,9 +25,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Services\Validation\Attributes\Resources\ValidationMessages.resx">
+      <CustomToolNamespace>Res</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Res</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
 

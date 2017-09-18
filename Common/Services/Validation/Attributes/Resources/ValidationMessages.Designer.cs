@@ -69,5 +69,14 @@ namespace Res {
                 return ResourceManager.GetString("ValidationEmailError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{0}&apos; must have at least {1} entries..
+        /// </summary>
+        public static string ValidationListCountError {
+            get {
+                return ResourceManager.GetString("ValidationListCountError", resourceCulture);
+            }
+        }
     }
 }

@@ -62,6 +62,15 @@ namespace Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{0}&apos; must be positive.
+        /// </summary>
+        public static string IsPositive {
+            get {
+                return ResourceManager.GetString("IsPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The field &apos;{0}&apos; is not a correct e-mail. eg: info@microsoft.com.
         /// </summary>
         public static string ValidationEmailError {

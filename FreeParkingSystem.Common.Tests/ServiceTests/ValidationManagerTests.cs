@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Common.Tests
 {
+    [Collection("Validation Manager Tests")]
     public class ValidationManagerTests
     {
         private readonly ITestOutputHelper output;
@@ -150,6 +151,31 @@ namespace FreeParkingSystem.Common.Tests
             Assert.Equal(false, result.IsValid);
             Assert.Equal(1, result.Errors.Count());
             output.WriteLine("Exception: {0}", result.Errors.ToList()[0].Message);
+        }
+
+        [Fact]
+        public void ValidationResultNullThrows()
+        {
+            // arrange  
+
+            // act  
+
+
+
+            // assert  
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                try
+                {
+                    var valRes = new ValidationResult(null);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    output.WriteLine("Exception: {0}", ex.Message);
+                    throw;
+                }
+            });
+
         }
 
     }

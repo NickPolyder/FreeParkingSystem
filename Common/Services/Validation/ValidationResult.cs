@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using FreeParkingSystem.Common.Models;
 
@@ -19,8 +20,10 @@ namespace FreeParkingSystem.Common.Services.Validation
 
         public ValidationResult(IEnumerable<Exception> errors)
         {
-            IsValid = errors?.Count() <= 0;
-            Errors = errors;
+            if (errors == null) throw new ArgumentNullException(nameof(errors));
+            var errs = errors.ToArray();
+            IsValid = errs.Length <= 0;
+            Errors = errs;
         }
 
         public override bool Equals(object obj)

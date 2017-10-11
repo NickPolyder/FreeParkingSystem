@@ -17,7 +17,21 @@ namespace FreeParkingSystem.Common.Services.Validation.Attributes
         {
             try
             {
-                var result = _canHandle(value, validationContext.ObjectType, validationContext.MemberName);
+                Type type = null;
+                var propertyType = validationContext.ObjectType.GetProperty(validationContext.MemberName);
+                if (propertyType != null)
+                {
+                    type = propertyType.PropertyType;
+                }
+                else
+                {
+                    var fieldType = validationContext.ObjectType.GetField(validationContext.MemberName);
+                    if (fieldType == null)
+                        throw new InvalidOperationException("The attribute applies only to fields or properties.");
+
+                    type = fieldType.FieldType;
+                }
+                var result = _isNumericOrNull(value, type, validationContext.MemberName);
 
                 return result ?
                     ValResult.Success :
@@ -29,12 +43,13 @@ namespace FreeParkingSystem.Common.Services.Validation.Attributes
             }
         }
 
-        private bool _canHandle(object value, Type type, string memberName)
+        private bool _isNumericOrNull(object value, Type type, string memberName)
         {
             var nullable = Nullable.GetUnderlyingType(type);
             if (nullable != null)
             {
                 type = nullable;
+                if (value == null) return true;
             }
 
             switch (Type.GetTypeCode(type))

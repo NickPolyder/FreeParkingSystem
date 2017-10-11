@@ -2,7 +2,7 @@
 
 namespace FreeParkingSystem.Common.Models
 {
-    public struct Position : IEquatable<Position>
+    public class Position : IEquatable<Position>
     {
         public double Latitude { get; }
 

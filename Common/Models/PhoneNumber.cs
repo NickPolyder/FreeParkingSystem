@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FreeParkingSystem.Common.Models
 {
-    public struct PhoneNumber : IEquatable<PhoneNumber>
+    public class PhoneNumber : IEquatable<PhoneNumber>
     {
         [Phone]
         public string Number { get; }

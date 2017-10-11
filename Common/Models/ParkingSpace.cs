@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeParkingSystem.Common.Services.Validation.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FreeParkingSystem.Common.Models
@@ -14,17 +15,19 @@ namespace FreeParkingSystem.Common.Models
         public Position Position { get; set; }
 
         [Required]
-        [Range(1, Int32.MaxValue)]
+        [IsPositive]
         public int Floors { get; set; }
 
         [Required]
-        [Range(1, Int32.MaxValue)]
+        [IsPositive]
         public int ParkSpaces { get; set; }
 
         public bool HasSpecialParkSpaces { get; set; }
 
+        [IsPositive]
         public double? MaxHeightOfVehicle { get; set; }
 
+        [IsPositive]
         public double? WidthOfParkSpot { get; set; }
 
     }

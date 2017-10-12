@@ -33,10 +33,7 @@ namespace FreeParkingSystem.Common.Services.Validation.Attributes
             return false;
         }
 
-        public override string FormatErrorMessage(string name)
-        {
-            return string.Format(Res.ValidationMessages.ValidationListCountError, name, _minCount);
-            //return base.FormatErrorMessage(name);
-        }
+        public override string FormatErrorMessage(string name) =>
+            string.Format(Res.ValidationMessages.ValidationListCountError, name, _minCount);
     }
 }

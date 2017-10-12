@@ -18,8 +18,6 @@ namespace FreeParkingSystem.Common.Services.Models
         { }
 
         public FailureServiceResult(IFailureServiceResult result) : base(result?.Exception)
-        {
-
-        }
+        { }
     }
 }

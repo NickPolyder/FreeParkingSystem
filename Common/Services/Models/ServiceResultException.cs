@@ -11,7 +11,6 @@ namespace FreeParkingSystem.Common.Services.Models
         { }
 
         public ServiceResultException(string message) : base(message)
-        {
-        }
+        { }
     }
 }

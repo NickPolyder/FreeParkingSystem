@@ -16,6 +16,7 @@ namespace FreeParkingSystem.Common.Services
         private IValidationManager _validationManager;
 
         private IValidationComponent _roleAlreadyExists;
+
         public RoleService(IBaseRepository<Role> roleRepository) : this(roleRepository, new ValidationManager())
         { }
 

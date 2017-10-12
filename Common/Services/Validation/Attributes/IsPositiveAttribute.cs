@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using ValResult = System.ComponentModel.DataAnnotations.ValidationResult;
+
 namespace FreeParkingSystem.Common.Services.Validation.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public sealed class IsPositiveAttribute : ValidationAttribute
     {
         public IsPositiveAttribute() : base(() => Res.ValidationMessages.IsPositive)
-        {
-
-        }
+        { }
 
         public override bool RequiresValidationContext => true;
 
@@ -33,8 +32,7 @@ namespace FreeParkingSystem.Common.Services.Validation.Attributes
                 }
                 var result = _isNumericOrNull(value, type, validationContext.MemberName);
 
-                return result ?
-                    ValResult.Success :
+                return result ? ValResult.Success :
                     new ValResult(FormatErrorMessage(validationContext.MemberName), new[] { validationContext.MemberName });
             }
             catch (Exception ex)

@@ -16,6 +16,7 @@ namespace FreeParkingSystem.Common.Services
         private IValidationManager _validationManager;
 
         private IValidationComponent _roleAlreadyExists;
+        private IValidationComponent _canUpdate;
 
         public RoleService(IBaseRepository<Role> roleRepository) : this(roleRepository, new ValidationManager())
         { }
@@ -25,6 +26,7 @@ namespace FreeParkingSystem.Common.Services
             _roleRepository = roleRepository ?? throw new ArgumentNullException(nameof(roleRepository));
             _validationManager = validationManager ?? new ValidationManager();
             _roleAlreadyExists = new RoleAlreadyExistsValidation<Role>(_roleRepository);
+            _canUpdate = new CanUpdateRoleValidation<Role>(_roleRepository);
         }
 
         public IServiceResult<IRole> Find(string id)
@@ -114,14 +116,19 @@ namespace FreeParkingSystem.Common.Services
 
         public virtual IServiceResult<IRole> Update(IRole role)
         {
-            return ServiceResult.Wrap(() =>
-            {
-                var validationResult = _validationManager.Validate(role);
-                if (!validationResult.IsValid) return _createErrorFromValidationResult(validationResult);
+            _validationManager.Add(_canUpdate);
+            var result = ServiceResult.Wrap(() =>
+           {
+               var validationResult = _validationManager.Validate(role);
+               if (!validationResult.IsValid) return _createErrorFromValidationResult(validationResult);
 
-                _roleRepository.Update(role as Role);
-                return ServiceResult.Return(role);
-            });
+               _roleRepository.Update(role as Role);
+               return ServiceResult.Return(role);
+           });
+
+            _validationManager.Remove(_canUpdate);
+
+            return result;
         }
 
         public virtual IServiceResult<IRole> Delete(IRole role)

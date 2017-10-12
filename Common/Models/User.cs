@@ -10,7 +10,6 @@ namespace FreeParkingSystem.Common.Models
     public class User : BaseModel, IUser
     {
 
-
         [Required]
         public string FirstName { get; set; }
 

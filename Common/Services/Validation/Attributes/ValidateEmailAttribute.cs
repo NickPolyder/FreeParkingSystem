@@ -3,13 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FreeParkingSystem.Common.Services.Validation.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public sealed class ValidateEmailAttribute : ValidationAttribute
     {
         public ValidateEmailAttribute() : base(() => Res.ValidationMessages.ValidationEmailError)
-        {
-
-        }
+        { }
 
         public override bool IsValid(object value)
         {

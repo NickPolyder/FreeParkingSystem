@@ -122,5 +122,28 @@ namespace FreeParkingSystem.Common.Tests.Models
             output.WriteLine("Exception: {0}", addRole.AsFailure().Exception.Message);
         }
 
+        [Fact]
+        public void RoleService_Update()
+        {
+            // arrange  
+            var mockRepo = new Mock<IBaseRepository<Role>>();
+            var mockRole = Role.Administrator();
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Role>())).Callback<Role>((role) =>
+            {
+                var index = _roles.FindIndex(tt => tt.Id == role.Id);
+                _roles[index] = role;
+            });
+            mockRepo.Setup(repo => repo.GetById(It.IsAny<string>())).Returns(() => mockRole as Role);
+            var roleService = new RoleService(mockRepo.Object);
+
+            // act  
+            var addRole = roleService.Add(mockRole.Name, mockRole.AccessLevel, mockRole.Description);
+
+            // assert  
+            Assert.Equal(true, addRole.IsFailure());
+            Assert.Equal(typeof(MemberValidationException), addRole.AsFailure().Exception.GetType());
+            output.WriteLine("Exception: {0}", addRole.AsFailure().Exception.Message);
+        }
+
     }
 }

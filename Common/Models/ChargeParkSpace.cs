@@ -18,8 +18,7 @@ namespace FreeParkingSystem.Common.Models
 
         public override bool Equals(object obj)
         {
-            if (!(obj is ChargeParkSpace)) return false;
-            var castedObj = (ChargeParkSpace)obj;
+            if (!(obj is ChargeParkSpace castedObj)) return false;
             return Cost.Equals(castedObj.Cost) && Hour.Equals(castedObj.Hour);
         }
 

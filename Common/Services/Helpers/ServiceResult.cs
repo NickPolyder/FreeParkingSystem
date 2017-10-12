@@ -44,7 +44,6 @@ namespace FreeParkingSystem.Common.Services.Helpers
         {
             try
             {
-
                 return function == null ? Return<TEntity>() : Return(function());
             }
             catch (Exception e)

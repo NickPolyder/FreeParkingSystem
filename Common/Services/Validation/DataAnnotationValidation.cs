@@ -6,10 +6,7 @@ namespace FreeParkingSystem.Common.Services.Validation
 {
     public class DataAnnotationValidation : IValidationComponent
     {
-        public bool CanValidate(object obj)
-        {
-            return true;
-        }
+        public bool CanValidate(object obj) => true;
 
         public IValidationResult Validate(object obj)
         {
@@ -19,11 +16,10 @@ namespace FreeParkingSystem.Common.Services.Validation
             {
                 return ValidationResult.CreateSuccessResult();
             }
-            else
-            {
-                return ValidationResult.CreateErrorResult(validationResults
-                    .Select(tt => new MemberValidationException(obj, tt.ErrorMessage, tt.MemberNames)));
-            }
+
+            return ValidationResult.CreateErrorResult(validationResults
+                .Select(tt => new MemberValidationException(obj, tt.ErrorMessage, tt.MemberNames)));
+
         }
     }
 }

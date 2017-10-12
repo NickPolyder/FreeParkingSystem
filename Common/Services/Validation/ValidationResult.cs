@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using FreeParkingSystem.Common.Models;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
-    public struct ValidationResult : IValidationResult
+    public class ValidationResult : IValidationResult
     {
         public bool IsValid { get; }
 
@@ -43,7 +41,7 @@ namespace FreeParkingSystem.Common.Services.Validation
 
         public static bool operator ==(ValidationResult left, ValidationResult right)
         {
-            return left.Equals(right);
+            return left?.Equals(right) ?? false;
         }
 
         public static bool operator !=(ValidationResult left, ValidationResult right)

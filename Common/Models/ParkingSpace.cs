@@ -1,5 +1,4 @@
 ﻿using FreeParkingSystem.Common.Services.Validation.Attributes;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FreeParkingSystem.Common.Models

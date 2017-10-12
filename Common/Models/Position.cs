@@ -30,7 +30,7 @@ namespace FreeParkingSystem.Common.Models
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Position && Equals((Position)obj);
+            return obj is Position position && Equals(position);
         }
 
         public override int GetHashCode()
@@ -43,7 +43,7 @@ namespace FreeParkingSystem.Common.Models
 
         public static bool operator ==(Position left, Position right)
         {
-            return left.Equals(right);
+            return left?.Equals(right) ?? false;
         }
 
         public static bool operator !=(Position left, Position right)

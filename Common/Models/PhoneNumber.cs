@@ -24,7 +24,7 @@ namespace FreeParkingSystem.Common.Models
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is PhoneNumber && Equals((PhoneNumber)obj);
+            return obj is PhoneNumber number && Equals(number);
         }
 
         public override int GetHashCode()
@@ -39,7 +39,7 @@ namespace FreeParkingSystem.Common.Models
 
         public static bool operator ==(PhoneNumber left, PhoneNumber right)
         {
-            return left.Equals(right);
+            return left?.Equals(right) ?? false;
         }
 
         public static bool operator !=(PhoneNumber left, PhoneNumber right)

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FreeParkingSystem.Common.Models;
-using FreeParkingSystem.Common.Repositories;
-using FreeParkingSystem.Common.Services;
-using FreeParkingSystem.Common.Services.Helpers;
+﻿using FreeParkingSystem.Common.Models;
 using FreeParkingSystem.Common.Services.Validation;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 using System.Linq;
@@ -38,12 +31,46 @@ namespace FreeParkingSystem.Common.Tests.Models
             var errors = result.Errors.ToList();
             Assert.Equal(false, result.IsValid);
             Assert.True(errors.Count > 0);
-            foreach(var error in errors)
+            foreach (var error in errors)
             {
                 output.WriteLine(error.Message);
             }
         }
 
+        [Fact]
+        public void Parking_Space_Width_Of_Parking_Spot_Not_Positive()
+        {
+            // arrange  
+            var parkSpace = _createMock();
+            parkSpace.WidthOfParkSpot = -1;
+            // act  
+            var result = validationManager.Validate(parkSpace);
+
+            // assert  
+            var errors = result.Errors.ToList();
+            Assert.Equal(false, result.IsValid);
+            Assert.True(errors.Count > 0);
+            foreach (var error in errors)
+            {
+                output.WriteLine(error.Message);
+            }
+        }
+
+
+        [Fact]
+        public void Parking_Space_Width_Of_Parking_Spot_Is_Positive()
+        {
+            // arrange  
+            var parkSpace = _createMock();
+            parkSpace.WidthOfParkSpot = 1;
+            // act  
+            var result = validationManager.Validate(parkSpace);
+
+            // assert  
+            var errors = result.Errors.ToList();
+            Assert.Equal(true, result.IsValid);
+            Assert.True(errors.Count == 0);
+        }
 
         private static ParkingSpace _createMock()
         {

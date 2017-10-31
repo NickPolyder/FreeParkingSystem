@@ -1,5 +1,8 @@
-# FreeParkingSystem
-This repo is created as a contribution to my personal portfolio
+# Free Parking System
+
+This repo is created as a contribution to my personal portfolio.   
+The **_Free Parking System_** is being developed on my spare time and i use it 
+to sharpen my skills at unit testing.
 
 
 ### Thanks

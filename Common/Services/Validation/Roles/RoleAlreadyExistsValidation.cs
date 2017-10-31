@@ -34,7 +34,7 @@ namespace FreeParkingSystem.Common.Services.Validation
                      rr.Name.Equals(role.Name, StringComparison.InvariantCultureIgnoreCase) &&
                      rr.Description.Equals(role.Description, StringComparison.InvariantCultureIgnoreCase) &&
                      rr.AccessLevel == role.AccessLevel).Any();
-                if (hasTheSame)
+                if (!hasTheSame)
                     return ValidationResult.CreateSuccessResult();
 
                 return ValidationResult.CreateErrorResult(new MemberValidationException(obj,

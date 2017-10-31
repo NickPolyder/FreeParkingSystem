@@ -128,6 +128,10 @@ namespace FreeParkingSystem.Common.Tests.Models
             // arrange  
             var mockRepo = new Mock<IBaseRepository<Role>>();
             var mockRole = Role.Administrator();
+            _roles.Add(mockRole);
+            var updatedMockRole = Role.Administrator();
+            updatedMockRole.Id = mockRole.Id;
+            updatedMockRole.Description = "Hi You Okay ?";
             mockRepo.Setup(repo => repo.Update(It.IsAny<Role>())).Callback<Role>((role) =>
             {
                 var index = _roles.FindIndex(tt => tt.Id == role.Id);
@@ -137,12 +141,12 @@ namespace FreeParkingSystem.Common.Tests.Models
             var roleService = new RoleService(mockRepo.Object);
 
             // act  
-            var addRole = roleService.Add(mockRole.Name, mockRole.AccessLevel, mockRole.Description);
+            var updateRole = roleService.Update(updatedMockRole);
 
             // assert  
-            Assert.Equal(true, addRole.IsFailure());
-            Assert.Equal(typeof(MemberValidationException), addRole.AsFailure().Exception.GetType());
-            output.WriteLine("Exception: {0}", addRole.AsFailure().Exception.Message);
+            Assert.Equal(true, updateRole.IsSuccess());
+            Assert.Equal(updatedMockRole.Description, updateRole.AsSuccess<IRole>().Value.Description);
+            output.WriteLine("Description: {0}", updateRole.AsSuccess<IRole>().Value.Description);
         }
 
     }

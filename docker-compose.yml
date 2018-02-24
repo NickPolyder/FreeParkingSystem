@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  freeparkingsystem.api:
-    image: freeparkingsystem.api
+  freeparkingsystem.webapp:
+    image: freeparkingsystem.webapp
     build:
-      context: ./FreeParkingSystem.API
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Core\FreeParkingSystem.WebApp\Dockerfile

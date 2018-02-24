@@ -7,7 +7,7 @@ namespace FreeParkingSystem.Common.Services.Validation
 {
     public class CanUpdateRoleValidation<TRole> : IValidationComponent where TRole : IRole
     {
-        private IBaseRepository<TRole> _baseRepository;
+        private readonly IBaseRepository<TRole> _baseRepository;
 
         public CanUpdateRoleValidation(IBaseRepository<TRole> baseRepo)
         {

@@ -8,7 +8,9 @@ namespace FreeParkingSystem.Common.Models
     {
         public bool Is24HourOpen { get; private set; }
 
-        public List<(TimeSpan Start, TimeSpan End)> OpenHoursList { get; private set; }
+        private List<(TimeSpan Start, TimeSpan End)> _openHoursList;
+
+        public List<(TimeSpan Start, TimeSpan End)> OpenHoursList => _openHoursList ?? (_openHoursList = new List<(TimeSpan Start, TimeSpan End)>());
 
         public DayOfWeek Day { get; private set; }
         public DaySchedule() : this(DayOfWeek.Sunday)
@@ -26,7 +28,7 @@ namespace FreeParkingSystem.Common.Models
             Is24HourOpen = openHours == null || openHours.Count == 0;
             if (!Is24HourOpen)
             {
-                OpenHoursList = new List<(TimeSpan Start, TimeSpan End)>();
+                _openHoursList = new List<(TimeSpan Start, TimeSpan End)>();
                 openHours?.ForEach(times => AddOpenHours(times.Start, times.End));
             }
         }
@@ -48,7 +50,7 @@ namespace FreeParkingSystem.Common.Models
         public void AddOpenHours(TimeSpan start, TimeSpan end)
         {
             if (Is24HourOpen) return;
-            if (OpenHoursList == null) throw new ArgumentNullException(nameof(OpenHoursList));
+
             if (end.TotalMilliseconds <= start.TotalMilliseconds) throw new ArgumentException($"{nameof(start)} must be before {nameof(end)}");
 
             #region If the start and the end times are inside of a current Open Hour List

@@ -7,7 +7,7 @@ namespace FreeParkingSystem.Common.Services.Validation
 {
     public class RoleAlreadyExistsValidation<TRole> : IValidationComponent where TRole : IRole
     {
-        private IBaseRepository<TRole> _baseRepository;
+        private readonly IBaseRepository<TRole> _baseRepository;
 
         public RoleAlreadyExistsValidation(IBaseRepository<TRole> baseRepo)
         {
@@ -16,7 +16,7 @@ namespace FreeParkingSystem.Common.Services.Validation
 
         public bool CanValidate(object obj)
         {
-            return obj is IRole; //obj.GetType().IsSubclassOf(typeof(IRole));
+            return obj is IRole;
         }
 
         public IValidationResult Validate(object obj)

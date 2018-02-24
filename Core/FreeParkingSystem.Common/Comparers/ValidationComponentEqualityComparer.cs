@@ -6,7 +6,7 @@ namespace FreeParkingSystem.Common.Helpers
 {
     public class ValidationComponentEqualityComparer : IEqualityComparer<IValidationComponent>
     {
-        private TypeEqualityComparer _comparer;
+        private readonly TypeEqualityComparer _comparer;
 
         public ValidationComponentEqualityComparer() : this(new TypeEqualityComparer())
         { }

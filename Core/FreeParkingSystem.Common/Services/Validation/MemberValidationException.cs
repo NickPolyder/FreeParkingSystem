@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace FreeParkingSystem.Common.Services.Validation
 {
+#pragma warning disable S3925 // "ISerializable" should be implemented correctly
     public class MemberValidationException : Exception
     {
         public IEnumerable<string> MemberNames
@@ -48,5 +50,9 @@ namespace FreeParkingSystem.Common.Services.Validation
 
         public MemberValidationException(string message, Exception innerException) : base(message, innerException)
         { }
+
+        public MemberValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
+
     }
 }

@@ -11,14 +11,14 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
 {
     public class ValidationAttributesTests
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
-        private ValidationManager validationManager;
+        private readonly ValidationManager _validationManager;
 
         public ValidationAttributesTests(ITestOutputHelper output)
         {
-            this.output = output;
-            validationManager = new ValidationManager();
+            _output = output;
+            _validationManager = new ValidationManager();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             var test = TestAttributes.Create();
             test.Number1 = -1;
             // act  
-            var result = validationManager.Validate(test);
+            var result = _validationManager.Validate(test);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -36,7 +36,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 
@@ -47,7 +47,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             var test = TestAttributes.Create();
             test.Number2 = -1;
             // act  
-            var result = validationManager.Validate(test);
+            var result = _validationManager.Validate(test);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -55,7 +55,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 
@@ -66,7 +66,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             var test = TestAttributes.Create();
             test.Number2 = null;
             // act  
-            var result = validationManager.Validate(test);
+            var result = _validationManager.Validate(test);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -82,7 +82,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             var test = TestAttributes.Create();
             test.ListNumber = null;
             // act  
-            var result = validationManager.Validate(test);
+            var result = _validationManager.Validate(test);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -90,7 +90,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 
@@ -101,7 +101,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             var test = TestAttributes.Create();
             test.ListNumber = new List<int>();
             // act  
-            var result = validationManager.Validate(test);
+            var result = _validationManager.Validate(test);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -109,7 +109,7 @@ namespace FreeParkingSystem.Common.Tests.ServiceTests.Validation
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 

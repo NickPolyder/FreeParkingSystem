@@ -90,10 +90,13 @@ namespace FreeParkingSystem.Common.Tests
             user.AddRole(admin);
 
             // act  
-            Action Throws = () => { user.ReplaceRole(anonymous, anonymous); };
+            void Throws()
+            {
+                user.ReplaceRole(anonymous, anonymous);
+            }
 
             // assert  
-            Assert.Throws<InvalidOperationException>(Throws);
+            Assert.Throws<InvalidOperationException>((Action)Throws);
         }
 
     }

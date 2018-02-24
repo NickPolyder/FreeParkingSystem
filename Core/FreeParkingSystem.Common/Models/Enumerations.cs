@@ -1,5 +1,6 @@
 ﻿using System;
 
+#pragma warning disable S2342 // Enumeration types should comply with a naming convention
 namespace FreeParkingSystem.Common.Models
 {
     [Flags]
@@ -8,23 +9,23 @@ namespace FreeParkingSystem.Common.Models
         /// <summary>
         /// Has full access
         /// </summary>
-        Administrator,
+        Administrator = 16,
         /// <summary>
         /// has Editing access
         /// </summary>
-        Moderator,
+        Moderator = 8,
         /// <summary>
         /// The owner of a position
         /// </summary>
-        Owner,
+        Owner = 4,
         /// <summary>
         /// Simple member
         /// </summary>
-        Member,
+        Member = 2,
         /// <summary>
         /// Anonymous access
         /// </summary>
-        Anonymous
+        Anonymous = 1
     }
 
     public enum PhoneNumberType

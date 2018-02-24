@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FreeParkingSystem.Common.Models
 {
-    public class PhoneNumber : IEquatable<PhoneNumber>
+    public class PhoneNumber
     {
         [Phone]
         public string Number { get; }
@@ -16,35 +15,9 @@ namespace FreeParkingSystem.Common.Models
             PhoneType = phoneType;
         }
 
-        public bool Equals(PhoneNumber other)
-        {
-            return string.Equals(Number, other.Number);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is PhoneNumber number && Equals(number);
-        }
-
-        public override int GetHashCode()
-        {
-            return (Number != null ? Number.GetHashCode() : 0);
-        }
-
         public override string ToString()
         {
             return $"PhoneType: {PhoneType}\nNumber: {Number}";
-        }
-
-        public static bool operator ==(PhoneNumber left, PhoneNumber right)
-        {
-            return left?.Equals(right) ?? false;
-        }
-
-        public static bool operator !=(PhoneNumber left, PhoneNumber right)
-        {
-            return !(left == right);
         }
     }
 }

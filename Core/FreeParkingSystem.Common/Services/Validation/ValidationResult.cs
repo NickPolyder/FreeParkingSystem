@@ -39,16 +39,6 @@ namespace FreeParkingSystem.Common.Services.Validation
             return (IsValid.GetHashCode() * 397) ^ (errors.GetHashCode());
         }
 
-        public static bool operator ==(ValidationResult left, ValidationResult right)
-        {
-            return left?.Equals(right) ?? false;
-        }
-
-        public static bool operator !=(ValidationResult left, ValidationResult right)
-        {
-            return !(left == right);
-        }
-
         public static ValidationResult CreateSuccessResult()
         {
             return new ValidationResult(true);

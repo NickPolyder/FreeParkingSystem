@@ -167,7 +167,8 @@ namespace FreeParkingSystem.Common.Tests
             {
                 try
                 {
-                    var valRes = new ValidationResult(null);
+                    // ReSharper disable once ObjectCreationAsStatement
+                    new ValidationResult(null);
                 }
                 catch (ArgumentNullException ex)
                 {

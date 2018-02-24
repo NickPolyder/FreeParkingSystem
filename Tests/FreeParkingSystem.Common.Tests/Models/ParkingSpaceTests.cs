@@ -8,14 +8,14 @@ namespace FreeParkingSystem.Common.Tests.Models
 {
     public class ParkingSpaceTests
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
-        private ValidationManager validationManager;
+        private readonly ValidationManager _validationManager;
 
         public ParkingSpaceTests(ITestOutputHelper output)
         {
-            this.output = output;
-            validationManager = new ValidationManager();
+            this._output = output;
+            _validationManager = new ValidationManager();
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace FreeParkingSystem.Common.Tests.Models
             var parkSpace = _createMock();
             parkSpace.Floors = -1;
             // act  
-            var result = validationManager.Validate(parkSpace);
+            var result = _validationManager.Validate(parkSpace);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -33,7 +33,7 @@ namespace FreeParkingSystem.Common.Tests.Models
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 
@@ -44,7 +44,7 @@ namespace FreeParkingSystem.Common.Tests.Models
             var parkSpace = _createMock();
             parkSpace.WidthOfParkSpot = -1;
             // act  
-            var result = validationManager.Validate(parkSpace);
+            var result = _validationManager.Validate(parkSpace);
 
             // assert  
             var errors = result.Errors.ToList();
@@ -52,7 +52,7 @@ namespace FreeParkingSystem.Common.Tests.Models
             Assert.True(errors.Count > 0);
             foreach (var error in errors)
             {
-                output.WriteLine(error.Message);
+                _output.WriteLine(error.Message);
             }
         }
 
@@ -64,7 +64,7 @@ namespace FreeParkingSystem.Common.Tests.Models
             var parkSpace = _createMock();
             parkSpace.WidthOfParkSpot = 1;
             // act  
-            var result = validationManager.Validate(parkSpace);
+            var result = _validationManager.Validate(parkSpace);
 
             // assert  
             var errors = result.Errors.ToList();

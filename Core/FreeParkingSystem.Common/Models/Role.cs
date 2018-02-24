@@ -27,12 +27,7 @@ namespace FreeParkingSystem.Common.Models
 
         public override bool Equals(object obj) => RoleEqualityComparer.Current.Equals(this, obj as IRole);
 
-        public static bool operator ==(Role role1, Role role2) => RoleEqualityComparer.Current.Equals(role1, role2);
-
-        public static bool operator !=(Role role1, Role role2) => !RoleEqualityComparer.Current.Equals(role1, role2);
-
         public override int GetHashCode() => RoleEqualityComparer.Current.GetHashCode(this);
-
 
         public static IRole Anonymous()
         {

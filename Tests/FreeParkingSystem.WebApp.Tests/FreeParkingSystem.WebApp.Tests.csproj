@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FreeParkingSystem.API\FreeParkingSystem.API.csproj" />
+    <ProjectReference Include="..\..\Core\FreeParkingSystem.WebApp\FreeParkingSystem.WebApp.csproj" />
   </ItemGroup>
 
 </Project>

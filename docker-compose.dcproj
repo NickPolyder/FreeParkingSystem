@@ -2,17 +2,17 @@
 <Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.0</ProjectVersion>
-    <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>867c4a80-a9a2-4f43-8d5e-ebe9d32b94cf</ProjectGuid>
+    <DockerTargetOS>Windows</DockerTargetOS>
+    <ProjectGuid>13e4fd58-9b0a-45f2-97e8-9b055058c26f</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
-    <DockerServiceUrl>http://localhost:{ServicePort}/api/values</DockerServiceUrl>
-    <DockerServiceName>freeparkingsystem.api</DockerServiceName>
+    <DockerServiceUrl>http://{ServiceIPAddress}</DockerServiceUrl>
+    <DockerServiceName>freeparkingsystem.webapp</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.ci.build.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
+    <None Include=".dockerignore" />
   </ItemGroup>
 </Project>

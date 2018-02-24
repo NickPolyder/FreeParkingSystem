@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <AssemblyName>FreeParkingSystem.WebApp</AssemblyName>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Properties\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -19,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\FreeParkingSystem.Common.csproj" />
+    <ProjectReference Include="..\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
   </ItemGroup>
 
 </Project>

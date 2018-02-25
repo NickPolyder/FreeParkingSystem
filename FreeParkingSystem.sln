@@ -19,7 +19,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5032FD9-A969-4CAF-8EB0-B8CCE1CA2EB5}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
-		README.md = README.md
+		README.MD = README.MD
+		STRUCTURE.MD = STRUCTURE.MD
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13E4FD58-9B0A-45F2-97E8-9B055058C26F}"

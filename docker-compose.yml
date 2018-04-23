@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: Core\FreeParkingSystem.WebApp\Dockerfile
+
+  freeparkingsystem.accounts:
+    image: freeparkingsystemaccounts
+    build:
+      context: .
+      dockerfile: Core\FreeParkingSystem.Accounts\Dockerfile
+

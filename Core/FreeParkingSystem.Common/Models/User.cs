@@ -19,8 +19,6 @@ namespace FreeParkingSystem.Common.Models
         [ValidateEmail]
         public string Email { get; set; }
 
-        public string Password { get; set; }
-
         [Phone]
         public string Phone { get; set; }
 

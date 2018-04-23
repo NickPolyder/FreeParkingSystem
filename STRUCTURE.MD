@@ -4,6 +4,7 @@ Here i will be writing down the structure of the app.
 
 Projects that helped with structure:
 - [Smart Hotel 360 ](https://github.com/Microsoft/SmartHotel360)
+- [e-Shop On Containers](https://github.com/dotnet-architecture/eShopOnContainers)
 
 
 ## Authentication

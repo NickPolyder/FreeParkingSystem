@@ -13,8 +13,6 @@ namespace FreeParkingSystem.Common.Models
 
         string Email { get; set; }
 
-        string Password { get; set; }
-
         string Phone { get; set; }
 
         bool Active { get; set; }

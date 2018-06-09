@@ -29,19 +29,50 @@ namespace FreeParkingSystem.Common.Models
 
         public override int GetHashCode() => RoleEqualityComparer.Current.GetHashCode(this);
 
+        private static object _anonymousLock = new object();
+        private volatile static IRole _anonymous;
+
         public static IRole Anonymous()
         {
-            return new Role();
+            lock (_anonymousLock)
+            {
+                if (_anonymous == null)
+                {
+                    _anonymous = new Role();
+                }
+            }
+            return _anonymous;
         }
+
+        private static object _administratorLock = new object();
+        private volatile static IRole _administrator;
 
         public static IRole Administrator()
         {
-            return new Role(AccessLevel.Administrator);
+            lock (_administratorLock)
+            {
+                if (_administrator == null)
+                {
+                    _administrator = new Role(AccessLevel.Administrator);
+                }
+            }
+            return _administrator;
         }
 
+        private static object _memberLock = new object();
+        private volatile static IRole _member;
+        
         public static IRole Member()
         {
-            return new Role(AccessLevel.Member);
+            lock (_memberLock)
+            {
+                if (_member == null)
+                {
+                    _member = new Role(AccessLevel.Member);
+                }
+            }
+
+            return _member;
         }
     }
 }

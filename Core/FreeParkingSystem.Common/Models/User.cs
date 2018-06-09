@@ -9,7 +9,6 @@ namespace FreeParkingSystem.Common.Models
 {
     public class User : BaseModel, IUser
     {
-
         [Required]
         public string FirstName { get; set; }
 
@@ -94,6 +93,48 @@ namespace FreeParkingSystem.Common.Models
         public string FullName()
         {
             return $"{FirstName} {LastName}";
+        }
+
+        private static object _lock = new object();
+
+        private volatile static IUser _sysAdmin;
+
+        public static IUser SysAdmin
+        {
+            get
+            {
+                _createSysAdminUser();
+
+                return _sysAdmin;
+            }
+        }
+
+        private static void _createSysAdminUser()
+        {
+            if (_sysAdmin != null) return;
+
+            lock (_lock)
+            {
+                if (_sysAdmin == null)
+                {
+                    var createdAt = new DateTimeOffset(1992, 12, 24, 07, 30, 10, TimeSpan.Zero);
+                    var user = new User
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        FirstName = "Nick",
+                        LastName = "Polyderopoulos",
+                        Email = "nickpolyder@hotmail.gr",
+                        Phone = "003052342342423",
+                        Active = true,
+                        CreatedAt = createdAt,
+                        UpdatedAt = createdAt,
+                        IsDeleted = false,
+                        CreatedBy = null,
+                    };
+                    user.AddRole(Role.Administrator());
+                    _sysAdmin = user;
+                }
+            }
         }
     }
 }

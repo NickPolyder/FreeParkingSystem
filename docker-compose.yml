@@ -2,14 +2,21 @@ version: '3.4'
 
 services:
   freeparkingsystem.webapp:
-    image: freeparkingsystem.webapp
+    image: ${DOCKER_REGISTRY}freeparkingsystem.webapp
     build:
       context: .
       dockerfile: Core\FreeParkingSystem.WebApp\Dockerfile
 
   freeparkingsystem.accounts:
-    image: freeparkingsystemaccounts
+    image: ${DOCKER_REGISTRY}freeparkingsystem.accounts
     build:
       context: .
       dockerfile: Core\FreeParkingSystem.Accounts\Dockerfile
+
+
+  freeparkingsystem.parking:
+    image: ${DOCKER_REGISTRY}freeparkingsystem.parking
+    build:
+      context: .
+      dockerfile: Core\FreeParkingSystem.Parking\Dockerfile
 

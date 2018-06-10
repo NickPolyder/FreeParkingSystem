@@ -27,5 +27,11 @@ namespace FreeParkingSystem.Common.Helpers
 
             return -1;
         }
+
+
+        public static bool NextBool(this Random rand)
+        {
+            return rand.Next(0, 2) == 1;
+        }
     }
 }

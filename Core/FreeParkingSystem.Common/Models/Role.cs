@@ -1,4 +1,5 @@
 ﻿using FreeParkingSystem.Common.Helpers;
+using System;
 
 namespace FreeParkingSystem.Common.Models
 {
@@ -29,50 +30,26 @@ namespace FreeParkingSystem.Common.Models
 
         public override int GetHashCode() => RoleEqualityComparer.Current.GetHashCode(this);
 
-        private static object _anonymousLock = new object();
-        private volatile static IRole _anonymous;
+
+        private static Lazy<IRole> _anonymous = new Lazy<IRole>(() => new Role(), true);
 
         public static IRole Anonymous()
         {
-            lock (_anonymousLock)
-            {
-                if (_anonymous == null)
-                {
-                    _anonymous = new Role();
-                }
-            }
-            return _anonymous;
+            return _anonymous.Value;
         }
 
-        private static object _administratorLock = new object();
-        private volatile static IRole _administrator;
+        private volatile static Lazy<IRole> _administrator = new Lazy<IRole>(() => new Role(AccessLevel.Administrator), true);
 
         public static IRole Administrator()
         {
-            lock (_administratorLock)
-            {
-                if (_administrator == null)
-                {
-                    _administrator = new Role(AccessLevel.Administrator);
-                }
-            }
-            return _administrator;
+            return _administrator.Value;
         }
 
-        private static object _memberLock = new object();
-        private volatile static IRole _member;
-        
+        private volatile static Lazy<IRole> _member = new Lazy<IRole>(() => new Role(AccessLevel.Member), true);
+
         public static IRole Member()
         {
-            lock (_memberLock)
-            {
-                if (_member == null)
-                {
-                    _member = new Role(AccessLevel.Member);
-                }
-            }
-
-            return _member;
+            return _member.Value;
         }
     }
 }

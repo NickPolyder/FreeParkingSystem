@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="dca9a14f-517a-4ef4-baaa-fbd6c0ae5004" ChangeDateTime="06/16/2019 18:48:37">
+    <Property Name="ElementName" Value="[dbo].[Claims].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Claims]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClaimType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a60a2816-aca0-4bbb-bf1a-6471f065170c" ChangeDateTime="06/16/2019 21:25:10">
+    <Property Name="ElementName" Value="[dbo].[ParkingSpot].[Identification]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ParkingSpot]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Number" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3f9f561c-03bc-4642-8e04-1148e8b32610" ChangeDateTime="06/16/2019 21:25:58">
+    <Property Name="ElementName" Value="[dbo].[ParkingSpot].[Number]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ParkingSpot]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Position" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5cb36183-317f-4f49-b9c3-3337a8f3014d" ChangeDateTime="06/16/2019 21:28:51">
+    <Property Name="ElementName" Value="[dbo].[ParkingSpot].[ParkingSiteID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ParkingSpot]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ParkingSiteId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6c44cc8-e57a-4af7-895a-8b8cc24439fc" ChangeDateTime="06/16/2019 21:32:42">
+    <Property Name="ElementName" Value="[dbo].[AK_ParkingSpot_Column]" />
+    <Property Name="ElementType" Value="SqlUniqueConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ParkingSpot]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AK_ParkingSpot_UniquePosition]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="96c876b4-ebc2-48f0-b3be-10509694efac" ChangeDateTime="06/16/2019 21:42:30">
+    <Property Name="ElementName" Value="[dbo].[ParkingSpot].[SpotTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ParkingSpot]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ParkingSpotTypeId" />
+  </Operation>
+</Operations>

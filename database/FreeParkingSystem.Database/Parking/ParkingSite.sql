@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
 	[Name] NVARCHAR(MAX) NOT NULL, 	
 	[ParkingTypeId] INT NOT NULL, 
-	[Active] BIT NOT NULL DEFAULT 0, 	
+	[IsActive] BIT NOT NULL DEFAULT 0, 	
 	[OwnerId] INT NOT NULL, 
 	[GeolocationX] NVARCHAR(MAX) NOT NULL,
 	[GeolocationY] NVARCHAR(MAX) NOT NULL, 

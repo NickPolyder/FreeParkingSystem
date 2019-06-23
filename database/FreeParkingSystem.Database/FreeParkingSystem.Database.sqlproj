@@ -26,6 +26,10 @@
     <AutoCreateStatisticsIncremental>True</AutoCreateStatisticsIncremental>
     <IsEncryptionOn>True</IsEncryptionOn>
     <TargetFrameworkProfile />
+    <GenerateCreateScript>True</GenerateCreateScript>
+    <ServerUrl>localhost,3306</ServerUrl>
+    <LoginName>sa</LoginName>
+    <Password>S1mple@password</Password>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -71,11 +75,15 @@
     <Build Include="Parking\ParkingSite.sql" />
     <Build Include="Parking\ParkingSpot.sql" />
     <Build Include="Parking\ParkingSpotType.sql" />
+    <Build Include="Orders\Order.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FreeParkingSystem.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FreeParkingSystem.Database.publish.xml" />
+    <None Include="Dockerfile" />
   </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>sqlcmd  -S $(ServerUrl) -U $(LoginName) -P $(Password) -i $(MSBuildProjectName)_Create.sql</PostBuildEvent>
+  </PropertyGroup>
 </Project>

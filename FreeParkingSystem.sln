@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A81C5D6-0A65-44C3-9A96-7273617647B5}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -14,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{B2C59AE7-4
 		docs\Solution-Architecture.md = docs\Solution-Architecture.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Accounts", "src\Account\FreeParkingSystem.Accounts\FreeParkingSystem.Accounts.csproj", "{D4400DCC-F17E-4163-8B79-6F420D9CE6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts", "src\Account\FreeParkingSystem.Accounts\FreeParkingSystem.Accounts.csproj", "{D4400DCC-F17E-4163-8B79-6F420D9CE6C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{5AC95103-B6C5-4811-969C-805613651FD2}"
 EndProject
@@ -22,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{D405FC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parking", "Parking", "{56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{4B83DC1E-A9E1-417F-BA74-D21D0B65B7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{4B83DC1E-A9E1-417F-BA74-D21D0B65B7A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A72E336D-910C-4337-8E90-D62B4186A314}"
 EndProject

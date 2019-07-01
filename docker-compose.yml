@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    image: "microsoft/mssql-server-windows-developer"
+    container_name: db1
+    ports:
+        - "3306:1433"
+    volumes:
+        - C:/Repos/data
+    environment:
+        SA_PASSWORD: "S1mple@password"
+        ACCEPT_EULA: "Y"
+        COMPOSE_CONVERT_WINDOWS_PATHS: 1
+        #   attach_dbs:

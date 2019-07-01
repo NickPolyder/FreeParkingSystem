@@ -27,9 +27,6 @@
     <IsEncryptionOn>True</IsEncryptionOn>
     <TargetFrameworkProfile />
     <GenerateCreateScript>True</GenerateCreateScript>
-    <ServerUrl>localhost,3306</ServerUrl>
-    <LoginName>sa</LoginName>
-    <Password>S1mple@password</Password>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -80,10 +77,8 @@
   <ItemGroup>
     <RefactorLog Include="FreeParkingSystem.Database.refactorlog" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Dockerfile" />
-  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>sqlcmd  -S $(ServerUrl) -U $(LoginName) -P $(Password) -i $(MSBuildProjectName)_Create.sql</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{B2C59AE7-4
 		docs\Solution-Architecture.md = docs\Solution-Architecture.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts", "src\Account\FreeParkingSystem.Accounts\FreeParkingSystem.Accounts.csproj", "{D4400DCC-F17E-4163-8B79-6F420D9CE6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts.API", "src\Account\FreeParkingSystem.Accounts.API\FreeParkingSystem.Accounts.API.csproj", "{D4400DCC-F17E-4163-8B79-6F420D9CE6C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{5AC95103-B6C5-4811-969C-805613651FD2}"
 EndProject
@@ -23,13 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{D405FC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parking", "Parking", "{56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{4B83DC1E-A9E1-417F-BA74-D21D0B65B7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders.API", "src\Orders\FreeParkingSystem.Orders.API\FreeParkingSystem.Orders.API.csproj", "{4B83DC1E-A9E1-417F-BA74-D21D0B65B7A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking.API", "src\Parking\FreeParkingSystem.Parking.API\FreeParkingSystem.Parking.API.csproj", "{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A72E336D-910C-4337-8E90-D62B4186A314}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FreeParkingSystem.Database", "database\FreeParkingSystem.Database\FreeParkingSystem.Database.sqlproj", "{5690F8DB-7170-446C-9F42-EA4B72D637B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Accounts.Contract", "src\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj", "{1423BCBA-CCC1-4544-8DED-F93BE28D657F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{5690F8DB-7170-446C-9F42-EA4B72D637B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5690F8DB-7170-446C-9F42-EA4B72D637B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5690F8DB-7170-446C-9F42-EA4B72D637B8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{4B83DC1E-A9E1-417F-BA74-D21D0B65B7A6} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}
 		{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 		{5690F8DB-7170-446C-9F42-EA4B72D637B8} = {A72E336D-910C-4337-8E90-D62B4186A314}
+		{1423BCBA-CCC1-4544-8DED-F93BE28D657F} = {5AC95103-B6C5-4811-969C-805613651FD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

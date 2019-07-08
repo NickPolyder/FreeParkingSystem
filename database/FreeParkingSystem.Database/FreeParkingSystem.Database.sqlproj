@@ -64,6 +64,7 @@
     <Folder Include="Orders" />
     <Folder Include="Accounts" />
     <Folder Include="Parking" />
+    <Folder Include="Data" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Accounts\User.sql" />
@@ -76,6 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FreeParkingSystem.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FreeParkingSystem.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Data\InsertConfiguration.PostDeployment.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>

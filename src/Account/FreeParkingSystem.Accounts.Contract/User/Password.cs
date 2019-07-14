@@ -7,7 +7,7 @@ namespace FreeParkingSystem.Accounts.Contract.User
 		private readonly string _password;
 		public bool IsEncrypted { get; }
 
-		private Password(string password, bool isEncrypted)
+		public Password(string password, bool isEncrypted)
 		{
 			_password = password;
 			IsEncrypted = isEncrypted;

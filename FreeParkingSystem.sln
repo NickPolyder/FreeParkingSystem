@@ -31,7 +31,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A7
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FreeParkingSystem.Database", "database\FreeParkingSystem.Database\FreeParkingSystem.Database.sqlproj", "{5690F8DB-7170-446C-9F42-EA4B72D637B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Accounts.Contract", "src\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj", "{1423BCBA-CCC1-4544-8DED-F93BE28D657F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts.Contract", "src\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj", "{1423BCBA-CCC1-4544-8DED-F93BE28D657F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DD937B37-84CA-41C1-8A1A-FEA16FECAC64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common", "src\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj", "{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Tests", "Tests\FreeParkingSystem.Common.Tests\FreeParkingSystem.Common.Tests.csproj", "{870B14B7-B7E8-4238-9AA0-F78E443474A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Testing", "Tests\FreeParkingSystem.Testing\FreeParkingSystem.Testing.csproj", "{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +71,18 @@ Global
 		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1423BCBA-CCC1-4544-8DED-F93BE28D657F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{870B14B7-B7E8-4238-9AA0-F78E443474A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870B14B7-B7E8-4238-9AA0-F78E443474A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870B14B7-B7E8-4238-9AA0-F78E443474A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870B14B7-B7E8-4238-9AA0-F78E443474A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +93,9 @@ Global
 		{345B36F3-DF6A-469C-9CE8-25C7CF6F1D07} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 		{5690F8DB-7170-446C-9F42-EA4B72D637B8} = {A72E336D-910C-4337-8E90-D62B4186A314}
 		{1423BCBA-CCC1-4544-8DED-F93BE28D657F} = {5AC95103-B6C5-4811-969C-805613651FD2}
+		{7DDF409B-B28F-4F3E-AD9D-4ADB1D85A8EF} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
+		{870B14B7-B7E8-4238-9AA0-F78E443474A8} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
+		{A32651C4-29B5-49F0-9C5C-1ADE5CB1F55E} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

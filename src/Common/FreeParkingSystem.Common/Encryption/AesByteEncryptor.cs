@@ -9,7 +9,7 @@ namespace FreeParkingSystem.Common.Encryption
 		private readonly EncryptionOptions _options;
 		private readonly Aes _aes;
 		private readonly int _ivLength;
-		protected AesByteEncryptor(EncryptionOptions options)
+		public AesByteEncryptor(EncryptionOptions options)
 		{
 			_options = options;
 			_aes = Aes.Create();
@@ -21,12 +21,14 @@ namespace FreeParkingSystem.Common.Encryption
 			var iv = GenerateIv();
 			using (var encryptor = _aes.CreateEncryptor(_options.SecretKey, iv))
 			using (MemoryStream ms = new MemoryStream())
-			using (var cryptoStream = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
 			{
 				ms.Write(iv, 0, iv.Length);
-				cryptoStream.Write(input, iv.Length + 1, input.Length);
-				cryptoStream.FlushFinalBlock();
-				return ms.ToArray();
+				using (var cryptoStream = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+				{
+					cryptoStream.Write(input, 0, input.Length);
+					cryptoStream.FlushFinalBlock();
+					return ms.ToArray();
+				}
 			}
 		}
 
@@ -39,7 +41,7 @@ namespace FreeParkingSystem.Common.Encryption
 			using (MemoryStream ms = new MemoryStream())
 			using (var cryptoStream = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
 			{
-				cryptoStream.Write(input, iv.Length + 1, input.Length - iv.Length);
+				cryptoStream.Write(input, iv.Length, input.Length - iv.Length);
 				cryptoStream.FlushFinalBlock();
 				return ms.ToArray();
 			}

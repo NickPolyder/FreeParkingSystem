@@ -6,7 +6,7 @@ namespace FreeParkingSystem.Common.Encryption
 	{
 		private readonly IEncrypt<byte[]> _byteEncryptor;
 
-		protected AesStringEncryptor(IEncrypt<byte[]> byteEncryptor)
+		public AesStringEncryptor(IEncrypt<byte[]> byteEncryptor)
 		{
 			_byteEncryptor = byteEncryptor;
 		}
@@ -21,10 +21,10 @@ namespace FreeParkingSystem.Common.Encryption
 
 		public string Decrypt(string input)
 		{
-			var bytesToDecrypt = System.Text.Encoding.UTF8.GetBytes(input);
+			var bytesToDecrypt = Convert.FromBase64String(input);
 			var decryptedItem = _byteEncryptor.Decrypt(bytesToDecrypt);
 
-			return Convert.ToBase64String(decryptedItem, Base64FormattingOptions.None);
+			return System.Text.Encoding.UTF8.GetString(decryptedItem);
 		}
 	}
 }

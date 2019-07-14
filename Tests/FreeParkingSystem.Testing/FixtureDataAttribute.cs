@@ -14,6 +14,7 @@ namespace FreeParkingSystem.Testing
 	/// <summary>
 	/// Modified attribute in order to make AutoFixture.AutoDataAttribute work with .net standard projects.
 	/// </summary>
+	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 	public class FixtureDataAttribute : DataAttribute
 	{
 		private readonly Lazy<IFixture> _lazyFixture;
@@ -23,19 +24,12 @@ namespace FreeParkingSystem.Testing
 
 		}
 
-		public FixtureDataAttribute(Type setupType) : this(() =>
-		{
-			var fixture = CreateDefaultFixture();
-
-			setupType.GetMethod("ContainerSetup")?.Invoke(null, new object[]{ fixture });
-
-			return fixture;
-		})
+		public FixtureDataAttribute(Type setupType) : this(() => CreateFixtureWithContainerSetup(setupType))
 		{
 			
 		}
-
-		public FixtureDataAttribute(Func<IFixture> fixtureFactory)
+		
+		protected FixtureDataAttribute(Func<IFixture> fixtureFactory)
 		{
 			_lazyFixture = new Lazy<IFixture>(fixtureFactory, LazyThreadSafetyMode.None);
 		}
@@ -70,8 +64,17 @@ namespace FreeParkingSystem.Testing
 			}
 		}
 
+		protected static IFixture CreateFixtureWithContainerSetup(Type setupType)
+		{
+			var fixture = CreateDefaultFixture();
 
-		private static IFixture CreateDefaultFixture()
+			setupType.GetMethod("ContainerSetup")?.Invoke(null, new object[] { fixture });
+
+			return fixture;
+		}
+
+
+		protected static IFixture CreateDefaultFixture()
 		{
 			return new Fixture().Customize(new CompositeCustomization(new AutoMoqCustomization()));
 		}

@@ -23,11 +23,6 @@ namespace FreeParkingSystem.Testing
 		{
 
 		}
-
-		public FixtureDataAttribute(Type setupType) : this(() => CreateFixtureWithContainerSetup(setupType))
-		{
-			
-		}
 		
 		protected FixtureDataAttribute(Func<IFixture> fixtureFactory)
 		{
@@ -37,6 +32,9 @@ namespace FreeParkingSystem.Testing
 		public override IEnumerable<object[]> GetData(MethodInfo testMethod)
 		{
 			if (testMethod == null) throw new ArgumentNullException(nameof(testMethod));
+
+			
+			testMethod.DeclaringType?.GetMethod("ContainerSetup")?.Invoke(null, new object[] { _lazyFixture.Value});
 
 			var specimens = new List<object>();
 			var context = new SpecimenContext(_lazyFixture.Value);
@@ -57,22 +55,13 @@ namespace FreeParkingSystem.Testing
 			var customizeAttributes = p.GetCustomAttributes()
 				.OfType<IParameterCustomizationSource>()
 				.OrderBy(x => x);
+
 			foreach (var ca in customizeAttributes)
 			{
 				var c = ca.GetCustomization(p);
 				_lazyFixture.Value.Customize(c);
 			}
 		}
-
-		protected static IFixture CreateFixtureWithContainerSetup(Type setupType)
-		{
-			var fixture = CreateDefaultFixture();
-
-			setupType.GetMethod("ContainerSetup")?.Invoke(null, new object[] { fixture });
-
-			return fixture;
-		}
-
 
 		protected static IFixture CreateDefaultFixture()
 		{

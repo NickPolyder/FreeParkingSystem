@@ -26,14 +26,15 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 		[Theory, FixtureData]
 		public void Encrypt_ShouldCall_ByteEncryptor_Encrypt(
-			[Frozen]Mock<IEncrypt<byte[]>> byteEncryptorMock,
-			string input,
-			AesStringEncryptor sut)
+			Mock<IEncrypt<byte[]>> byteEncryptorMock,
+			string input)
 		{
 			// Arrange
 			byteEncryptorMock
 				.Setup(encryptor => encryptor.Encrypt(It.IsAny<byte[]>()))
 				.Returns(new byte[0]);
+
+			var sut = new AesStringEncryptor(byteEncryptorMock.Object);
 
 			// Act
 			sut.Encrypt(input);
@@ -46,8 +47,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 		[Theory, FixtureData]
 		public void Decrypt_ShouldCall_ByteEncryptor_Decrypt(
 			[Frozen]Mock<IEncrypt<byte[]>> byteEncryptorMock,
-			byte[] input,
-			AesStringEncryptor sut)
+			byte[] input)
 		{
 			// Arrange
 			byteEncryptorMock
@@ -55,6 +55,8 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Returns(new byte[0]);
 
 			var base64Input = Convert.ToBase64String(input);
+
+			var sut = new AesStringEncryptor(byteEncryptorMock.Object);
 			// Act
 
 			sut.Decrypt(base64Input);
@@ -64,7 +66,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 		}
 
 
-		[Theory, FixtureData(typeof(AesStringEncryptorTests))]
+		[Theory, FixtureData]
 		
 		public void Encrypt_ShouldEncryptValues(
 			string input,
@@ -81,9 +83,9 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 		}
 
 		[Theory]
-		[InlineFixtureData(typeof(AesStringEncryptorTests), "R7RMNs748OpiKMsgA8ojILCbA6rImTKpaU0UT78VejL33uMW4mPG0vMeQCgVBnz/XvMP3QDQoadoIo5aEjNAOg==", "inputd9c54f6e-9659-476d-bd99-bea9dcbf2bc0")]
-		[InlineFixtureData(typeof(AesStringEncryptorTests), "GJJcwzv4LzsobxUKw7T0M2hFAykiYnG+i5srxPohIeXEJ+KCRVLYcUGHB0b2E7W3uPGpB6zOO1pj4AqDqUxT9A==", "inputf5597d6c-396e-423d-bedd-3ab142aa497b")]
-		[InlineFixtureData(typeof(AesStringEncryptorTests), "TiijlBfXiivzdNfYCAbOWhqyCJv62dP+GWt90mM9EjNr6nt892jmHnz/cYpq73GJSNlgdU6PT+jf3npOQ9YtMw==", "input26891dc4-ed43-4f70-a3e3-2c0a16ecbc35")]
+		[InlineFixtureData("R7RMNs748OpiKMsgA8ojILCbA6rImTKpaU0UT78VejL33uMW4mPG0vMeQCgVBnz/XvMP3QDQoadoIo5aEjNAOg==", "inputd9c54f6e-9659-476d-bd99-bea9dcbf2bc0")]
+		[InlineFixtureData("GJJcwzv4LzsobxUKw7T0M2hFAykiYnG+i5srxPohIeXEJ+KCRVLYcUGHB0b2E7W3uPGpB6zOO1pj4AqDqUxT9A==", "inputf5597d6c-396e-423d-bedd-3ab142aa497b")]
+		[InlineFixtureData("TiijlBfXiivzdNfYCAbOWhqyCJv62dP+GWt90mM9EjNr6nt892jmHnz/cYpq73GJSNlgdU6PT+jf3npOQ9YtMw==", "input26891dc4-ed43-4f70-a3e3-2c0a16ecbc35")]
 		public void Decrypt_ShouldDecryptValues(
 			string input,
 			string expected,
@@ -98,7 +100,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 			result.ShouldBe(expected);
 		}
 
-		[Theory, FixtureData(typeof(AesStringEncryptorTests))]
+		[Theory, FixtureData]
 		public void ShouldBeAbleToEncryptAndDecryptTheInformation(
 			string input,
 			AesStringEncryptor sut)

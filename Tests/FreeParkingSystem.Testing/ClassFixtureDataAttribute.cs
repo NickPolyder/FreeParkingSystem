@@ -13,13 +13,7 @@ namespace FreeParkingSystem.Testing
 		{
 			_typeData = typeData;
 		}
-
-		public ClassFixtureDataAttribute(Type typeData, Type setupData) : base(setupData)
-		{
-			_typeData = typeData;
-		}
-
-
+		
 		public override IEnumerable<object[]> GetData(MethodInfo testMethod)
 		{
 			if (testMethod == null) throw new ArgumentNullException(nameof(testMethod));

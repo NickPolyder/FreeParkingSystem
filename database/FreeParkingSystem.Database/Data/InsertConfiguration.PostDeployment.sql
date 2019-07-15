@@ -13,8 +13,6 @@ GO
 :setvar DatabaseName "FreeParkingSystem.Database"
 
 GO
-:on error exit
-GO
 /*
 Detect SQLCMD mode and disable script execution if SQLCMD mode is not supported.
 To re-enable the script after enabling SQLCMD mode, execute the following:

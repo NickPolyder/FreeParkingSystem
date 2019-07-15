@@ -14,12 +14,7 @@ namespace FreeParkingSystem.Testing
 		{
 			_data = data;
 		}
-
-		public InlineFixtureDataAttribute(Type setupType, params object[] data) : base(setupType)
-		{
-			_data = data;
-		}
-
+		
 		public override IEnumerable<object[]> GetData(MethodInfo testMethod)
 		{
 			var fullList = new List<object>();

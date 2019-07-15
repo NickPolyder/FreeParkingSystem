@@ -22,14 +22,14 @@ namespace FreeParkingSystem.Common.Tests.Hashing
 		[Theory, FixtureData]
 		public void ShouldCall_ByteHasher(
 			[Frozen]Mock<IHash<byte[]>> byteHasherMock,
-			string input,
-			ShaStringHasher sut)
+			string input)
 		{
 			// Arrange
 			byteHasherMock
 				.Setup(hasher => hasher.Hash(It.IsAny<byte[]>()))
 				.Returns(new byte[0]);
 
+			var sut = new ShaStringHasher(byteHasherMock.Object);
 			// Act
 			sut.Hash(input);
 
@@ -38,9 +38,9 @@ namespace FreeParkingSystem.Common.Tests.Hashing
 		}
 
 		[Theory]
-		[InlineFixtureData(typeof(ShaStringHasherTests), "inputd9c54f6e-9659-476d-bd99-bea9dcbf2bc0", "41nHappakeRGp1HUQJK7cy7CTbfT8VMbRO6kaaw7SMkje+zeG2toyP8NMEOLU7IcUQVxQAPDLlb9oqRz3NaFaw==")]
-		[InlineFixtureData(typeof(ShaStringHasherTests), "inputf5597d6c-396e-423d-bedd-3ab142aa497b", "JlFTgECJj09XxMdY6tq4FRP6rfaFHHz2j6r1chnoTQF6fmgOt/+VilaWIH4XgM2zChVGcjthYQ43jL/bWyCfTQ==")]
-		[InlineFixtureData(typeof(ShaStringHasherTests), "input26891dc4-ed43-4f70-a3e3-2c0a16ecbc35", "DaQRwEmgBIwjjRnU12TDnMWcOGars5RomC3NCDXm8lEUyQx/YqoKH5wEBMw+d2j7hCNILCUfiRMwxEzI1Q0W/w==")]
+		[InlineFixtureData("inputd9c54f6e-9659-476d-bd99-bea9dcbf2bc0", "41nHappakeRGp1HUQJK7cy7CTbfT8VMbRO6kaaw7SMkje+zeG2toyP8NMEOLU7IcUQVxQAPDLlb9oqRz3NaFaw==")]
+		[InlineFixtureData("inputf5597d6c-396e-423d-bedd-3ab142aa497b", "JlFTgECJj09XxMdY6tq4FRP6rfaFHHz2j6r1chnoTQF6fmgOt/+VilaWIH4XgM2zChVGcjthYQ43jL/bWyCfTQ==")]
+		[InlineFixtureData("input26891dc4-ed43-4f70-a3e3-2c0a16ecbc35", "DaQRwEmgBIwjjRnU12TDnMWcOGars5RomC3NCDXm8lEUyQx/YqoKH5wEBMw+d2j7hCNILCUfiRMwxEzI1Q0W/w==")]
 		public void ShouldReturnHashedValue(
 			string input,
 			string expected,

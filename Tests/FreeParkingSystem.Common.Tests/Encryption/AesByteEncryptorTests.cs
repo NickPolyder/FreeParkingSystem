@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Customize(fixture);
 		}
 
-		[Theory, FixtureData(typeof(AesByteEncryptorTests))]
+		[Theory, FixtureData]
 		public void Encrypt_ShouldReturnTheEncryptedValue(
 			byte[] input,
 			AesByteEncryptor sut)
@@ -38,7 +38,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 		}
 
-		[Theory, ClassFixtureData(typeof(AesByteData), typeof(AesByteEncryptorTests))]
+		[Theory, ClassFixtureData(typeof(AesByteData))]
 		public void Decrypt_ShouldReturnTheDecryptedValue(
 			byte[] input,
 			byte[] expected,
@@ -54,7 +54,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 		}
 
-		[Theory, FixtureData(typeof(AesByteEncryptorTests))]
+		[Theory, FixtureData]
 		public void ShouldBeAbleToEncryptAndDecryptTheInformation(
 			byte[] input,
 			AesByteEncryptor sut)

@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+    <ProjectReference Include="..\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

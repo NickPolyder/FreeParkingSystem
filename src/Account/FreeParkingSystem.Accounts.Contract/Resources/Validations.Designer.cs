@@ -122,5 +122,14 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
                 return ResourceManager.GetString("PasswordValidation_NumbersRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password needs to have at least one special character..
+        /// </summary>
+        public static string PasswordValidation_SpecialsRequired {
+            get {
+                return ResourceManager.GetString("PasswordValidation_SpecialsRequired", resourceCulture);
+            }
+        }
     }
 }

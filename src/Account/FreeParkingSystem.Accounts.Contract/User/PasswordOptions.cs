@@ -11,7 +11,7 @@
 		public string AllowedSpecialCharacters { get; }
 
 
-		public PasswordOptions(int minimumCharacters, int maximumCharacters, PasswordRequirements requirements, string allowedSpecialCharacters)
+		public PasswordOptions(int minimumCharacters, int maximumCharacters, PasswordRequirements requirements, string allowedSpecialCharacters = null)
 		{
 			MinimumCharacters = minimumCharacters;
 			MaximumCharacters = maximumCharacters;

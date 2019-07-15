@@ -7,8 +7,10 @@ namespace FreeParkingSystem.Accounts.Validators
 {
 	public class PasswordValidator : IValidate<Password>
 	{
-		private const string _numbers = "0123456789";
-		private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		private const string Numbers = "0123456789";
+		private const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		private const string DefaultSpecialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+
 		private readonly PasswordOptions _options;
 
 		public PasswordValidator(PasswordOptions options)
@@ -35,14 +37,41 @@ namespace FreeParkingSystem.Accounts.Validators
 			ValidateRequiredNumbers(password, stringPassword);
 
 			ValidateRequiredCapitals(password, stringPassword);
+
+			ValidateRequiredSpecials(password, stringPassword);
+		}
+
+		private void ValidateRequiredSpecials(Password password, string stringPassword)
+		{
+			if (_options.Requirements.HasFlag(PasswordRequirements.Special))
+			{
+				string allowedSpecialCharacters = !string.IsNullOrWhiteSpace(_options.AllowedSpecialCharacters)
+					? _options.AllowedSpecialCharacters
+					: DefaultSpecialCharacters;
+
+				bool hasSpecialCharacters = false;
+				foreach (var character in allowedSpecialCharacters)
+				{
+					if (stringPassword.IndexOf(character) > -1)
+					{
+						hasSpecialCharacters = true;
+						break;
+					}
+				}
+
+				if (!hasSpecialCharacters)
+				{
+					throw new PasswordValidationException(Validations.PasswordValidation_SpecialsRequired, password);
+				}
+			}
 		}
 
 		private void ValidateRequiredCapitals(Password password, string stringPassword)
 		{
-			if (_options.Requirements == PasswordRequirements.Capitals)
+			if (_options.Requirements.HasFlag(PasswordRequirements.Capitals))
 			{
 				bool hasCapitals = false;
-				foreach (var character in _alphabet)
+				foreach (var character in Alphabet)
 				{
 					if (stringPassword.IndexOf(character) > -1)
 					{
@@ -58,27 +87,12 @@ namespace FreeParkingSystem.Accounts.Validators
 			}
 		}
 
-		private void ValidatePasswordLength(Password password, string stringPassword)
-		{
-			if (_options.MinimumCharacters <= stringPassword.Length)
-			{
-				throw new PasswordValidationException(
-					Validations.PasswordValidation_MinimumCharacterRequired.WithArgs(_options.MinimumCharacters), password);
-			}
-
-			if (_options.MaximumCharacters >= stringPassword.Length)
-			{
-				throw new PasswordValidationException(
-					Validations.PasswordValidation_MaximumCharacterRequired.WithArgs(_options.MaximumCharacters), password);
-			}
-		}
-
 		private void ValidateRequiredNumbers(Password password, string stringPassword)
 		{
-			if (_options.Requirements == PasswordRequirements.Numbers)
+			if (_options.Requirements.HasFlag(PasswordRequirements.Numbers))
 			{
 				bool hasNumber = false;
-				foreach (var number in _numbers)
+				foreach (var number in Numbers)
 				{
 					if (stringPassword.IndexOf(number) > -1)
 					{
@@ -91,6 +105,21 @@ namespace FreeParkingSystem.Accounts.Validators
 				{
 					throw new PasswordValidationException(Validations.PasswordValidation_NumbersRequired, password);
 				}
+			}
+		}
+
+		private void ValidatePasswordLength(Password password, string stringPassword)
+		{
+			if (_options.MinimumCharacters > 0 && stringPassword.Length <= _options.MinimumCharacters)
+			{
+				throw new PasswordValidationException(
+					Validations.PasswordValidation_MinimumCharacterRequired.WithArgs(_options.MinimumCharacters), password);
+			}
+
+			if (_options.MaximumCharacters > 0 && stringPassword.Length > _options.MaximumCharacters)
+			{
+				throw new PasswordValidationException(
+					Validations.PasswordValidation_MaximumCharacterRequired.WithArgs(_options.MaximumCharacters), password);
 			}
 		}
 	}

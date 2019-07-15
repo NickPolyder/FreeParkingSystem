@@ -140,4 +140,7 @@
   <data name="PasswordValidation_NumbersRequired" xml:space="preserve">
     <value>The password needs to have at least one number.</value>
   </data>
+  <data name="PasswordValidation_SpecialsRequired" xml:space="preserve">
+    <value>The password needs to have at least one special character.</value>
+  </data>
 </root>

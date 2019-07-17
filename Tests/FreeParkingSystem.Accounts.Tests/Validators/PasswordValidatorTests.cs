@@ -14,7 +14,7 @@ namespace FreeParkingSystem.Accounts.Tests.Validators
 			PasswordValidator sut)
 		{
 			// Arrange
-			var password = new Password(passwordString, true);
+			var password = new Password(passwordString, true,true);
 
 			// Act
 			var exception = Record.Exception(() => sut.Validate(password));

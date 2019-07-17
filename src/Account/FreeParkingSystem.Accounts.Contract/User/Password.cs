@@ -5,11 +5,36 @@ namespace FreeParkingSystem.Accounts.Contract.User
 	public struct Password : IEquatable<Password>
 	{
 		private readonly string _password;
+
+		public string Salt { get; }
+		public bool IsHashed { get; }
 		public bool IsEncrypted { get; }
 
-		public Password(string password, bool isEncrypted)
+		public Password(string password) : this(password, false)
+		{
+		}
+
+		public Password(string password, bool isHashed) : this(password, isHashed, false)
+		{
+		}
+
+		public Password(string password, bool isHashed, bool isEncrypted) : this(password, string.Empty, isHashed, isEncrypted)
+		{
+		}
+
+		public Password(string password, string salt) : this(password, salt, false)
+		{
+		}
+
+		public Password(string password, string salt, bool isHashed) : this(password, salt, isHashed, false)
+		{
+		}
+
+		public Password(string password, string salt, bool isHashed, bool isEncrypted)
 		{
 			_password = password;
+			Salt = salt ?? string.Empty;
+			IsHashed = isHashed;
 			IsEncrypted = isEncrypted;
 		}
 
@@ -47,7 +72,10 @@ namespace FreeParkingSystem.Accounts.Contract.User
 
 		public override string ToString()
 		{
-			return _password;
+			if (IsHashed || IsEncrypted)
+				return _password;
+
+			return string.Format("{1}{0}{1}", _password, Salt);
 		}
 	}
 }

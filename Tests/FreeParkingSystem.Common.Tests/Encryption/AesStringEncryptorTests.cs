@@ -67,7 +67,6 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 
 		[Theory, FixtureData]
-		
 		public void Encrypt_ShouldEncryptValues(
 			string input,
 			AesStringEncryptor sut)

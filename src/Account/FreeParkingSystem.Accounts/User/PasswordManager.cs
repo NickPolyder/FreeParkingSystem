@@ -1,4 +1,6 @@
-﻿using FreeParkingSystem.Accounts.Contract.User;
+﻿using System;
+using System.Security.Cryptography;
+using FreeParkingSystem.Accounts.Contract.User;
 using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts
@@ -15,10 +17,39 @@ namespace FreeParkingSystem.Accounts
 			_passwordHasher = passwordHasher;
 			_passwordEncrypter = passwordEncrypter;
 		}
-		public Password CreatePassword(string password)
+		public Password Create(string password)
 		{
-			var pass = new Password(password);
+			var salt = GenerateSalt();
+			var pass = new Password(password, salt);
+
 			_passwordValidator.Validate(pass);
+			var hashedPassword = _passwordHasher.Hash(pass);
+			var encryptedPassword = _passwordEncrypter.Encrypt(hashedPassword);
+
+			return encryptedPassword;
 		}
+
+		public bool Verify(Password password, Password otherPassword)
+		{
+			Password decryptedPassword = password.IsEncrypted 
+				? _passwordEncrypter.Decrypt(password) 
+				: password;
+
+			Password decryptedOtherPassword = otherPassword.IsEncrypted
+				? _passwordEncrypter.Decrypt(otherPassword)
+				: otherPassword;
+
+			return decryptedPassword.Equals(decryptedOtherPassword);
+		}
+
+
+		private string GenerateSalt()
+		{
+			var buffer = new byte[128];
+			RandomNumberGenerator.Create().GetBytes(buffer);
+			return System.Text.Encoding.UTF8.GetString(buffer);
+		}
+
+
 	}
 }

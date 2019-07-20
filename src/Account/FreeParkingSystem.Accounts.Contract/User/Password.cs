@@ -5,7 +5,7 @@ namespace FreeParkingSystem.Accounts.Contract.User
 	public struct Password : IEquatable<Password>
 	{
 		private readonly string _password;
-
+		
 		public string Salt { get; }
 		public bool IsHashed { get; }
 		public bool IsEncrypted { get; }
@@ -32,8 +32,9 @@ namespace FreeParkingSystem.Accounts.Contract.User
 
 		public Password(string password, string salt, bool isHashed, bool isEncrypted)
 		{
-			_password = password;
+			var hasSalt = !string.IsNullOrWhiteSpace(salt);
 			Salt = salt ?? string.Empty;
+			_password = hasSalt ? password?.Replace(Salt, string.Empty) : password;
 			IsHashed = isHashed;
 			IsEncrypted = isEncrypted;
 		}
@@ -42,6 +43,8 @@ namespace FreeParkingSystem.Accounts.Contract.User
 		{
 			return (_password == null ||
 					_password.Equals(other._password)) &&
+				   Salt.Equals(other.Salt) &&
+				   IsHashed == other.IsHashed &&
 				   IsEncrypted == other.IsEncrypted;
 		}
 
@@ -55,7 +58,9 @@ namespace FreeParkingSystem.Accounts.Contract.User
 			unchecked
 			{
 				int hashCode = _password == null ? 0 : _password.GetHashCode();
-				hashCode = (hashCode * 257) ^ IsEncrypted.GetHashCode();
+				hashCode = (hashCode * 89) ^ Salt.GetHashCode();
+				hashCode = (hashCode * 101) ^ IsEncrypted.GetHashCode();
+				hashCode = (hashCode * 257) ^ IsHashed.GetHashCode();
 				return hashCode;
 			}
 		}

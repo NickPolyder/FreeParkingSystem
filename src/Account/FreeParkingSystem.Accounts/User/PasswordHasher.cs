@@ -1,5 +1,4 @@
-﻿using System;
-using FreeParkingSystem.Accounts.Contract.User;
+﻿using FreeParkingSystem.Accounts.Contract.User;
 using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts.User
@@ -20,7 +19,7 @@ namespace FreeParkingSystem.Accounts.User
 				return input;
 
 			if (input.IsEncrypted)
-				throw new ArgumentException();
+				throw new PasswordEncryptionException(Contract.Resources.Validations.PasswordEncryption_EncryptedPasswordCannotBeHashed, input);
 
 			var stringPassword = input.ToString();
 

@@ -5,11 +5,19 @@ using FreeParkingSystem.Testing;
 using Moq;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Common.Tests.Hashing
 {
 	public class ShaStringHasherTests
 	{
+		private readonly ITestOutputHelper _testOutputHelper;
+
+		public ShaStringHasherTests(ITestOutputHelper testOutputHelper)
+		{
+			_testOutputHelper = testOutputHelper;
+		}
+
 
 		public static void ContainerSetup(IFixture fixture)
 		{
@@ -19,17 +27,17 @@ namespace FreeParkingSystem.Common.Tests.Hashing
 					   .Customize(fixture);
 		}
 
-		[Theory, FixtureData]
+		[Theory, FixtureData(RunContainerSetup = false)]
 		public void ShouldCall_ByteHasher(
 			[Frozen]Mock<IHash<byte[]>> byteHasherMock,
-			string input)
+			string input,
+			ShaStringHasher sut)
 		{
 			// Arrange
 			byteHasherMock
 				.Setup(hasher => hasher.Hash(It.IsAny<byte[]>()))
 				.Returns(new byte[0]);
 
-			var sut = new ShaStringHasher(byteHasherMock.Object);
 			// Act
 			sut.Hash(input);
 
@@ -50,6 +58,7 @@ namespace FreeParkingSystem.Common.Tests.Hashing
 
 			// Act
 			var result = sut.Hash(input);
+			_testOutputHelper.WriteLine($"input: {input} = {result}");
 
 			// Assert
 			result.ShouldBe(expected);

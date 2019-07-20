@@ -3,18 +3,17 @@ using FreeParkingSystem.Accounts.Contract.Resources;
 
 namespace FreeParkingSystem.Accounts.Contract.User
 {
-	public class PasswordValidationException : Exception
+	public class PasswordValidationException : PasswordException
 	{
-		public Password Password
-		{
-			get => Data.Contains(nameof(Password)) && Data[nameof(Password)] is Password value ? value : default;
-			set => Data[nameof(Password)] = value;
-		}
-		public PasswordValidationException():this(Validations.PasswordValidation_GeneralMessage)
+		public PasswordValidationException() : base()
 		{
 		}
 
-		public PasswordValidationException(Password password):this(Validations.PasswordValidation_GeneralMessage, password)
+		public PasswordValidationException(Password password) : base(password)
+		{
+		}
+
+		public PasswordValidationException(Password password, Exception innerException) : base(password, innerException)
 		{
 		}
 
@@ -22,14 +21,14 @@ namespace FreeParkingSystem.Accounts.Contract.User
 		{
 		}
 
-		public PasswordValidationException(string message, Password password) : this(message, password, null)
+		public PasswordValidationException(string message, Password password) : base(message, password, null)
 		{
 		}
 
 		public PasswordValidationException(string message, Exception innerException) : base(message, innerException)
 		{
 		}
-		
+
 		public PasswordValidationException(string message, Password password, Exception innerException) : base(message, innerException)
 		{
 			Password = password;

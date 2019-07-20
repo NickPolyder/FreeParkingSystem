@@ -3,11 +3,19 @@ using FreeParkingSystem.Common.Encryption;
 using FreeParkingSystem.Testing;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Common.Tests.Encryption
 {
 	public class AesByteEncryptorTests
 	{
+		private readonly ITestOutputHelper _testOutputHelper;
+
+		public AesByteEncryptorTests(ITestOutputHelper testOutputHelper)
+		{
+			_testOutputHelper = testOutputHelper;
+		}
+
 		public static void ContainerSetup(IFixture fixture)
 		{
 			var secretKey = new byte[32]
@@ -31,6 +39,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 			// Act
 			var result = sut.Encrypt(input);
+			_testOutputHelper.WriteLine($"input: [{string.Join(", ", input)}] = [{string.Join(", ", result)}]");
 
 			// Assert
 			result.ShouldNotBe(input);
@@ -48,6 +57,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 			// Act
 			var result = sut.Decrypt(input);
+			_testOutputHelper.WriteLine($"input: [{string.Join(", ",input)}] = [{string.Join(", ", result)}]");
 
 			// Assert
 			result.ShouldBe(expected);

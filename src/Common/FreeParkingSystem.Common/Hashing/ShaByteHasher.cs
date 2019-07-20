@@ -12,9 +12,7 @@ namespace FreeParkingSystem.Common.Hashing
 
 		public byte[] Hash(byte[] input)
 		{
-			_sha512.Initialize();
 			var hashed = _sha512.ComputeHash(input);
-			_sha512.Clear();
 			return hashed;
 		}
 	}

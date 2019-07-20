@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FreeParkingSystem.Common.Tests.Encryption
 {
-	public class AesByteData:IEnumerable<object[]>
+	public class AesByteData : IEnumerable<object[]>
 	{
 		public IEnumerator<object[]> GetEnumerator()
 		{

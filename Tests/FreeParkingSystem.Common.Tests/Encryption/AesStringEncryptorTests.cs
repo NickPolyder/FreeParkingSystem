@@ -6,11 +6,19 @@ using FreeParkingSystem.Testing;
 using Moq;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Common.Tests.Encryption
 {
 	public class AesStringEncryptorTests
 	{
+		private readonly ITestOutputHelper _testOutputHelper;
+
+		public AesStringEncryptorTests(ITestOutputHelper testOutputHelper)
+		{
+			_testOutputHelper = testOutputHelper;
+		}
+
 		public static void ContainerSetup(IFixture fixture)
 		{
 			var secretKey = new byte[32]
@@ -24,18 +32,17 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Customize(fixture);
 		}
 
-		[Theory, FixtureData]
+		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Encrypt_ShouldCall_ByteEncryptor_Encrypt(
-			Mock<IEncrypt<byte[]>> byteEncryptorMock,
-			string input)
+			[Frozen] Mock<IEncrypt<byte[]>> byteEncryptorMock,
+			string input,
+			AesStringEncryptor sut)
 		{
 			// Arrange
 			byteEncryptorMock
 				.Setup(encryptor => encryptor.Encrypt(It.IsAny<byte[]>()))
 				.Returns(new byte[0]);
-
-			var sut = new AesStringEncryptor(byteEncryptorMock.Object);
-
+			
 			// Act
 			sut.Encrypt(input);
 
@@ -44,10 +51,11 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 		}
 
 
-		[Theory, FixtureData]
+		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Decrypt_ShouldCall_ByteEncryptor_Decrypt(
 			[Frozen]Mock<IEncrypt<byte[]>> byteEncryptorMock,
-			byte[] input)
+			byte[] input,
+			AesStringEncryptor sut)
 		{
 			// Arrange
 			byteEncryptorMock
@@ -55,8 +63,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Returns(new byte[0]);
 
 			var base64Input = Convert.ToBase64String(input);
-
-			var sut = new AesStringEncryptor(byteEncryptorMock.Object);
+			
 			// Act
 
 			sut.Decrypt(base64Input);
@@ -75,7 +82,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 			// Act
 			var result = sut.Encrypt(input);
-
+			_testOutputHelper.WriteLine($"input: {input} = {result}");
 			// Assert
 			result.ShouldNotBe(input);
 			result.ShouldNotBeNullOrEmpty();
@@ -94,7 +101,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 			// Act
 			var result = sut.Decrypt(input);
-
+			_testOutputHelper.WriteLine($"input: {input} = {result}");
 			// Assert
 			result.ShouldBe(expected);
 		}

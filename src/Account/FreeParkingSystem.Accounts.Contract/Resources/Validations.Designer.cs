@@ -61,6 +61,24 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password is not valid.
+        /// </summary>
+        public static string Password_GeneralMessage {
+            get {
+                return ResourceManager.GetString("Password_GeneralMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password cannot be hashed while being encrypted.
+        /// </summary>
+        public static string PasswordEncryption_EncryptedPasswordCannotBeHashed {
+            get {
+                return ResourceManager.GetString("PasswordEncryption_EncryptedPasswordCannotBeHashed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password is encrypted and cannot be validated..
         /// </summary>
         public static string PasswordValidation_CannotValidateEncryptedPassword {
@@ -84,15 +102,6 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
         public static string PasswordValidation_EmptyPassword {
             get {
                 return ResourceManager.GetString("PasswordValidation_EmptyPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The password is not valid.
-        /// </summary>
-        public static string PasswordValidation_GeneralMessage {
-            get {
-                return ResourceManager.GetString("PasswordValidation_GeneralMessage", resourceCulture);
             }
         }
         

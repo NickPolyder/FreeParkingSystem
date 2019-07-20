@@ -5,17 +5,20 @@ namespace FreeParkingSystem.Accounts
 {
 	public class PasswordManager : IPasswordManager
 	{
-		private readonly IHash<string> _stringHasher;
-		private readonly IEncrypt<string> _stringEncrypter;
+		private readonly IValidate<Password> _passwordValidator;
+		private readonly IHash<Password> _passwordHasher;
+		private readonly IEncrypt<Password> _passwordEncrypter;
 
-		public PasswordManager(IHash<string> stringHasher,IEncrypt<string> stringEncrypter)
+		public PasswordManager(IValidate<Password> passwordValidator, IHash<Password> passwordHasher, IEncrypt<Password> passwordEncrypter)
 		{
-			_stringHasher = stringHasher;
-			_stringEncrypter = stringEncrypter;
+			_passwordValidator = passwordValidator;
+			_passwordHasher = passwordHasher;
+			_passwordEncrypter = passwordEncrypter;
 		}
 		public Password CreatePassword(string password)
 		{
-			throw new System.NotImplementedException();
+			var pass = new Password(password);
+			_passwordValidator.Validate(pass);
 		}
 	}
 }

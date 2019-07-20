@@ -26,12 +26,7 @@ namespace FreeParkingSystem.Accounts.Validators
 			}
 
 			var stringPassword = password.ToString();
-
-			if (string.IsNullOrWhiteSpace(stringPassword))
-			{
-				throw new PasswordValidationException(Validations.PasswordValidation_EmptyPassword, password);
-			}
-
+			
 			ValidatePasswordLength(password, stringPassword);
 
 			ValidateRequiredNumbers(password, stringPassword);

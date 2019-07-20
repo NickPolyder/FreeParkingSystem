@@ -8,7 +8,9 @@
 		/// </summary>
 		/// <param name="password"></param>
 		/// <returns></returns>
-		Password CreatePassword(string password);
+		Password Create(string password);
+
+		bool Verify(Password password, Password otherPassword);
 
 	}
 }

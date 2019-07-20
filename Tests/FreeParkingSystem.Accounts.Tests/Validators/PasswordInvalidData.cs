@@ -11,13 +11,6 @@ namespace FreeParkingSystem.Accounts.Tests.Validators
 		{
 			yield return new object[]
 			{
-				new PasswordOptions(0,0,PasswordRequirements.None),
-				new Password("",false),
-				Contract.Resources.Validations.PasswordValidation_EmptyPassword
-			};
-
-			yield return new object[]
-			{
 				new PasswordOptions(5,0,PasswordRequirements.None),
 				new Password("012",false),
 				Contract.Resources.Validations.PasswordValidation_MinimumCharacterRequired.WithArgs(5)

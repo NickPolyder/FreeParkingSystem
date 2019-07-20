@@ -1,4 +1,5 @@
 ﻿using System;
+using FreeParkingSystem.Accounts.Contract.Resources;
 
 namespace FreeParkingSystem.Accounts.Contract.User
 {
@@ -32,6 +33,11 @@ namespace FreeParkingSystem.Accounts.Contract.User
 
 		public Password(string password, string salt, bool isHashed, bool isEncrypted)
 		{
+			if (string.IsNullOrWhiteSpace(password))
+			{
+				throw new PasswordValidationException(Validations.PasswordValidation_EmptyPassword);
+			}
+
 			var hasSalt = !string.IsNullOrWhiteSpace(salt);
 			Salt = salt ?? string.Empty;
 			_password = hasSalt ? password?.Replace(Salt, string.Empty) : password;

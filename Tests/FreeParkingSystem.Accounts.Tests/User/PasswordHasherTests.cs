@@ -1,5 +1,4 @@
-﻿using System;
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract.User;
 using FreeParkingSystem.Accounts.User;
@@ -28,8 +27,13 @@ namespace FreeParkingSystem.Accounts.Tests.User
 
 		public static void ContainerSetup(IFixture fixture)
 		{
+			fixture.Build<IHash<byte[]>>()
+				.FromFactory(() =>new ShaByteHasher())
+				.ToCustomization()
+				.Customize(fixture);
+
 			fixture.Build<IHash<string>>()
-				.FromFactory(() => new ShaStringHasher(new ShaByteHasher()))
+				.FromFactory((IHash<byte[]> byteHash) => new ShaStringHasher(byteHash))
 				.ToCustomization()
 				.Customize(fixture);
 		}
@@ -71,11 +75,12 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		public void WhenPasswordIsValid_ShouldCallStringHasher(
 			[Frozen] Mock<IHash<string>> stringHasherMock,
 			string passwordString,
+			string hashedString,
 			PasswordHasher sut)
 		{
 			// Arrange
 			var password = new Password(passwordString, false, false);
-			stringHasherMock.Setup(svc => svc.Hash(It.IsAny<string>())).Returns(String.Empty);
+			stringHasherMock.Setup(svc => svc.Hash(It.IsAny<string>())).Returns(hashedString);
 
 			// Act
 			sut.Hash(password);

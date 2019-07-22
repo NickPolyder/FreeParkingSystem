@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using FreeParkingSystem.Accounts.Contract.User;
 using FreeParkingSystem.Common;
 
@@ -9,13 +8,13 @@ namespace FreeParkingSystem.Accounts
 	{
 		private readonly IValidate<Password> _passwordValidator;
 		private readonly IHash<Password> _passwordHasher;
-		private readonly IEncrypt<Password> _passwordEncrypter;
+		private readonly IEncrypt<Password> _passwordEncryptor;
 
-		public PasswordManager(IValidate<Password> passwordValidator, IHash<Password> passwordHasher, IEncrypt<Password> passwordEncrypter)
+		public PasswordManager(IValidate<Password> passwordValidator, IHash<Password> passwordHasher, IEncrypt<Password> passwordEncryptor)
 		{
 			_passwordValidator = passwordValidator;
 			_passwordHasher = passwordHasher;
-			_passwordEncrypter = passwordEncrypter;
+			_passwordEncryptor = passwordEncryptor;
 		}
 		public Password Create(string password)
 		{
@@ -24,7 +23,7 @@ namespace FreeParkingSystem.Accounts
 
 			_passwordValidator.Validate(pass);
 			var hashedPassword = _passwordHasher.Hash(pass);
-			var encryptedPassword = _passwordEncrypter.Encrypt(hashedPassword);
+			var encryptedPassword = _passwordEncryptor.Encrypt(hashedPassword);
 
 			return encryptedPassword;
 		}
@@ -32,11 +31,11 @@ namespace FreeParkingSystem.Accounts
 		public bool Verify(Password password, Password otherPassword)
 		{
 			Password decryptedPassword = password.IsEncrypted 
-				? _passwordEncrypter.Decrypt(password) 
+				? _passwordEncryptor.Decrypt(password) 
 				: password;
 
 			Password decryptedOtherPassword = otherPassword.IsEncrypted
-				? _passwordEncrypter.Decrypt(otherPassword)
+				? _passwordEncryptor.Decrypt(otherPassword)
 				: otherPassword;
 
 			return decryptedPassword.Equals(decryptedOtherPassword);

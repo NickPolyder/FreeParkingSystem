@@ -18,7 +18,22 @@ namespace FreeParkingSystem.Testing
 	public class FixtureDataAttribute : DataAttribute
 	{
 		private readonly Lazy<IFixture> _lazyFixture;
+		private string _containerMethod = "ContainerSetup";
 
+		public string ContainerMethod
+		{
+			get => _containerMethod;
+
+			set
+			{
+				if (string.IsNullOrWhiteSpace(value))
+				{
+					throw new ArgumentNullException(nameof(value), value);
+				}
+
+				_containerMethod = value;
+			}
+		}
 		public bool RunContainerSetup { get; set; } = true;
 
 		public FixtureDataAttribute() : this(CreateDefaultFixture)
@@ -36,7 +51,7 @@ namespace FreeParkingSystem.Testing
 			if (testMethod == null) throw new ArgumentNullException(nameof(testMethod));
 
 			if (RunContainerSetup)
-				testMethod.DeclaringType?.GetMethod("ContainerSetup")?.Invoke(null, new object[] { _lazyFixture.Value });
+				testMethod.DeclaringType?.GetMethod(ContainerMethod)?.Invoke(null, new object[] { _lazyFixture.Value });
 
 			var specimens = new List<object>();
 			var context = new SpecimenContext(_lazyFixture.Value);

@@ -1,5 +1,4 @@
-﻿using System;
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract.User;
 using FreeParkingSystem.Accounts.User;
@@ -30,11 +29,18 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			{
 				237, 201, 222, 52, 18, 152, 49, 135, 198, 143, 48, 247, 22, 185, 5, 216, 43, 6, 37, 243, 13, 52, 149, 119, 74, 104, 70, 130, 246, 76, 231, 147
 			};
+			
+			fixture.Build<EncryptionOptions>()
+				.FromFactory(() => new EncryptionOptions(secretKey))
+				.ToCustomization()
+				.Customize(fixture);
 
-			var byteEncryptor = new AesByteEncryptor(new EncryptionOptions(secretKey));
-
+			fixture.Build<IEncrypt<byte[]>>()
+				.FromFactory((EncryptionOptions options) => new AesByteEncryptor(options))
+				.ToCustomization()
+				.Customize(fixture);
 			fixture.Build<IEncrypt<string>>()
-				.FromFactory(() => new AesStringEncryptor(byteEncryptor))
+				.FromFactory((IEncrypt<byte[]> byteEncryptor) => new AesStringEncryptor(byteEncryptor))
 				.ToCustomization()
 				.Customize(fixture);
 		}
@@ -75,12 +81,13 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		public void Encrypt_WhenPasswordIsNotEncrypted_ShouldCallEncryptorEncrypt(
 			[Frozen] Mock<IEncrypt<string>> stringEncryptorMock,
 			string passwordString,
+			string encryptedString,
 			PasswordEncryptor sut)
 		{
 			// Arrange
 			stringEncryptorMock
 				.Setup(svc => svc.Encrypt(It.IsAny<string>()))
-				.Returns(string.Empty);
+				.Returns(encryptedString);
 
 			var password = new Password(passwordString, true, false);
 
@@ -95,12 +102,13 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		public void Decrypt_WhenPasswordIsEncrypted_ShouldCallEncryptorDecrypt(
 			[Frozen] Mock<IEncrypt<string>> stringEncryptorMock,
 			string passwordString,
+			string decryptedString,
 			PasswordEncryptor sut)
 		{
 			// Arrange
 			stringEncryptorMock
 				.Setup(svc => svc.Decrypt(It.IsAny<string>()))
-				.Returns(string.Empty);
+				.Returns(decryptedString);
 
 			var password = new Password(passwordString, true, true);
 

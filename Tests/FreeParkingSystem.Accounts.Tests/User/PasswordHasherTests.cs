@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using AutoFixture.Xunit;
-using FreeParkingSystem.Accounts.Contract.User;
+using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.User;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Hashing;
@@ -25,7 +25,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			
 		}
 
-		public static void ContainerSetup(IFixture fixture)
+		private static void ContainerSetup(IFixture fixture)
 		{
 			fixture.Build<IHash<byte[]>>()
 				.FromFactory(() =>new ShaByteHasher())

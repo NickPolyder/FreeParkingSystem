@@ -21,6 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
+		<ProjectReference Include="..\..\src\Account\FreeParkingSystem.Accounts.Data\FreeParkingSystem.Accounts.Data.csproj" />
 		<ProjectReference Include="..\..\src\Account\FreeParkingSystem.Accounts\FreeParkingSystem.Accounts.csproj" />
 		<ProjectReference Include="..\FreeParkingSystem.Testing\FreeParkingSystem.Testing.csproj" />
 	</ItemGroup>

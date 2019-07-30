@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FreeParkingSystem.Accounts.Contract.User
+namespace FreeParkingSystem.Accounts.Contract
 {
 	[Flags]
 	public enum PasswordRequirements : byte

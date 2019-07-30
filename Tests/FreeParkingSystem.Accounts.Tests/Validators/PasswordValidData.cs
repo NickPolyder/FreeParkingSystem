@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FreeParkingSystem.Accounts.Contract.User;
+using FreeParkingSystem.Accounts.Contract;
 
 namespace FreeParkingSystem.Accounts.Tests.Validators
 {

@@ -19,7 +19,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 			_testOutputHelper = testOutputHelper;
 		}
 
-		public static void ContainerSetup(IFixture fixture)
+		private static void ContainerSetup(IFixture fixture)
 		{
 			var secretKey = new byte[32]
 			{

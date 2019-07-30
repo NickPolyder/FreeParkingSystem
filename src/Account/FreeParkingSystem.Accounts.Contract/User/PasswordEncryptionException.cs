@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace FreeParkingSystem.Accounts.Contract.User
+namespace FreeParkingSystem.Accounts.Contract
 {
 	public class PasswordEncryptionException : PasswordException
 	{

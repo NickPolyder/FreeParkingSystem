@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography;
-using FreeParkingSystem.Accounts.Contract.User;
+using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts

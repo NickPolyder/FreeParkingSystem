@@ -1,7 +1,7 @@
 ﻿using System;
 using FreeParkingSystem.Accounts.Contract.Resources;
 
-namespace FreeParkingSystem.Accounts.Contract.User
+namespace FreeParkingSystem.Accounts.Contract
 {
 	public abstract class PasswordException: Exception
 	{

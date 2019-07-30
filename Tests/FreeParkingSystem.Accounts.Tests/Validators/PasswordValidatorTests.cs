@@ -1,4 +1,4 @@
-﻿using FreeParkingSystem.Accounts.Contract.User;
+﻿using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Testing;
 using Shouldly;

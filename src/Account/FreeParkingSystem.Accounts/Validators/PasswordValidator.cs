@@ -1,5 +1,5 @@
 ﻿using FreeParkingSystem.Accounts.Contract.Resources;
-using FreeParkingSystem.Accounts.Contract.User;
+using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.ExtensionMethods;
 

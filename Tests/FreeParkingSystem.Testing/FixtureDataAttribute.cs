@@ -6,7 +6,6 @@ using System.Threading;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoFixture.Kernel;
-using FreeParkingSystem.Common;
 using Xunit.Sdk;
 
 namespace FreeParkingSystem.Testing
@@ -51,7 +50,8 @@ namespace FreeParkingSystem.Testing
 			if (testMethod == null) throw new ArgumentNullException(nameof(testMethod));
 
 			if (RunContainerSetup)
-				testMethod.DeclaringType?.GetMethod(ContainerMethod)?.Invoke(null, new object[] { _lazyFixture.Value });
+				testMethod.DeclaringType?.GetMethod(ContainerMethod,BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic)
+					?.Invoke(null, new object[] { _lazyFixture.Value });
 
 			var specimens = new List<object>();
 			var context = new SpecimenContext(_lazyFixture.Value);

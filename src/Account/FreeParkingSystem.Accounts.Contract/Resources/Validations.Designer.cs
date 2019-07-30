@@ -61,6 +61,15 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing context item: User.
+        /// </summary>
+        public static string MappingContext_MissingUser {
+            get {
+                return ResourceManager.GetString("MappingContext_MissingUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password is not valid.
         /// </summary>
         public static string Password_GeneralMessage {

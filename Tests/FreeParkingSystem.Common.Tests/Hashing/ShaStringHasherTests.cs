@@ -19,7 +19,7 @@ namespace FreeParkingSystem.Common.Tests.Hashing
 		}
 
 
-		public static void ContainerSetup(IFixture fixture)
+		private static void ContainerSetup(IFixture fixture)
 		{
 			fixture.Build<IHash<byte[]>>()
 					   .FromFactory(() => new ShaByteHasher())

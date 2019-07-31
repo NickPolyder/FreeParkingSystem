@@ -11,9 +11,9 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 {
 	public class UserMapper : IMap<DbUser, User>
 	{
-		private readonly IMap<DbClaims, Claim> _claimsMapper;
+		private readonly IMap<DbClaims, UserClaim> _claimsMapper;
 
-		public UserMapper(IMap<DbClaims, Claim> claimsMapper)
+		public UserMapper(IMap<DbClaims, UserClaim> claimsMapper)
 		{
 			_claimsMapper = claimsMapper;
 		}
@@ -36,19 +36,14 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 		{
 			if (input == null)
 				return null;
-
-			var dictionary = new Dictionary<object, object>
-			{
-				[typeof(User)] = input
-			};
-
+			
 			return new DbUser
 			{
 				Id = input.Id,
 				UserName = input.UserName,
 				Password = input.Password.ToString(),
 				Salt = input.Password.Salt,
-				Claims = _claimsMapper.ReverseMap(input.Claims, dictionary).ToArray()
+				Claims = _claimsMapper.ReverseMap(input.Claims).ToArray()
 			};
 		}
 

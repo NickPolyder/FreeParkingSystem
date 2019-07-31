@@ -21,8 +21,8 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 				.ToCustomization()
 				.Customize(fixture);
 
-			fixture.Build<Contract.User>()
-				.Without(p => p.Claims)
+			fixture.Build<UserClaim>()
+				.Without(p => p.User)
 				.ToCustomization()
 				.Customize(fixture);
 		}
@@ -50,9 +50,10 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 			// Assert
 			result.ShouldNotBeNull();
+			result.Id.ShouldBe(dbClaim.Id);
+			result.UserId.ShouldBe(dbClaim.UserId);
 			result.Type.ShouldBe(dbClaim.ClaimType);
 			result.Value.ShouldBe(dbClaim.ClaimValue);
-			result.GetId().ShouldBe(dbClaim.Id);
 		}
 
 		[Theory, FixtureData]
@@ -67,49 +68,22 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 		}
 
 		[Theory, FixtureData]
-		public void ReverseMap_WhenContextUserIsNotProvided_ShouldThrowException(
-			string claimType,
-			string claimValue,
-			ClaimsMapper sut)
-		{
-			// Arrange
-			var claim = new Claim(claimType, claimValue);
-
-			// Act
-
-			var result = Record.Exception(() => sut.ReverseMap(claim));
-
-			// Assert
-			result.ShouldNotBeNull();
-			result.ShouldBeOfType<MappingContextException>();
-			result.Message.ShouldBe(Contract.Resources.Validations.MappingContext_MissingUser);
-		}
-
-
-		[Theory, FixtureData]
 		public void ReverseMap_WhenValid_ShouldReturnTheMappedInstance(
-			Contract.User user,
-			string claimType,
-			string claimValue,
-			ClaimsMapper sut)
+				UserClaim claim,
+				ClaimsMapper sut)
 		{
 			// Arrange
-			var claim = new Claim(claimType, claimValue);
-			var dictionary = new Dictionary<object, object>
-			{
-				[typeof(Contract.User)] = user
-			};
 
 			// Act
 
-			var result = sut.ReverseMap(claim, dictionary);
+			var result = sut.ReverseMap(claim);
 
 			// Assert
 			result.ShouldNotBeNull();
-			result.Id.ShouldBe(claim.GetId());
+			result.Id.ShouldBe(claim.Id);
 			result.ClaimType.ShouldBe(claim.Type);
 			result.ClaimValue.ShouldBe(claim.Value);
-			result.UserId.ShouldBe(user.Id);
+			result.UserId.ShouldBe(claim.UserId);
 		}
 	}
 }

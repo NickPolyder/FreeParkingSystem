@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\Validations.Designer.cs">
       <DependentUpon>Validations.resx</DependentUpon>
       <DesignTime>True</DesignTime>

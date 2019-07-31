@@ -21,7 +21,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 		{
 			BuildUser(fixture);
 
-			fixture.Build<IMap<DbClaims, Claim>>()
+			fixture.Build<IMap<DbClaims, UserClaim>>()
 				.FromFactory(() => new ClaimsMapper())
 				.ToCustomization()
 				.Customize(fixture);
@@ -35,6 +35,11 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 				.Customize(fixture);
 
 			fixture.Build<DbClaims>()
+				.Without(p => p.User)
+				.ToCustomization()
+				.Customize(fixture);
+
+			fixture.Build<UserClaim>()
 				.Without(p => p.User)
 				.ToCustomization()
 				.Customize(fixture);
@@ -53,7 +58,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
 		public void Map_WhenInputDoesNotHaveClaims_ShouldNotCallClaimMapper(
-			[Frozen] Mock<IMap<DbClaims, Claim>> claimMapperMock,
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
 			DbUser dbUser,
 			UserMapper sut)
 		{
@@ -69,13 +74,14 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
 		public void Map_WhenInputItHasClaims_ShouldCallClaimMapper(
-			[Frozen] Mock<IMap<DbClaims, Claim>> claimMapperMock,
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
 			DbUser dbUser,
+			UserClaim claim,
 			UserMapper sut)
 		{
 			// Arrange
 			claimMapperMock.Setup(mapper => mapper.Map(It.IsAny<DbClaims>(), It.IsAny<IDictionary<object, object>>()))
-				.Returns(new Claim("type", "value"));
+				.Returns(claim);
 
 			// Act
 			sut.Map(dbUser);
@@ -87,13 +93,14 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
 		public void Map_WhenInputHasClaims_ShouldReturnTheMappedInstanceWithClaims(
-			[Frozen] Mock<IMap<DbClaims, Claim>> claimMapperMock,
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
 			DbUser dbUser,
+			UserClaim claim,
 			UserMapper sut)
 		{
 			// Arrange
 			claimMapperMock.Setup(mapper => mapper.Map(It.IsAny<DbClaims>(), It.IsAny<IDictionary<object, object>>()))
-				.Returns(new Claim("type", "value"));
+				.Returns(claim);
 
 			// Act
 			var result = sut.Map(dbUser);
@@ -132,11 +139,119 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.Claims.ForEach((resultClaim) =>
 			{
 				var claimValue = dbUser.Claims.FirstOrDefault(claim => claim.ClaimType == resultClaim.Type &&
-				                                                       claim.ClaimValue == resultClaim.Value &&
-				                                                       claim.Id == resultClaim.GetId() &&
-				                                                       claim.UserId == dbUser.Id);
+																	   claim.ClaimValue == resultClaim.Value &&
+																	   claim.Id == resultClaim.Id &&
+																	   claim.UserId == dbUser.Id);
 
 				claimValue.ShouldNotBeNull();
+			});
+		}
+
+
+		[Theory, FixtureData]
+		public void ReverseMap_WhenInputIsNull_ShouldReturnNull(
+			UserMapper sut)
+		{
+			// Act
+			var result = sut.ReverseMap(null);
+
+			// Assert
+			result.ShouldBeNull();
+		}
+
+		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
+		public void ReverseMap_WhenInputDoesNotHaveClaims_ShouldNotCallClaimMapper(
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
+			Contract.User user,
+			UserMapper sut)
+		{
+			// Arrange
+			user.Claims = null;
+
+			// Act
+			sut.ReverseMap(user);
+
+			// Assert
+			claimMapperMock.Verify(mapper => mapper.ReverseMap(It.IsAny<UserClaim>(), It.IsAny<IDictionary<object, object>>()), Times.Never);
+		}
+
+		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
+		public void ReverseMap_WhenInputHasClaims_ShouldReturnTheMappedInstanceWithClaims(
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
+			Contract.User user,
+			List<UserClaim> claims,
+			DbClaims dbClaim,
+			UserMapper sut)
+		{
+			// Arrange
+			user.Claims = claims;
+
+			claimMapperMock.Setup(mapper => mapper.ReverseMap(It.IsAny<UserClaim>(), It.IsAny<IDictionary<object, object>>()))
+				.Returns(dbClaim);
+
+			// Act
+			sut.ReverseMap(user);
+
+			// Assert
+			claimMapperMock.Verify(mapper => mapper.ReverseMap(It.IsAny<UserClaim>(), It.IsAny<IDictionary<object, object>>()),
+				Times.Exactly(user.Claims.Count));
+		}
+
+		[Theory, FixtureData(ContainerMethod = nameof(BuildUser))]
+		public void ReverseMap_WhenInputItHasClaims_ShouldCallClaimMapper(
+			[Frozen] Mock<IMap<DbClaims, UserClaim>> claimMapperMock,
+			Contract.User user,
+			List<UserClaim> claims,
+			DbClaims dbClaim,
+			UserMapper sut)
+		{
+			// Arrange
+			user.Claims = claims;
+
+			claimMapperMock.Setup(mapper => mapper.ReverseMap(It.IsAny<UserClaim>(), It.IsAny<IDictionary<object, object>>()))
+				.Returns(dbClaim);
+
+			// Act
+			var result = sut.ReverseMap(user);
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldBe(user.Id);
+			result.UserName.ShouldBe(user.UserName);
+			result.Salt.ShouldBe(user.Password.Salt);
+			result.Password.ShouldBe(user.Password.ToString());
+			result.Claims.Count.ShouldBe(user.Claims.Count);
+		}
+
+
+		[Theory, FixtureData]
+		public void ReverseMap_ShouldReturnMappedData(
+			Contract.User user,
+			List<UserClaim> claims,
+			UserMapper sut)
+		{
+			// Arrange
+			claims.ForEach(claim => claim.UserId = user.Id);
+			user.Claims = claims;
+
+			// Act
+			var result = sut.ReverseMap(user);
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldBe(user.Id);
+			result.UserName.ShouldBe(user.UserName);
+			result.Salt.ShouldBe(user.Password.Salt);
+			result.Password.ShouldBe(user.Password.ToString());
+			result.Claims.ForEach((resultClaim) =>
+			{
+				var claimValue = user.Claims.FirstOrDefault(claim => claim.Type == resultClaim.ClaimType &&
+				                                                       claim.Value == resultClaim.ClaimValue &&
+				                                                       claim.Id == resultClaim.Id);
+
+				claimValue.ShouldNotBeNull();
+
+				resultClaim.UserId.ShouldBe(user.Id);
 			});
 		}
 	}

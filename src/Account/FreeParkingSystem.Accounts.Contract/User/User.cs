@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace FreeParkingSystem.Accounts.Contract
 {
@@ -10,6 +9,6 @@ namespace FreeParkingSystem.Accounts.Contract
 		public string UserName { get; set; }
 
 		public Password Password { get; set; }
-		public ICollection<Claim> Claims { get; set; }
+		public ICollection<UserClaim> Claims { get; set; }
 	}
 }

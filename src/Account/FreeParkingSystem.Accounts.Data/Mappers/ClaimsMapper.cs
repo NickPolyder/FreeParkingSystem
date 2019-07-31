@@ -6,32 +6,31 @@ using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts.Data.Mappers
 {
-	public class ClaimsMapper : IMap<DbClaims, Claim>
+	public class ClaimsMapper : IMap<DbClaims, UserClaim>
 	{
-		public Claim Map(DbClaims input, IDictionary<object, object> context)
+		public UserClaim Map(DbClaims input, IDictionary<object, object> context)
 		{
 			if (input == null)
 				return null;
 
-			var claim = new Claim(input.ClaimType, input.ClaimValue);
-			claim.SetId(input.Id);
-			return claim;
+			return new UserClaim
+			{
+				Id = input.Id,
+				UserId =  input.UserId,
+				Type =  input.ClaimType,
+				Value = input.ClaimValue,
+			};
 		}
 
-		public DbClaims ReverseMap(Claim input, IDictionary<object, object> context)
+		public DbClaims ReverseMap(UserClaim input, IDictionary<object, object> context)
 		{
 			if (input == null)
 				return null;
-
-			if (!(context.TryGetValue(typeof(User), out var resultUser) && resultUser is User user))
-			{
-				throw new MappingContextException(Contract.Resources.Validations.MappingContext_MissingUser);
-			}
-
+			
 			return new DbClaims
 			{
-				Id = input.GetId(),
-				UserId = user.Id,
+				Id = input.Id,
+				UserId = input.UserId,
 				ClaimType = input.Type,
 				ClaimValue = input.Value
 			};

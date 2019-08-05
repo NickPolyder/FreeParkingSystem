@@ -22,5 +22,23 @@ namespace FreeParkingSystem.Accounts.Data.Repositories
 
 			return Mapper.Map(dbClaims);
 		}
+
+		public bool UserHasClaim(int userId, string type)
+		{
+			if (string.IsNullOrWhiteSpace(type))
+				throw new ArgumentNullException(nameof(type));
+
+			return Set.Any(claim => claim.UserId == userId && claim.ClaimType.Equals(type));
+		}
+
+		public UserClaim GetClaimByType(int userId, string type)
+		{
+			if (string.IsNullOrWhiteSpace(type))
+				throw new ArgumentNullException(nameof(type));
+
+			var claimItem = Set.SingleOrDefault(claim => claim.UserId == userId && claim.ClaimType.Equals(type));
+
+			return Mapper.Map(claimItem);
+		}
 	}
 }

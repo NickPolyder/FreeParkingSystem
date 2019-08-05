@@ -2,7 +2,7 @@
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
-using FreeParkingSystem.Accounts.User;
+using FreeParkingSystem.Accounts;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Hashing;
 using FreeParkingSystem.Testing;

@@ -61,6 +61,24 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The claim already exists.
+        /// </summary>
+        public static string Claim_AlreadyExists {
+            get {
+                return ResourceManager.GetString("Claim_AlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The claim does not exist.
+        /// </summary>
+        public static string Claim_DoesNotExist {
+            get {
+                return ResourceManager.GetString("Claim_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing context item: User.
         /// </summary>
         public static string MappingContext_MissingUser {
@@ -147,6 +165,15 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
         public static string PasswordValidation_SpecialsRequired {
             get {
                 return ResourceManager.GetString("PasswordValidation_SpecialsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is unavailable.
+        /// </summary>
+        public static string User_AlreadyExists {
+            get {
+                return ResourceManager.GetString("User_AlreadyExists", resourceCulture);
             }
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using FreeParkingSystem.Common.Data;
 
 namespace FreeParkingSystem.Accounts.Data.Models
 {
-	public class DbClaims
+	public class DbClaims : IEntity
 	{
 		[Key]
 		public int Id { get; set; }

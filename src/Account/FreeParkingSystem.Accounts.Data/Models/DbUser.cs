@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using FreeParkingSystem.Common.Data;
 
 namespace FreeParkingSystem.Accounts.Data.Models
 {
-	public class DbUser
+	public class DbUser: IEntity
 	{
 		[Key]
 		public int Id { get; set; }

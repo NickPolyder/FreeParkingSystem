@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 			};
 		}
 
-		public DbClaims ReverseMap(UserClaim input, IDictionary<object, object> context)
+		public DbClaims Map(UserClaim input, IDictionary<object, object> context)
 		{
 			if (input == null)
 				return null;

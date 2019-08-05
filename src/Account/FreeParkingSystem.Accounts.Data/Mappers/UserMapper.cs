@@ -32,7 +32,7 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 			};
 		}
 
-		public DbUser ReverseMap(User input, IDictionary<object, object> context)
+		public DbUser Map(User input, IDictionary<object, object> context)
 		{
 			if (input == null)
 				return null;
@@ -43,7 +43,7 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 				UserName = input.UserName,
 				Password = input.Password.ToString(),
 				Salt = input.Password.Salt,
-				Claims = _claimsMapper.ReverseMap(input.Claims).ToArray()
+				Claims = _claimsMapper.Map(input.Claims).ToArray()
 			};
 		}
 

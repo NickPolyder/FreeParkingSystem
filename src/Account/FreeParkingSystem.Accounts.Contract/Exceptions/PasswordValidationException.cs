@@ -1,6 +1,9 @@
 ﻿using System;
-namespace FreeParkingSystem.Accounts.Contract
+using System.Diagnostics.CodeAnalysis;
+
+namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
+	[ExcludeFromCodeCoverage]
 	public class PasswordValidationException : PasswordException
 	{
 		public PasswordValidationException() : base()

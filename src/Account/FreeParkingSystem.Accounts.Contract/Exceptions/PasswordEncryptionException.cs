@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
-namespace FreeParkingSystem.Accounts.Contract
+namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
+	[ExcludeFromCodeCoverage]
 	public class PasswordEncryptionException : PasswordException
 	{
 		public PasswordEncryptionException()

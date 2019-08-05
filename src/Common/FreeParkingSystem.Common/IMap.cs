@@ -6,6 +6,6 @@ namespace FreeParkingSystem.Common
 	{
 		TOutput Map(TInput input, IDictionary<object,object> context);
 
-		TInput ReverseMap(TOutput input, IDictionary<object, object> context);
+		TInput Map(TOutput input, IDictionary<object, object> context);
 	}
 }

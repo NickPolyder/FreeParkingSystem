@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using AutoFixture;
+﻿using AutoFixture;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Data.Mappers;
 using FreeParkingSystem.Accounts.Data.Models;
-using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Testing;
 using Shouldly;
@@ -28,18 +25,29 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 		}
 
 		[Theory, FixtureData]
-		public void Map_WhenInputIsNull_ShouldReturnNull(
+		public void Map_WhenDbClaimsIsNull_ShouldReturnNull(
 			ClaimsMapper sut)
 		{
 			// Act
-			var result = sut.Map(null);
+			var result = sut.Map((DbClaims)null);
 
 			// Assert
 			result.ShouldBeNull();
 		}
 
 		[Theory, FixtureData]
-		public void Map_WhenInputIsNotNull_ShouldReturnTheMappedInstance(
+		public void Map_WhenUserClaimIsNull_ShouldReturnNull(
+			ClaimsMapper sut)
+		{
+			// Act
+			var result = sut.Map((UserClaim)null);
+
+			// Assert
+			result.ShouldBeNull();
+		}
+
+		[Theory, FixtureData]
+		public void Map_DbClaims_WhenValid_ShouldReturnTheMappedInstance(
 			DbClaims dbClaim,
 			ClaimsMapper sut)
 		{
@@ -56,19 +64,9 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.Value.ShouldBe(dbClaim.ClaimValue);
 		}
 
-		[Theory, FixtureData]
-		public void ReverseMap_WhenInputIsNull_ShouldReturnNull(
-			ClaimsMapper sut)
-		{
-			// Act
-			var result = sut.ReverseMap(null);
-
-			// Assert
-			result.ShouldBeNull();
-		}
 
 		[Theory, FixtureData]
-		public void ReverseMap_WhenValid_ShouldReturnTheMappedInstance(
+		public void Map_UserClaim_WhenValid_ShouldReturnTheMappedInstance(
 				UserClaim claim,
 				ClaimsMapper sut)
 		{
@@ -76,7 +74,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 			// Act
 
-			var result = sut.ReverseMap(claim);
+			var result = sut.Map(claim);
 
 			// Assert
 			result.ShouldNotBeNull();

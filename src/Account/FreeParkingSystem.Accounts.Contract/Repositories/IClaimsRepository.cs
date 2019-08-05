@@ -7,5 +7,8 @@ namespace FreeParkingSystem.Accounts.Contract.Repositories
 	{
 		IEnumerable<UserClaim> GetClaimsByUser(int userId);
 
+		bool UserHasClaim(int userId, string type);
+
+		UserClaim GetClaimByType(int userId, string type);
 	}
 }

@@ -14,5 +14,17 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 				action(model);
 			}
 		}
+
+		public static void ForEach<TModel>(this IEnumerable<TModel> enumerable, Action<TModel, int> action)
+		{
+			if (action == null) return;
+
+			var index = 0;
+			foreach (var model in enumerable)
+			{
+				action(model, index);
+				index++;
+			}
+		}
 	}
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common.Data\FreeParkingSystem.Common.Data.csproj" />
     <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
     <ProjectReference Include="..\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
   </ItemGroup>

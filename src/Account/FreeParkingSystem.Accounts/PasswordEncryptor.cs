@@ -1,7 +1,7 @@
 ﻿using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Common;
 
-namespace FreeParkingSystem.Accounts.User
+namespace FreeParkingSystem.Accounts
 {
 	public class PasswordEncryptor : IEncrypt<Password>
 	{

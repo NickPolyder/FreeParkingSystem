@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using FreeParkingSystem.Accounts.Contract.Resources;
 
-namespace FreeParkingSystem.Accounts.Contract
+namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
+	[ExcludeFromCodeCoverage]
 	public abstract class PasswordException: Exception
 	{
 		public Password Password

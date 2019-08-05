@@ -1,4 +1,5 @@
 ﻿using FreeParkingSystem.Accounts.Contract;
+using FreeParkingSystem.Accounts.Contract.Exceptions;
 using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts.User

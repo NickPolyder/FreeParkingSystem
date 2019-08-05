@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract;
+using FreeParkingSystem.Accounts.Contract.Exceptions;
 using FreeParkingSystem.Accounts.User;
 using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;

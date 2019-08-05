@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FreeParkingSystem.Accounts.Contract
+namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
 	public class PasswordEncryptionException : PasswordException
 	{

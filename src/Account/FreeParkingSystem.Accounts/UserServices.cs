@@ -33,6 +33,7 @@ namespace FreeParkingSystem.Accounts
 				UserName = userName,
 				Password = encryptedPassword,
 			};
+
 			return _userRepository.Add(user);
 		}
 

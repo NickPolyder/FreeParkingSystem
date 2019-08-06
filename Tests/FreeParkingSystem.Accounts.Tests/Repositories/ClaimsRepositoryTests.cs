@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using AutoFixture;
-using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Data.Mappers;
 using FreeParkingSystem.Accounts.Data.Models;
@@ -10,7 +9,6 @@ using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Testing;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Shouldly;
 using Xunit;
 
@@ -79,11 +77,113 @@ namespace FreeParkingSystem.Accounts.Tests.Repositories
 			}
 		}
 
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void UserHasClaim_ShouldThrowExceptionWhenTypeIsNull(
+			string type,
+			IMap<DbClaims, UserClaim> mapper,
+			int userId)
+		{
+			// Arrange
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new ClaimsRepository(dbContext, mapper))
+			{
+
+				// Act
+				var exception = Record.Exception(() => sut.UserHasClaim(userId, type));
+
+				// Assert
+				exception.ShouldNotBeNull();
+				exception.ShouldBeOfType<ArgumentNullException>();
+				(exception as ArgumentNullException).ParamName.ShouldBe(nameof(type));
+			}
+		}
+
+		[Theory, FixtureData]
+		public void UserHasClaim_ShouldReturnTrueIfTheUserHasAClaim(
+			IMap<DbClaims, UserClaim> mapper,
+			UserClaim[] claims,
+			int userId)
+		{
+			// Arrange
+			claims.ForEach(claim => claim.UserId = userId);
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new ClaimsRepository(dbContext, mapper))
+			{
+				sut.AddRange(claims);
+
+				// Act
+				var result = sut.UserHasClaim(userId, claims[0].Type);
+
+				// Assert
+				result.ShouldBeTrue();
+			}
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void GetClaimByType_ShouldThrowExceptionWhenTypeIsNull(
+			string type,
+			IMap<DbClaims, UserClaim> mapper,
+			int userId)
+		{
+			// Arrange
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new ClaimsRepository(dbContext, mapper))
+			{
+
+				// Act
+				var exception = Record.Exception(() => sut.GetClaimByType(userId, type));
+
+				// Assert
+				exception.ShouldNotBeNull();
+				exception.ShouldBeOfType<ArgumentNullException>();
+				(exception as ArgumentNullException).ParamName.ShouldBe(nameof(type));
+			}
+		}
+
+		[Theory, FixtureData]
+		public void GetClaimByType_ShouldReturnTrueIfTheUserHasAClaim(
+			IMap<DbClaims, UserClaim> mapper,
+			UserClaim[] claims,
+			int userId)
+		{
+			// Arrange
+			claims.ForEach(claim => claim.UserId = userId);
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new ClaimsRepository(dbContext, mapper))
+			{
+				sut.AddRange(claims);
+
+				// Act
+				var result = sut.GetClaimByType(userId, claims[0].Type);
+
+				// Assert
+				result.ShouldNotBeNull();
+				result.Id.ShouldBe(claims[0].Id);
+				result.UserId.ShouldBe(claims[0].UserId);
+				result.Type.ShouldBe(claims[0].Type);
+				result.Value.ShouldBe(claims[0].Value);
+			}
+		}
+
 
 		private static AccountsDbContext GetDbContext()
 		{
 			var options = new DbContextOptionsBuilder<AccountsDbContext>()
-				.UseInMemoryDatabase("InMemory")
+				.UseInMemoryDatabase(Guid.NewGuid().ToString())
 				.Options;
 
 			var dbContext = new AccountsDbContext(options);

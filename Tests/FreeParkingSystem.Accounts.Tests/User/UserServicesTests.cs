@@ -316,14 +316,10 @@ namespace FreeParkingSystem.Accounts.Tests.User
 
 		[Theory, FixtureData]
 		public void ChangeClaim_WhenUserIsNull_ShouldThrowException(
-			string username,
-			string password,
 			(string type, string value) claim,
 			UserServices sut)
 		{
 			// Arrange
-			var user = sut.CreateUser(username, password);
-			sut.AddClaim(user, claim.type, claim.value);
 
 			// Act
 			var exception = Record.Exception(() => sut.ChangeClaim(null, claim.type, claim.value));
@@ -430,7 +426,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 										$"Password: {user.Password}");
 			sut.AddClaim(user, claim.type, claim.value);
 			user.Claims.Clear();
-			
+
 			// Act
 			sut.ChangeClaim(user, claim.type, newValue);
 
@@ -465,7 +461,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 										$"Password: {user.Password}");
 
 			sut.AddClaim(user, claim.type, claim.value);
-			
+
 			// Act
 			sut.ChangeClaim(user, claim.type, newValue);
 
@@ -482,6 +478,88 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			result.Type.ShouldBe(claim.type);
 			result.Value.ShouldBe(newValue);
 			result.User.ShouldNotBeNull();
+		}
+
+		[Theory, FixtureData]
+		public void RemoveClaim_WhenUserIsNull_ShouldThrowException(
+			string username,
+			string password,
+			string claimType,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			// Act
+			var exception = Record.Exception(() => sut.RemoveClaim(null, claimType));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("user");
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void RemoveClaim_WhenTypeIsNull_ShouldThrowException(
+			string claimType,
+			string username,
+			string password,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			// Act
+			var exception = Record.Exception(() => sut.RemoveClaim(user, claimType));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("type");
+		}
+
+		[Theory, FixtureData]
+		public void RemoveClaim_WhenClaimDoesNotExist_ShouldThrowException(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			// Act
+			var exception = Record.Exception(() => sut.RemoveClaim(user, claim.type));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ClaimException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.Claim_DoesNotExist);
+		}
+
+		[Theory, FixtureData]
+		public void RemoveClaim_ShouldDeleteTheClaim(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+			sut.AddClaim(user, claim.type, claim.value);
+			
+			// Act
+			sut.RemoveClaim(user, claim.type);
+
+			// Assert
+			user.Claims.Count.ShouldBe(0);
 		}
 
 		private static AccountsDbContext GetDbContext()

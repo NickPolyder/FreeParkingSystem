@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
@@ -51,41 +52,28 @@ namespace FreeParkingSystem.Accounts
 				Type = type,
 				Value = value
 			});
-			var oldClaims = user.Claims.ToList();
-			var index = oldClaims.FindIndex(oldClaim => oldClaim.UserId == user.Id && oldClaim.Type == type);
-			if (index >= 0)
-			{
-				oldClaims[index] = userClaim;
-				user.Claims = oldClaims;
-			}
-			else
-			{
-				user.Claims.Add(userClaim);
-			}
-		}
 
+			userClaim.User = user;
+
+			AddToUserClaims(userClaim, user, type);
+		}
 
 		public void ChangeClaim(User user, string type, string changedValue)
 		{
 			Validate(user, type, changedValue);
 
 			var userClaim = _claimsRepository.GetClaimByType(user.Id, type);
-			
-			if(userClaim == null)
+
+			if (userClaim == null)
 				throw new ClaimException(Contract.Resources.Validations.Claim_DoesNotExist);
 
 			userClaim.Value = changedValue;
 
-			var oldClaims = user.Claims.ToList();
-			var index = oldClaims.FindIndex(oldClaim => oldClaim.UserId == user.Id && oldClaim.Type == type);
-			if (index >= 0)
-			{
-				oldClaims[index] = userClaim;
-			}
-			else
-			{
-				user.Claims.Add(userClaim);
-			}
+			_claimsRepository.Update(userClaim);
+
+			userClaim.User = user;
+
+			AddToUserClaims(userClaim, user, type);
 		}
 
 		public void RemoveClaim(User user, string type)
@@ -108,9 +96,33 @@ namespace FreeParkingSystem.Accounts
 			if (index >= 0)
 			{
 				oldClaims.RemoveAt(index);
+				user.Claims = oldClaims;
 			}
 		}
 
+		private static void AddToUserClaims(UserClaim userClaim, User user, string type)
+		{
+			var oldClaims = user.Claims.ToList();
+
+			var index = oldClaims.FindIndex(oldClaim => oldClaim.UserId == user.Id && oldClaim.Type == type);
+
+			if (index >= 0)
+			{
+				oldClaims[index] = userClaim;
+				user.Claims = oldClaims;
+			}
+			else
+			{
+				var newClaimList = new List<UserClaim>
+				{
+					userClaim
+				};
+
+				newClaimList.AddRange(oldClaims);
+
+				user.Claims = newClaimList;
+			}
+		}
 
 		private static void Validate(User user, string type, string value)
 		{

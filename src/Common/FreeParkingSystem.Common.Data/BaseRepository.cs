@@ -6,11 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreeParkingSystem.Common.Data
 {
-	public abstract class BaseRepository<TBusinessObject, TEntity> : IRepository<TBusinessObject> where TEntity : class, IEntity where  TBusinessObject: class
+	public abstract class BaseRepository<TBusinessObject, TEntity> : IRepository<TBusinessObject> where TEntity : class, IEntity where TBusinessObject : class
 	{
 		protected bool Disposed { get; private set; }
 
 		private readonly DbContext _dbContext;
+
+		protected DbContext DbContext
+		{
+			get
+			{
+				ThrowIfDisposed();
+				return _dbContext;
+			}
+		}
+
 		protected IMap<TEntity, TBusinessObject> Mapper { get; }
 
 		private readonly DbSet<TEntity> _dbSet;
@@ -28,7 +38,7 @@ namespace FreeParkingSystem.Common.Data
 		{
 			_dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 			Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-			_dbSet = _dbContext.Set<TEntity>();
+			_dbSet = DbContext.Set<TEntity>();
 		}
 
 		public TBusinessObject Get(int id)
@@ -55,8 +65,11 @@ namespace FreeParkingSystem.Common.Data
 
 			var dbObject = Mapper.Map(entity);
 
+			DetachObject(dbObject.Id);
+
 			Set.Add(dbObject);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 
 			var businessObject = Mapper.Map(dbObject);
 
@@ -70,8 +83,11 @@ namespace FreeParkingSystem.Common.Data
 
 			var dbObjects = Mapper.Map(entities).ToArray();
 
+			DetachObjects(dbObjects.Select(item => item.Id));
+
 			Set.AddRange(dbObjects);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 
 			var businessObjects = Mapper.Map(dbObjects);
 
@@ -85,8 +101,11 @@ namespace FreeParkingSystem.Common.Data
 
 			var dbObject = Mapper.Map(entity);
 
+			DetachObject(dbObject.Id);
+
 			Set.Update(dbObject);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 
 			var businessObject = Mapper.Map(dbObject);
 
@@ -101,8 +120,11 @@ namespace FreeParkingSystem.Common.Data
 
 			var dbObjects = Mapper.Map(entities).ToArray();
 
+			DetachObjects(dbObjects.Select(item => item.Id));
+
 			Set.UpdateRange(dbObjects);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 
 			var businessObjects = Mapper.Map(dbObjects);
 
@@ -117,26 +139,23 @@ namespace FreeParkingSystem.Common.Data
 				return;
 
 			Set.Remove(claim);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 		}
 
 		public virtual void DeleteRange(IEnumerable<int> ids)
 		{
 			var idArray = ids.ToArray();
 			var claims = Set.Where(claim => idArray.Contains(claim.Id)).ToArray();
-			
-			if(claims.Length == 0)
+
+			if (claims.Length == 0)
 				return;
 
 			Set.RemoveRange(claims);
-			SaveChanges();
+
+			DbContext.SaveChanges();
 		}
 
-		protected void SaveChanges()
-		{
-			ThrowIfDisposed();
-			_dbContext.SaveChanges();
-		}
 
 		protected virtual void Dispose(bool disposing)
 		{
@@ -154,7 +173,30 @@ namespace FreeParkingSystem.Common.Data
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
-		
+
+		private void DetachObject(int id)
+		{
+			var local = Set.Local.FirstOrDefault(entry => entry.Id.Equals(id));
+
+			// check if local is not null 
+			if (local != null) // I'm using a extension method
+			{
+				// detach
+				DbContext.Entry(local).State = EntityState.Detached;
+			}
+		}
+
+		private void DetachObjects(IEnumerable<int> ids)
+		{
+			var localArray = Set.Local.Where(entry => ids.Contains(entry.Id)).ToArray();
+
+			foreach (var local in localArray)
+			{
+				// detach
+				DbContext.Entry(local).State = EntityState.Detached;
+			}
+		}
+
 		protected void ThrowIfDisposed()
 		{
 			if (Disposed)

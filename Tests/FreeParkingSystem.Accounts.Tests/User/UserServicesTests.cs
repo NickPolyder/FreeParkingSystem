@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoFixture;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
@@ -30,7 +32,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 
 		private static void ContainerSetup(IFixture fixture)
 		{
-
 			fixture.Build<IUserRepository>()
 				.FromFactory(() => new UserRepository(GetDbContext(), new UserMapper(new ClaimsMapper())))
 				.ToCustomization()
@@ -113,8 +114,8 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			var result = sut.CreateUser(username, password);
 
 			_testOutputHelper.WriteLine($"User: {result.Id}{Environment.NewLine}" +
-			                            $"Username: {result.UserName}{Environment.NewLine}" +
-			                            $"Password: {result.Password}");
+										$"Username: {result.UserName}{Environment.NewLine}" +
+										$"Password: {result.Password}");
 			// Assert
 			result.Id.ShouldNotBe(default);
 			result.UserName.ShouldBe(username);
@@ -143,10 +144,351 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			exception.Message.ShouldBe(Contract.Resources.Validations.User_AlreadyExists);
 		}
 
+		[Theory, FixtureData]
+		public void AddClaim_WhenUserIsNull_ShouldThrowException(
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+
+			// Act
+			var exception = Record.Exception(() => sut.AddClaim(null, claim.type, claim.value));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("user");
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void AddClaim_WhenTypeIsNull_ShouldThrowException(
+			string claimType,
+			string username,
+			string password,
+			string claimValue,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			// Act
+			var exception = Record.Exception(() => sut.AddClaim(user, claimType, claimValue));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("type");
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void AddClaim_WhenValueIsNull_ShouldThrowException(
+			string claimValue,
+			string username,
+			string password,
+			string claimType,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			// Act
+			var exception = Record.Exception(() => sut.AddClaim(user, claimType, claimValue));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("value");
+		}
+
+		[Theory, FixtureData]
+		public void AddClaim_ShouldNotAddTheSameClaimTwice(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+			sut.AddClaim(user, claim.type, claim.value);
+
+			// Act
+			var exception = Record.Exception(() => sut.AddClaim(user, claim.type, claim.value));
+
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ClaimException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.Claim_AlreadyExists);
+		}
+
+		[Theory, FixtureData]
+		public void AddClaim_ShouldCreateClaim(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+			// Act
+			sut.AddClaim(user, claim.type, claim.value);
+
+			var result = user.Claims.FirstOrDefault(cl => cl.Type.Equals(claim.type));
+
+			_testOutputHelper.WriteLine($"Claim: {result.Id}{Environment.NewLine}" +
+										$"Type: {result.Type}{Environment.NewLine}" +
+										$"Value: {result.Value}");
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldNotBe(default);
+			result.UserId.ShouldBe(user.Id);
+			result.Type.ShouldBe(claim.type);
+			result.Value.ShouldBe(claim.value);
+			result.User.ShouldNotBeNull();
+		}
+
+		[Theory, FixtureData]
+		public void AddClaim_WhenAClaimAlreadyExistsInTheList_ShouldCreateClaim_AndReplaceClaimInUser(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			user.Claims = new List<UserClaim>
+			{
+				new UserClaim
+				{
+					Type = claim.type,
+					Value = claim.value,
+					User = user,
+					UserId = user.Id
+				}
+			};
+
+			// Act
+			sut.AddClaim(user, claim.type, claim.value);
+
+			var result = user.Claims.FirstOrDefault(cl => cl.Type.Equals(claim.type));
+
+			_testOutputHelper.WriteLine($"Claim: {result.Id}{Environment.NewLine}" +
+										$"Type: {result.Type}{Environment.NewLine}" +
+										$"Value: {result.Value}");
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldNotBe(default);
+			result.UserId.ShouldBe(user.Id);
+			result.Type.ShouldBe(claim.type);
+			result.Value.ShouldBe(claim.value);
+			result.User.ShouldNotBeNull();
+		}
+
+
+		[Theory, FixtureData]
+		public void ChangeClaim_WhenUserIsNull_ShouldThrowException(
+			string username,
+			string password,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+			sut.AddClaim(user, claim.type, claim.value);
+
+			// Act
+			var exception = Record.Exception(() => sut.ChangeClaim(null, claim.type, claim.value));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("user");
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void ChangeClaim_WhenTypeIsNull_ShouldThrowException(
+			string claimType,
+			string username,
+			string password,
+			string claimValue,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			// Act
+			var exception = Record.Exception(() => sut.ChangeClaim(user, claimType, claimValue));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("type");
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void ChangeClaim_WhenValueIsNull_ShouldThrowException(
+			string claimValue,
+			string username,
+			string password,
+			string claimType,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			// Act
+			var exception = Record.Exception(() => sut.ChangeClaim(user, claimType, claimValue));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ArgumentNullException>();
+			(exception as ArgumentNullException).ParamName.ShouldBe("value");
+		}
+
+		[Theory, FixtureData]
+		public void ChangeClaim_WhenThereAreNoClaims_ShouldThrowExceptions(
+			string username,
+			string password,
+			(string type, string value) otherClaim,
+			(string type, string value) claim,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			sut.AddClaim(user, claim.type, claim.value);
+
+			// Act
+			var exception = Record.Exception(() => sut.ChangeClaim(user, otherClaim.type, otherClaim.value));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<ClaimException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.Claim_DoesNotExist);
+		}
+
+		[Theory, FixtureData]
+		public void ChangeClaim_ShouldChangeClaim(
+			string username,
+			string password,
+			(string type, string value) claim,
+			string newValue,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+			sut.AddClaim(user, claim.type, claim.value);
+			user.Claims.Clear();
+			
+			// Act
+			sut.ChangeClaim(user, claim.type, newValue);
+
+			var result = user.Claims.FirstOrDefault(cl => cl.Type.Equals(claim.type));
+
+			_testOutputHelper.WriteLine($"Claim: {result.Id}{Environment.NewLine}" +
+										$"Type: {result.Type}{Environment.NewLine}" +
+										$"Value: {result.Value}");
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldNotBe(default);
+			result.UserId.ShouldBe(user.Id);
+			result.Type.ShouldBe(claim.type);
+			result.Value.ShouldBe(newValue);
+			result.User.ShouldNotBeNull();
+		}
+
+		[Theory, FixtureData]
+		public void ChangeClaim_WhenAClaimAlreadyExistsInTheList_ShouldCreateClaim_AndReplaceClaimInUser(
+			string username,
+			string password,
+			(string type, string value) claim,
+			string newValue,
+			UserServices sut)
+		{
+			// Arrange
+			var user = sut.CreateUser(username, password);
+
+			_testOutputHelper.WriteLine($"User: {user.Id}{Environment.NewLine}" +
+										$"Username: {user.UserName}{Environment.NewLine}" +
+										$"Password: {user.Password}");
+
+			sut.AddClaim(user, claim.type, claim.value);
+			
+			// Act
+			sut.ChangeClaim(user, claim.type, newValue);
+
+			var result = user.Claims.FirstOrDefault(cl => cl.Type.Equals(claim.type));
+
+			_testOutputHelper.WriteLine($"Claim: {result.Id}{Environment.NewLine}" +
+										$"Type: {result.Type}{Environment.NewLine}" +
+										$"Value: {result.Value}");
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldNotBe(default);
+			result.UserId.ShouldBe(user.Id);
+			result.Type.ShouldBe(claim.type);
+			result.Value.ShouldBe(newValue);
+			result.User.ShouldNotBeNull();
+		}
+
 		private static AccountsDbContext GetDbContext()
 		{
 			var options = new DbContextOptionsBuilder<AccountsDbContext>()
 				.UseInMemoryDatabase(Guid.NewGuid().ToString())
+				.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 				.Options;
 
 			var dbContext = new AccountsDbContext(options);

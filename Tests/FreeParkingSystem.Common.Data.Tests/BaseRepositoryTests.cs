@@ -109,9 +109,7 @@ namespace FreeParkingSystem.Common.Data.Tests
 			using (var sut = new TestRepository(dbContext, mapper))
 			{
 				var result = sut.Add(businessObject);
-				var dbItem = dbContext.TestEntities.Find(result.Id);
-				dbContext.Entry(dbItem).State = EntityState.Detached;
-
+				
 				// Act
 				var exception = Record.Exception(() => sut.Add(result));
 
@@ -203,9 +201,7 @@ namespace FreeParkingSystem.Common.Data.Tests
 
 				var item = sut.Add(businessObject);
 				businessObjectToUpdate.Id = item.Id;
-
-				var dbItem = dbContext.TestEntities.Find(item.Id);
-				dbContext.Entry(dbItem).State = EntityState.Detached;
+				
 				// Act
 
 				var result = sut.Update(businessObjectToUpdate);
@@ -251,13 +247,7 @@ namespace FreeParkingSystem.Common.Data.Tests
 			{
 				// Arrange
 				var addedItems = sut.AddRange(businessObjects).ToArray();
-				addedItems.ForEach((resultItem, index) =>
-				{
-					businessObjectsToUpdate[index].Id = resultItem.Id;
-
-					var dbItem = dbContext.TestEntities.Find(resultItem.Id);
-					dbContext.Entry(dbItem).State = EntityState.Detached;
-				});
+				addedItems.ForEach((resultItem, index) => businessObjectsToUpdate[index].Id = resultItem.Id);
 
 				// Act
 				var results = sut.UpdateRange(businessObjectsToUpdate).ToArray();

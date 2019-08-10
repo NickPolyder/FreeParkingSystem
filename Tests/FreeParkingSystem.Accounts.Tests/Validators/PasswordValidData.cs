@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FreeParkingSystem.Accounts.Contract;
 
@@ -12,6 +13,12 @@ namespace FreeParkingSystem.Accounts.Tests.Validators
 			{
 				new PasswordOptions(0,0,PasswordRequirements.Numbers),
 				new Password("password1",false)
+			};
+
+			yield return new object[]
+			{
+				new PasswordOptions(0,0,PasswordRequirements.Numbers),
+				new Password("password1",Guid.NewGuid().ToString(),false)
 			};
 
 			yield return new object[]

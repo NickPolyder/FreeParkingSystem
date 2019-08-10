@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using FreeParkingSystem.Common.Data;
@@ -15,9 +16,12 @@ namespace FreeParkingSystem.Accounts.Data.Models
 
 		public string Password { get; set; }
 
-		public string Salt { get; set; }
+		public byte[] Salt { get; set; }
 
 		[InverseProperty(nameof(DbClaims.User))]
 		public ICollection<DbClaims> Claims { get; set; }
+
+
+		public string SaltAsString() => Convert.ToBase64String(Salt);
 	}
 }

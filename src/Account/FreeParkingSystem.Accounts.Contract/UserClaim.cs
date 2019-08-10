@@ -10,6 +10,5 @@
 
 		public string Value { get; set; }
 
-		public User User { get; set; }
 	}
 }

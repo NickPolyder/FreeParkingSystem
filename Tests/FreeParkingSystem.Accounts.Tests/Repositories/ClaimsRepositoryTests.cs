@@ -18,30 +18,13 @@ namespace FreeParkingSystem.Accounts.Tests.Repositories
 	{
 		private static void ContainerSetup(IFixture fixture)
 		{
-
-			ClaimsSetup(fixture);
 			MapperSetup(fixture);
-
 		}
 
 		private static void MapperSetup(IFixture fixture)
 		{
 			fixture.Build<IMap<DbClaims, UserClaim>>()
 				.FromFactory(() => new ClaimsMapper())
-				.ToCustomization()
-				.Customize(fixture);
-		}
-
-
-		private static void ClaimsSetup(IFixture fixture)
-		{
-			fixture.Build<UserClaim>()
-				.Without(claim => claim.User)
-				.ToCustomization()
-				.Customize(fixture);
-
-			fixture.Build<DbClaims>()
-				.Without(claim => claim.User)
 				.ToCustomization()
 				.Customize(fixture);
 		}

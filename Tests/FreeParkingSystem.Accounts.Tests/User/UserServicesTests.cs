@@ -267,7 +267,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			result.UserId.ShouldBe(user.Id);
 			result.Type.ShouldBe(claim.type);
 			result.Value.ShouldBe(claim.value);
-			result.User.ShouldNotBeNull();
 		}
 
 		[Theory, FixtureData]
@@ -290,7 +289,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 				{
 					Type = claim.type,
 					Value = claim.value,
-					User = user,
 					UserId = user.Id
 				}
 			};
@@ -310,7 +308,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			result.UserId.ShouldBe(user.Id);
 			result.Type.ShouldBe(claim.type);
 			result.Value.ShouldBe(claim.value);
-			result.User.ShouldNotBeNull();
 		}
 
 
@@ -442,7 +439,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			result.UserId.ShouldBe(user.Id);
 			result.Type.ShouldBe(claim.type);
 			result.Value.ShouldBe(newValue);
-			result.User.ShouldNotBeNull();
 		}
 
 		[Theory, FixtureData]
@@ -477,7 +473,6 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			result.UserId.ShouldBe(user.Id);
 			result.Type.ShouldBe(claim.type);
 			result.Value.ShouldBe(newValue);
-			result.User.ShouldNotBeNull();
 		}
 
 		[Theory, FixtureData]

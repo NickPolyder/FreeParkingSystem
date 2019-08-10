@@ -4,13 +4,22 @@ using FreeParkingSystem.Accounts.Contract.Resources;
 
 namespace FreeParkingSystem.Accounts.Contract
 {
-	public struct Password : IEquatable<Password>
+	public class Password : IEquatable<Password>
 	{
+
+		public static readonly Password Empty = new Password();
+
 		private readonly string _password;
-		
+
 		public string Salt { get; }
 		public bool IsHashed { get; }
 		public bool IsEncrypted { get; }
+
+		private Password()
+		{
+			_password = string.Empty;
+			Salt = string.Empty;
+		}
 
 		public Password(string password) : this(password, false)
 		{
@@ -21,6 +30,10 @@ namespace FreeParkingSystem.Accounts.Contract
 		}
 
 		public Password(string password, bool isHashed, bool isEncrypted) : this(password, string.Empty, isHashed, isEncrypted)
+		{
+		}
+
+		public Password(string password, byte[] salt) : this(password, SaltAsString(salt), false)
 		{
 		}
 
@@ -48,6 +61,9 @@ namespace FreeParkingSystem.Accounts.Contract
 
 		public bool Equals(Password other)
 		{
+			if (other == null)
+				return false;
+
 			return (_password == null ||
 					_password.Equals(other._password)) &&
 				   Salt.Equals(other.Salt) &&
@@ -74,20 +90,27 @@ namespace FreeParkingSystem.Accounts.Contract
 
 		public static bool operator ==(Password left, Password right)
 		{
+			if (ReferenceEquals(left,null))
+				return ReferenceEquals(right, null);
+
 			return left.Equals(right);
 		}
 
 		public static bool operator !=(Password left, Password right)
 		{
+			if (ReferenceEquals(left, null))
+				return !ReferenceEquals(right, null);
+
 			return !left.Equals(right);
 		}
 
 		public override string ToString()
 		{
-			if (IsHashed || IsEncrypted)
-				return _password;
-
-			return string.Format("{1}{0}{1}", _password, Salt);
+			return _password;
 		}
+
+		public byte[] SaltAsBytes() => Convert.FromBase64String(Salt);
+
+		private static string SaltAsString(byte[] salt) => Convert.ToBase64String(salt);
 	}
 }

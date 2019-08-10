@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
     <ProjectReference Include="..\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
+    <ProjectReference Include="..\FreeParkingSystem.Accounts.Data\FreeParkingSystem.Accounts.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -47,13 +47,11 @@ namespace FreeParkingSystem.Accounts
 
 			var userClaim = _claimsRepository.Add(new UserClaim
 			{
-				User = user,
 				UserId = user.Id,
 				Type = type,
 				Value = value
 			});
 
-			userClaim.User = user;
 
 			AddToUserClaims(userClaim, user, type);
 		}
@@ -70,9 +68,7 @@ namespace FreeParkingSystem.Accounts
 			userClaim.Value = changedValue;
 
 			_claimsRepository.Update(userClaim);
-
-			userClaim.User = user;
-
+			
 			AddToUserClaims(userClaim, user, type);
 		}
 
@@ -98,6 +94,23 @@ namespace FreeParkingSystem.Accounts
 				oldClaims.RemoveAt(index);
 				user.Claims = oldClaims;
 			}
+		}
+
+		public User Login(string username, string password)
+		{
+			if (string.IsNullOrWhiteSpace(username))
+				throw new UserException(Contract.Resources.Validations.User_UsernameEmpty);
+
+			if (string.IsNullOrWhiteSpace(password))
+				throw new PasswordException(Contract.Resources.Validations.User_PasswordEmpty);
+
+			var user = _userRepository.GetByUsername(username);
+
+			if (user == null ||
+				!_passwordManager.Verify(user.Password, new Password(password, user.Password.Salt)))
+				throw new UserException(Contract.Resources.Validations.User_InvalidLogin);
+			
+			return user;
 		}
 
 		private static void AddToUserClaims(UserClaim userClaim, User user, string type)

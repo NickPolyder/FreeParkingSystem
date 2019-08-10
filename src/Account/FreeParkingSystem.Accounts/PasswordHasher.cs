@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Accounts
 			if (input.IsEncrypted)
 				throw new PasswordEncryptionException(Contract.Resources.Validations.PasswordEncryption_EncryptedPasswordCannotBeHashed, input);
 
-			var stringPassword = input.ToString();
+			var stringPassword = string.Format("{1}{0}{1}", input.ToString(), input.Salt);
 
 			for (int i = 0; i < RepeatHash; i++)
 			{

@@ -13,15 +13,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 	{
 		private static void ContainerSetup(IFixture fixture)
 		{
-			fixture.Build<DbClaims>()
-				.Without(p => p.User)
-				.ToCustomization()
-				.Customize(fixture);
-
-			fixture.Build<UserClaim>()
-				.Without(p => p.User)
-				.ToCustomization()
-				.Customize(fixture);
+			
 		}
 
 		[Theory, FixtureData]

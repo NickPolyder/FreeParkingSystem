@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using FreeParkingSystem.Common;
 
 namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
 	[ExcludeFromCodeCoverage]
-	public class UserException : Exception
+	public class UserException : ValidationException
 	{
 		public UserException()
 		{

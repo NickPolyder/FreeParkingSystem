@@ -1,4 +1,6 @@
-﻿namespace FreeParkingSystem.Common
+﻿using System;
+
+namespace FreeParkingSystem.Common
 {
 	public class EncryptionOptions
 	{
@@ -8,7 +10,7 @@
 
 		public EncryptionOptions(byte[] secretKey)
 		{
-			SecretKey = secretKey;
+			SecretKey = secretKey ?? throw new ArgumentNullException();
 		}
 
 	}

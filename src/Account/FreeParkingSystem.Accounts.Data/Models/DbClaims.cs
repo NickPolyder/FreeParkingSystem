@@ -16,8 +16,6 @@ namespace FreeParkingSystem.Accounts.Data.Models
 
 		public string ClaimValue { get; set; }
 
-		[ForeignKey(nameof(UserId))]
 		public DbUser User { get; set; }
-
 	}
 }

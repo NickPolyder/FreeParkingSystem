@@ -49,9 +49,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Accounts.Data", "src\Account\FreeParkingSystem.Accounts.Data\FreeParkingSystem.Accounts.Data.csproj", "{ABC4C165-112F-47B7-93F8-F2E9CE2409B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Data", "src\Common\FreeParkingSystem.Common.Data\FreeParkingSystem.Common.Data.csproj", "{9E296FA2-CD17-4A74-9DA4-C23BD5B8CB91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Data", "src\Common\FreeParkingSystem.Common.Data\FreeParkingSystem.Common.Data.csproj", "{9E296FA2-CD17-4A74-9DA4-C23BD5B8CB91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Data.Tests", "Tests\FreeParkingSystem.Common.Data.Tests\FreeParkingSystem.Common.Data.Tests.csproj", "{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Data.Tests", "Tests\FreeParkingSystem.Common.Data.Tests\FreeParkingSystem.Common.Data.Tests.csproj", "{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.API", "src\Common\FreeParkingSystem.Common.API\FreeParkingSystem.Common.API.csproj", "{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +115,10 @@ Global
 		{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{ABC4C165-112F-47B7-93F8-F2E9CE2409B9} = {5AC95103-B6C5-4811-969C-805613651FD2}
 		{9E296FA2-CD17-4A74-9DA4-C23BD5B8CB91} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
 		{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
+		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

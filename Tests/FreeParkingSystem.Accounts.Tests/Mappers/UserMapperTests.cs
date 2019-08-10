@@ -33,16 +33,6 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 				.Without(p => p.Claims)
 				.ToCustomization()
 				.Customize(fixture);
-
-			fixture.Build<DbClaims>()
-				.Without(p => p.User)
-				.ToCustomization()
-				.Customize(fixture);
-
-			fixture.Build<UserClaim>()
-				.Without(p => p.User)
-				.ToCustomization()
-				.Customize(fixture);
 		}
 
 		[Theory, FixtureData]
@@ -123,7 +113,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.UserName.ShouldBe(dbUser.UserName);
 			result.Password.IsEncrypted.ShouldBeTrue();
 			result.Password.IsHashed.ShouldBeTrue();
-			result.Password.Salt.ShouldBe(dbUser.Salt);
+			result.Password.Salt.ShouldBe(dbUser.SaltAsString());
 			result.Password.ToString().ShouldBe(dbUser.Password);
 			result.Claims.Count.ShouldBe(dbUser.Claims.Count);
 		}
@@ -145,7 +135,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.UserName.ShouldBe(dbUser.UserName);
 			result.Password.IsEncrypted.ShouldBeTrue();
 			result.Password.IsHashed.ShouldBeTrue();
-			result.Password.Salt.ShouldBe(dbUser.Salt);
+			result.Password.Salt.ShouldBe(dbUser.SaltAsString());
 			result.Password.ToString().ShouldBe(dbUser.Password);
 
 			result.Claims.ForEach((resultClaim) =>
@@ -219,7 +209,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.ShouldNotBeNull();
 			result.Id.ShouldBe(user.Id);
 			result.UserName.ShouldBe(user.UserName);
-			result.Salt.ShouldBe(user.Password.Salt);
+			result.Salt.ShouldBe(user.Password.SaltAsBytes());
 			result.Password.ShouldBe(user.Password.ToString());
 			result.Claims.Count.ShouldBe(user.Claims.Count);
 		}
@@ -242,7 +232,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 			result.ShouldNotBeNull();
 			result.Id.ShouldBe(user.Id);
 			result.UserName.ShouldBe(user.UserName);
-			result.Salt.ShouldBe(user.Password.Salt);
+			result.Salt.ShouldBe(user.Password.SaltAsBytes());
 			result.Password.ShouldBe(user.Password.ToString());
 			result.Claims.ForEach((resultClaim) =>
 			{

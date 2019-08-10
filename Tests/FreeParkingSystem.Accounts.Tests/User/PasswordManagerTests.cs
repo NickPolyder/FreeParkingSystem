@@ -60,7 +60,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			ContainerHashSetup(fixture);
 		}
 
-		public static void ContainerHashSetup(IFixture fixture)
+		private static void ContainerHashSetup(IFixture fixture)
 		{
 			fixture.Build<IHash<byte[]>>()
 				.FromFactory(() => new ShaByteHasher())
@@ -77,7 +77,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 				.ToCustomization()
 				.Customize(fixture);
 		}
-
+		
 		[Theory]
 		[InlineFixtureData(null, RunContainerSetup = false)]
 		[InlineFixtureData("", RunContainerSetup = false)]
@@ -98,9 +98,15 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Create_ShouldGenerateSalt(
 			[Frozen] Mock<IValidate<Password>> passwordValidatorMock,
+			[Frozen] Mock<IHash<Password>> passwordHashMock,
+			[Frozen] Mock<IEncrypt<Password>> passwordEncryptorMock,
 			string password,
 			PasswordManager sut)
 		{
+			// Assign
+			passwordHashMock.Setup(hash => hash.Hash(It.IsAny<Password>())).Returns(new Password(password));
+			passwordEncryptorMock.Setup(encryptor => encryptor.Encrypt(It.IsAny<Password>())).Returns(new Password(password));
+
 			// Act
 			sut.Create(password);
 
@@ -113,9 +119,15 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Create_ShouldCallValidate(
 			[Frozen] Mock<IValidate<Password>> passwordValidatorMock,
+			[Frozen] Mock<IHash<Password>> passwordHashMock,
+			[Frozen] Mock<IEncrypt<Password>> passwordEncryptorMock,
 			string password,
 			PasswordManager sut)
 		{
+			// Assign
+			passwordHashMock.Setup(hash => hash.Hash(It.IsAny<Password>())).Returns(new Password(password));
+			passwordEncryptorMock.Setup(encryptor => encryptor.Encrypt(It.IsAny<Password>())).Returns(new Password(password));
+
 			// Act
 			sut.Create(password);
 
@@ -145,9 +157,14 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Create_ShouldCall_Hash(
 			[Frozen] Mock<IHash<Password>> passwordHashMock,
+			[Frozen] Mock<IEncrypt<Password>> passwordEncryptorMock,
 			string password,
 			PasswordManager sut)
 		{
+			// Assign
+			passwordHashMock.Setup(hash => hash.Hash(It.IsAny<Password>())).Returns(new Password(password));
+			passwordEncryptorMock.Setup(encryptor => encryptor.Encrypt(It.IsAny<Password>())).Returns(new Password(password));
+
 			// Act
 			sut.Create(password);
 
@@ -161,6 +178,9 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			string password,
 			PasswordManager sut)
 		{
+			// Assign
+			passwordEncryptorMock.Setup(encryptor => encryptor.Encrypt(It.IsAny<Password>())).Returns(new Password(password,true));
+
 			// Act
 			sut.Create(password);
 
@@ -207,6 +227,27 @@ namespace FreeParkingSystem.Accounts.Tests.User
 		}
 
 		[Theory, FixtureData(RunContainerSetup = false)]
+		public void Verify_WhenPasswordIsNotHashed_ShouldCallHash(
+			[Frozen] Mock<IHash<Password>> passwordHasherMock,
+			string passwordString,
+			string otherPasswordString,
+			PasswordManager sut)
+		{
+			// Arrange
+			var password = new Password(passwordString, false, false);
+			var otherPassword = new Password(otherPasswordString, true, false);
+
+			passwordHasherMock.Setup(svc => svc.Hash(password))
+				.Returns(new Password(passwordString, true, false));
+
+			// Act
+			sut.Verify(password, otherPassword);
+
+			// Assert
+			passwordHasherMock.Verify(svc => svc.Hash(password), Times.Once);
+		}
+
+		[Theory, FixtureData(RunContainerSetup = false)]
 		public void Verify_WhenOtherPasswordIsEncrypted_ShouldCallDecrypt(
 			[Frozen] Mock<IEncrypt<Password>> passwordEncryptorMock,
 			string passwordString,
@@ -225,6 +266,27 @@ namespace FreeParkingSystem.Accounts.Tests.User
 
 			// Assert
 			passwordEncryptorMock.Verify(svc => svc.Decrypt(otherPassword), Times.Once);
+		}
+
+		[Theory, FixtureData(RunContainerSetup = false)]
+		public void Verify_WhenOtherPasswordIsNotHashed_ShouldCallHash(
+			[Frozen] Mock<IHash<Password>> passwordHasherMock,
+			string passwordString,
+			string otherPasswordString,
+			PasswordManager sut)
+		{
+			// Arrange
+			var password = new Password(passwordString, true, false);
+			var otherPassword = new Password(otherPasswordString, false, false);
+
+			passwordHasherMock.Setup(svc => svc.Hash(otherPassword))
+				.Returns(new Password(otherPasswordString, true, false));
+
+			// Act
+			sut.Verify(password, otherPassword);
+
+			// Assert
+			passwordHasherMock.Verify(svc => svc.Hash(otherPassword), Times.Once);
 		}
 
 		[Theory, FixtureData(RunContainerSetup = false)]

@@ -176,5 +176,32 @@ namespace FreeParkingSystem.Accounts.Contract.Resources {
                 return ResourceManager.GetString("User_AlreadyExists", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The username/password combination is invalid..
+        /// </summary>
+        public static string User_InvalidLogin {
+            get {
+                return ResourceManager.GetString("User_InvalidLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Password cannot be empty..
+        /// </summary>
+        public static string User_PasswordEmpty {
+            get {
+                return ResourceManager.GetString("User_PasswordEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Username cannot be empty..
+        /// </summary>
+        public static string User_UsernameEmpty {
+            get {
+                return ResourceManager.GetString("User_UsernameEmpty", resourceCulture);
+            }
+        }
     }
 }

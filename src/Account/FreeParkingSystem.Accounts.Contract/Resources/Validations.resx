@@ -158,4 +158,13 @@
   <data name="User_AlreadyExists" xml:space="preserve">
     <value>Username is unavailable</value>
   </data>
+  <data name="User_InvalidLogin" xml:space="preserve">
+    <value>The username/password combination is invalid.</value>
+  </data>
+  <data name="User_PasswordEmpty" xml:space="preserve">
+    <value>The Password cannot be empty.</value>
+  </data>
+  <data name="User_UsernameEmpty" xml:space="preserve">
+    <value>The Username cannot be empty.</value>
+  </data>
 </root>

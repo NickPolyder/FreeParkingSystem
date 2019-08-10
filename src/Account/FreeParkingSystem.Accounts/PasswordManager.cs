@@ -38,15 +38,23 @@ namespace FreeParkingSystem.Accounts
 				? _passwordEncryptor.Decrypt(otherPassword)
 				: otherPassword;
 
-			return decryptedPassword.Equals(decryptedOtherPassword);
+			Password hashedPassword = decryptedPassword.IsHashed
+				? decryptedPassword
+				: _passwordHasher.Hash(decryptedPassword);
+
+			Password otherHashedPassword = decryptedOtherPassword.IsHashed 
+				? decryptedOtherPassword
+				: _passwordHasher.Hash(decryptedOtherPassword);
+
+			return hashedPassword.Equals(otherHashedPassword);
 		}
 
 
-		private string GenerateSalt()
+		private byte[] GenerateSalt()
 		{
-			var buffer = new byte[128];
+			var buffer = new byte[32];
 			RandomNumberGenerator.Create().GetBytes(buffer);
-			return System.Text.Encoding.UTF8.GetString(buffer);
+			return buffer;
 		}
 
 

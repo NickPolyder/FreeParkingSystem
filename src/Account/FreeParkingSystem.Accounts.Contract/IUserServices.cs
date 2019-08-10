@@ -10,5 +10,7 @@
 
 		void RemoveClaim(User user, string type);
 
+		User Login(string username, string password);
+
 	}
 }

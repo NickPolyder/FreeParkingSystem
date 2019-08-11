@@ -1,15 +1,17 @@
 ﻿using System.Threading.Tasks;
 using FreeParkingSystem.Accounts.API.Models;
-using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Commands;
 using FreeParkingSystem.Common.API.ExtensionMethods;
+using FreeParkingSystem.Common.Authorization;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreeParkingSystem.Accounts.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class UsersController : ControllerBase
 	{
 		private readonly IMediator _mediator;

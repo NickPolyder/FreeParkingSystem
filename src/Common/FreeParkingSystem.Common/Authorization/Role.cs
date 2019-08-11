@@ -1,4 +1,4 @@
-﻿namespace FreeParkingSystem.Accounts.Contract
+﻿namespace FreeParkingSystem.Common.Authorization
 {
 	public enum Role
 	{

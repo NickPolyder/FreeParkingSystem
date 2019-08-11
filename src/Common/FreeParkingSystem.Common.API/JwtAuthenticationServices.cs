@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using FreeParkingSystem.Common.API.Options;
+using FreeParkingSystem.Common.Authorization;
+using Microsoft.IdentityModel.Tokens;
+
+namespace FreeParkingSystem.Common.API
+{
+	public class JwtAuthenticationServices : IAuthenticationServices
+	{
+		private readonly JwtAuthenticationOptions _jwtAuthenticationOptions;
+		private JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+		private readonly SigningCredentials _signingCredentials;
+
+		public JwtAuthenticationServices(JwtAuthenticationOptions jwtAuthenticationOptions)
+		{
+			_jwtAuthenticationOptions = jwtAuthenticationOptions;
+			_jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+
+			_signingCredentials = new SigningCredentials(new SymmetricSecurityKey(_jwtAuthenticationOptions.Secret), SecurityAlgorithms.HmacSha256Signature);
+		}
+
+		public UserToken CreateToken(string username, IEnumerable<Claim> claims)
+		{
+			var subjectClaims = new List<Claim>
+			{
+				new Claim(ClaimTypes.Name, username)
+			};
+			subjectClaims.AddRange(claims);
+
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Subject = new ClaimsIdentity(subjectClaims),
+				Expires = DateTime.UtcNow.Add(_jwtAuthenticationOptions.ExpiresAfter),
+				Audience = _jwtAuthenticationOptions.ValidAudience,
+				Issuer = _jwtAuthenticationOptions.ValidIssuer,
+				SigningCredentials = _signingCredentials
+			};
+
+			var securityToken = _jwtSecurityTokenHandler.CreateToken(tokenDescriptor);
+			var token = _jwtSecurityTokenHandler.WriteToken(securityToken);
+
+			return new UserToken
+			{
+				Username = username,
+				Claims = subjectClaims,
+				Token = token
+			};
+		}
+
+		public bool VerifyToken(string token, out UserToken userToken)
+		{
+			var validationParameters = new TokenValidationParameters()
+			{
+				RequireExpirationTime = _jwtAuthenticationOptions.RequireExpirationTime,
+				ValidateIssuer = _jwtAuthenticationOptions.ValidateIssuer,
+				ValidateAudience = _jwtAuthenticationOptions.ValidateAudience,
+				IssuerSigningKey = _signingCredentials.Key
+			};
+
+			var principal = _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out var _);
+			
+			if (principal != null && principal.Identity.IsAuthenticated)
+			{
+				userToken = new UserToken
+				{
+					Username = principal.Identity.Name,
+					Claims = principal.Claims,
+					Token = token
+				};
+
+				return true;
+			}
+			userToken = null;
+			return false;
+		}
+	}
+}

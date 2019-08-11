@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using FreeParkingSystem.Accounts.API.Models;
-using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Queries;
 using FreeParkingSystem.Common.API.ExtensionMethods;
+using FreeParkingSystem.Common.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +26,7 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 		{
 			var result = await _mediator.Send(new UserLoginRequest(input.UserName, input.Password));
 
-			return result.ToActionResult<User>();
+			return result.ToActionResult<UserToken>();
 		}
 	}
 }

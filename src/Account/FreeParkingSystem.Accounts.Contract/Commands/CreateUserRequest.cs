@@ -1,8 +1,9 @@
-﻿using System;
+﻿using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.Messages;
 
 namespace FreeParkingSystem.Accounts.Contract.Commands
 {
+	[AuthorizeRequest(Role.Admin)]
 	public class CreateUserRequest : BaseRequest
 	{
 		public string UserName { get; }

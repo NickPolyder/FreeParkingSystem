@@ -21,6 +21,7 @@ namespace FreeParkingSystem.Common
 
 			builder.RegisterGeneric(typeof(LoggingBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
 			builder.RegisterGeneric(typeof(ExceptionBehaviour<>)).As(typeof(IPipelineBehavior<,>));
+			builder.RegisterGeneric(typeof(AuthorizeBehaviour<>)).As(typeof(IPipelineBehavior<,>));
 
 			builder.RegisterType<ShaByteHasher>().AsImplementedInterfaces();
 			builder.RegisterType<ShaStringHasher>().AsImplementedInterfaces();

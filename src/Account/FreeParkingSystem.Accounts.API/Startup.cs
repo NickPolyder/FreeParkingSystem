@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Data.Models;
 using FreeParkingSystem.Common;
+using FreeParkingSystem.Common.API.ExtensionMethods;
+using FreeParkingSystem.Common.API.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace FreeParkingSystem.Accounts
 {
@@ -34,6 +30,15 @@ namespace FreeParkingSystem.Accounts
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddLogging(options => options.AddConsole());
+
+			var jwtOptions = Configuration.GetSection("jwt").Get<JwtAuthenticationOptions>();
+			services.AddJwtAuthentication((options =>
+			{
+				options.Secret = jwtOptions.Secret;
+				options.ValidAudience = jwtOptions.ValidAudience;
+				options.ValidIssuer = jwtOptions.ValidIssuer;
+				options.ExpiresAfter = jwtOptions.ExpiresAfter;
+			}));
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
@@ -85,6 +90,7 @@ namespace FreeParkingSystem.Accounts
 			}
 
 			app.UseHttpsRedirection();
+			app.UseAuthentication();
 			app.UseMvc();
 		}
 	}

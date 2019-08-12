@@ -5,7 +5,7 @@ namespace FreeParkingSystem.Common.Messages
 
 	public class SuccessResponse : BaseResponse
 	{
-		public SuccessResponse(Guid id) : base(id)
+		public SuccessResponse(Guid requestId) : base(requestId)
 		{
 		}
 	}
@@ -15,7 +15,7 @@ namespace FreeParkingSystem.Common.Messages
 
 		public TData Data { get; }
 
-		public SuccessResponse(Guid id, TData data) : base(id)
+		public SuccessResponse(Guid requestId, TData data) : base(requestId)
 		{
 			Data = data;
 		}

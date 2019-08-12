@@ -14,21 +14,26 @@ namespace FreeParkingSystem.Common.API.ExtensionMethods
 				case SuccessResponse _:
 					return new OkResult();
 				case ValidationResponse validation:
-					return new BadRequestObjectResult(validation.ValidationException.Message);
-				case UnauthenticatedResponse _:
-					return new UnauthorizedResult();
+					return new BadRequestObjectResult(validation.Error);
+				case UnauthenticatedResponse unauthenticated:
+					return new UnauthorizedObjectResult(unauthenticated.Error);
 				case UnauthorizedResponse unauthorized:
-					return new ObjectResult(Resources.Validations.User_Unauthorized)
+					return new ObjectResult(unauthorized.Error)
 					{
 						StatusCode = (int)HttpStatusCode.Forbidden
 					};
 				case UnhandledResponse unhandled:
-					return new ObjectResult(unhandled.Exception.Message)
+					return new ObjectResult(unhandled.Error)
 					{
 						StatusCode = (int)HttpStatusCode.InternalServerError
 					};
 				default:
-					return new ObjectResult(null)
+					var error = new ErrorBuilder()
+						.AddTitle(Resources.Validations.Unhandled_Title)
+						.AddMessage(Resources.Validations.Unhandled_Message)
+						.AddRequestId(response)
+						.Build();
+					return new ObjectResult(error)
 					{
 						StatusCode = (int)HttpStatusCode.InternalServerError
 					};

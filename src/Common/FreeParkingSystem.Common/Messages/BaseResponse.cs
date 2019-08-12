@@ -4,11 +4,11 @@ namespace FreeParkingSystem.Common.Messages
 {
 	public abstract class BaseResponse
 	{
-		public Guid Id { get; }
+		public Guid RequestId { get; }
 
-		protected BaseResponse(Guid id)
+		protected BaseResponse(Guid requestId)
 		{
-			Id = id;
+			RequestId = requestId;
 		}
 
 	}

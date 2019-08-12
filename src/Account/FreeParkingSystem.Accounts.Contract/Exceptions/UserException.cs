@@ -6,7 +6,7 @@ using FreeParkingSystem.Common;
 namespace FreeParkingSystem.Accounts.Contract.Exceptions
 {
 	[ExcludeFromCodeCoverage]
-	public class UserException : ValidationException
+	public class UserException : ErrorException
 	{
 		public UserException()
 		{

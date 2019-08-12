@@ -25,12 +25,18 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 				.FromFactory(() => new ClaimsMapper())
 				.ToCustomization()
 				.Customize(fixture);
+
 		}
 
 		private static void BuildUser(IFixture fixture)
 		{
 			fixture.Build<Contract.User>()
 				.Without(p => p.Claims)
+				.ToCustomization()
+				.Customize(fixture);
+
+			fixture.Build<DbClaims>()
+				.Without(p => p.User)
 				.ToCustomization()
 				.Customize(fixture);
 		}

@@ -53,7 +53,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Data.Tests", "Tests\FreeParkingSystem.Common.Data.Tests\FreeParkingSystem.Common.Data.Tests.csproj", "{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.API", "src\Common\FreeParkingSystem.Common.API\FreeParkingSystem.Common.API.csproj", "{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.API", "src\Common\FreeParkingSystem.Common.API\FreeParkingSystem.Common.API.csproj", "{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{165F1D1B-14E3-47AB-AAF4-B2F08CDB365F}"
+	ProjectSection(SolutionItems) = preProject
+		tools\SetupEnvironmentVariables.ps1 = tools\SetupEnvironmentVariables.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

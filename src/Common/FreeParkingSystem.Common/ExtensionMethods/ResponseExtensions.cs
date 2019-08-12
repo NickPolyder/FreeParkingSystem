@@ -19,7 +19,7 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 			return new SuccessResponse(@this.Id);
 		}
 
-		public static BaseResponse ToValidationResponse(this BaseRequest @this, ValidationException ex)
+		public static BaseResponse ToValidationResponse(this BaseRequest @this, ErrorException ex)
 		{
 			return new ValidationResponse(@this.Id, ex);
 		}

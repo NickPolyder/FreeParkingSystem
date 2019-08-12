@@ -23,7 +23,7 @@ namespace FreeParkingSystem.Common.Behaviors
 			{
 				return await next();
 			}
-			catch (ValidationException ex)
+			catch (ErrorException ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return request.ToValidationResponse(ex);

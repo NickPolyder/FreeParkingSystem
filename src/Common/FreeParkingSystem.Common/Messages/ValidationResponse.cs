@@ -4,10 +4,18 @@ namespace FreeParkingSystem.Common.Messages
 {
 	public class ValidationResponse : BaseResponse
 	{
-		public ValidationException ValidationException { get; }
-		public ValidationResponse(Guid id, ValidationException validationException) : base(id)
+		public Error Error { get; }
+		public ErrorException ErrorException { get; }
+		public ValidationResponse(Guid requestId, ErrorException errorException) : base(requestId)
 		{
-			ValidationException = validationException;
+			ErrorException = errorException;
+			Error = new ErrorBuilder()
+				.AddTitle(Resources.Validations.Validation_Title)
+				.AddMessage(ErrorException.Message)
+				.AddException(ErrorException)
+				.AddRequestId(this)
+				.Build();
+
 		}
 	}
 }

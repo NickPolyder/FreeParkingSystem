@@ -61,11 +61,65 @@ namespace FreeParkingSystem.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This request requires authentication.
+        /// </summary>
+        public static string Unauthenticated_Message {
+            get {
+                return ResourceManager.GetString("Unauthenticated_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthenticated.
+        /// </summary>
+        public static string Unauthenticated_Title {
+            get {
+                return ResourceManager.GetString("Unauthenticated_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user does not have the privilege to process this action..
         /// </summary>
-        public static string User_Unauthorized {
+        public static string Unauthorized_Message {
             get {
-                return ResourceManager.GetString("User_Unauthorized", resourceCulture);
+                return ResourceManager.GetString("Unauthorized_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized.
+        /// </summary>
+        public static string Unauthorized_Title {
+            get {
+                return ResourceManager.GetString("Unauthorized_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Request could not be handled..
+        /// </summary>
+        public static string Unhandled_Message {
+            get {
+                return ResourceManager.GetString("Unhandled_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown Error.
+        /// </summary>
+        public static string Unhandled_Title {
+            get {
+                return ResourceManager.GetString("Unhandled_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation Error.
+        /// </summary>
+        public static string Validation_Title {
+            get {
+                return ResourceManager.GetString("Validation_Title", resourceCulture);
             }
         }
     }

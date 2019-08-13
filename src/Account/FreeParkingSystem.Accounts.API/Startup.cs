@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using FreeParkingSystem.Accounts.Contract;
+using FreeParkingSystem.Accounts.Contract.Options;
 using FreeParkingSystem.Accounts.Data.Models;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.API.ExtensionMethods;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace FreeParkingSystem.Accounts
+namespace FreeParkingSystem.Accounts.API
 {
 	public class Startup
 	{

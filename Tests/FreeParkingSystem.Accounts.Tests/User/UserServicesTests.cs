@@ -4,6 +4,7 @@ using System.Linq;
 using AutoFixture;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
+using FreeParkingSystem.Accounts.Contract.Options;
 using FreeParkingSystem.Accounts.Contract.Repositories;
 using FreeParkingSystem.Accounts.Contract.Resources;
 using FreeParkingSystem.Accounts.Data.Mappers;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FreeParkingSystem.Accounts.Contract;
+using FreeParkingSystem.Accounts.Contract.Options;
 
 namespace FreeParkingSystem.Accounts.Tests.Validators
 {

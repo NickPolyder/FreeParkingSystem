@@ -1,4 +1,4 @@
-﻿namespace FreeParkingSystem.Accounts.Contract
+﻿namespace FreeParkingSystem.Accounts.Contract.Options
 {
 	public class PasswordOptions
 	{

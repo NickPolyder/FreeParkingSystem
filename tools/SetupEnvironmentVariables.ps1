@@ -1,9 +1,19 @@
 param(
 [Parameter(Mandatory=$true)]
 [string]$FilePath,
-[Parameter(Mandatory=$true)]
+[Parameter(Mandatory=$false)]
 [hashtable]$Dictionary
 )
+
+if($Dictionary -eq $null)
+{
+    $Dictionary = @{};
+    
+    foreach($item in (Get-ChildItem env:Deployment_*))
+    {
+        $Dictionary.Add($item.Name,$item.Value)
+    }
+}
 
 $environmentName = $Dictionary["Deployment_Environment_Name"];
 

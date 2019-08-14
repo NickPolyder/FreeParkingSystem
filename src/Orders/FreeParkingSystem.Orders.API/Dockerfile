@@ -3,18 +3,24 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+ENV Deployment_Environment_Name=$Env:ASPNETCORE_ENVIRONMENT
+
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
-WORKDIR /src
-COPY ["src/Orders/FreeParkingSystem.Orders/FreeParkingSystem.Orders.csproj", "src/Orders/FreeParkingSystem.Orders/"]
-RUN dotnet restore "src/Orders/FreeParkingSystem.Orders/FreeParkingSystem.Orders.csproj"
+
+WORKDIR /source
+
 COPY . .
-WORKDIR "/src/src/Orders/FreeParkingSystem.Orders"
-RUN dotnet build "FreeParkingSystem.Orders.csproj" -c Release -o /app
+#RUN dotnet restore "src/Account/FreeParkingSystem.Accounts.API/FreeParkingSystem.Accounts.API.csproj"
 
-FROM build AS publish
-RUN dotnet publish "FreeParkingSystem.Orders.csproj" -c Release -o /app
+#WORKDIR "/src/src/Account/FreeParkingSystem.Accounts.API"
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "FreeParkingSystem.Orders.dll"]
+#RUN dotnet build "FreeParkingSystem.Accounts.API.csproj" -c Release -o /app
+#
+#FROM build AS publish
+#RUN dotnet publish "FreeParkingSystem.Accounts.API.csproj" -c Release -o /app \
+#& .\tools\SetupEnvironmentVariables.ps1 /app/appsettings.{environment_name}.json $env
+#
+#FROM base AS final
+#WORKDIR /app
+#COPY --from=publish /app .
+#ENTRYPOINT ["dotnet", "FreeParkingSystem.Accounts.API.dll"]

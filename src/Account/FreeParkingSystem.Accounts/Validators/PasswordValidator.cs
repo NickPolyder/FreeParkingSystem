@@ -1,6 +1,7 @@
 ﻿using FreeParkingSystem.Accounts.Contract.Resources;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
+using FreeParkingSystem.Accounts.Contract.Options;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.ExtensionMethods;
 

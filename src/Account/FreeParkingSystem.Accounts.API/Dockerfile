@@ -23,10 +23,22 @@ FROM build AS publish
 RUN dotnet publish "FreeParkingSystem.Accounts.API.csproj" -c Release -o /app 
 
 WORKDIR "/source"
-RUN $env:Deployment_Environment_Name+='Staging'
-RUN & .\tools\SetupEnvironmentVariables.ps1 "/app/appsettings.{environment_name}.json"
-#
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app .
-#ENTRYPOINT ["dotnet", "FreeParkingSystem.Accounts.API.dll"]
+# Default environment variables.
+
+ENV Deployment_Environment_Name='Staging' \
+Deployment_LogLevel_Default='Error' \
+Deployment_Db_Server='localhost,3306' \
+Deployment_Db_Name='FreeParkingSystem.Database' \
+Deployment_Db_User='sa' \
+Deployment_Db_Password='S1mple@password' \
+Deployment_PasswordOptions_MinimumCharacters='4'
+RUN & .\tools\SetupEnvironmentVariables.ps1 "/app/appsettings.{environment_name}.json" 
+
+WORKDIR "/"
+
+RUN Remove-Item .\source -Recurse -Force
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "FreeParkingSystem.Accounts.API.dll", "ASPNETCORE_ENVIRONMENT $env:Deployment_Environment_Name"]

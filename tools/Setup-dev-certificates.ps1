@@ -15,5 +15,7 @@ $path = Split-Path $PSScriptRoot
 
 foreach($item in (Get-ChildItem $path -Force -Recurse -Include *API*.csproj -Exclude *Common*))
 {
+	Write-Host 'Project: ' $item.FullName
+
     dotnet user-secrets set "Kestrel:Certificates:Development:Password" $password --project $item.FullName
 }

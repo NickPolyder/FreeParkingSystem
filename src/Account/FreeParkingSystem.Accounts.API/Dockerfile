@@ -34,10 +34,9 @@ RUN dotnet publish "FreeParkingSystem.Accounts.API.csproj" -c Release -o /app
 WORKDIR "/"
 ADD tools app/tools
 ADD src/Account/FreeParkingSystem.Accounts.API/Properties/Run.ps1 /app/Run.ps1
-RUN Remove-Item .\source -Recurse -Force; New-Item -Path .\root\.microsoft\usersecrets -ItemType "directory";New-Item -Path .\root\.aspnet\https\ -ItemType "directory"
-
+RUN Remove-Item .\source -Recurse -Force
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 
-ENTRYPOINT .\Run.ps1
+ENTRYPOINT ["pwsh","-File", "Run.ps1"]

@@ -20,7 +20,7 @@ using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace FreeParkingSystem.Accounts.Tests.User
+namespace FreeParkingSystem.Accounts.Tests
 {
 	public class UserServicesTests
 	{
@@ -46,16 +46,13 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			fixture.Build<IPasswordManager>()
 				.FromFactory(() =>
 				{
-					var options = new PasswordOptions(0, int.MaxValue, PasswordRequirements.None);
+					var options = new PasswordOptions(TestConstants.MinimumCharacters, TestConstants.MaximumCharacters, TestConstants.DefaultPasswordRequirements);
 
 					var passwordValidator = new PasswordValidator(options);
 
 					var hashingPassword = new PasswordHasher(new ShaStringHasher(new ShaByteHasher()));
 
-					var secretKey = new byte[32]
-					{
-						237, 201, 222, 52, 18, 152, 49, 135, 198, 143, 48, 247, 22, 185, 5, 216, 43, 6, 37, 243, 13, 52, 149, 119, 74, 104, 70, 130, 246, 76, 231, 147
-					};
+					var secretKey = TestConstants.SecretKey;
 
 					var encryptPassword = new PasswordEncryptor(new AesStringEncryptor(new AesByteEncryptor(new EncryptionOptions(secretKey))));
 
@@ -550,13 +547,106 @@ namespace FreeParkingSystem.Accounts.Tests.User
 			// Arrange
 			var user = sut.CreateUser(username, password);
 			sut.AddClaim(user, claim.type, claim.value);
-			
+
 			// Act
 			sut.RemoveClaim(user, claim.type);
 
 			// Assert
 			user.Claims.Count.ShouldBe(0);
 		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void Login_WhenUsernameIsEmpty_ShouldThrowException(
+			string username,
+			string password,
+			UserServices sut)
+		{
+			// Arrange
+
+			// Act
+			var exception = Record.Exception(() => sut.Login(username, password));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<UserException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.User_UsernameEmpty);
+		}
+
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void Login_WhenPasswordIsEmpty_ShouldThrowException(
+			string password,
+			string username,
+			UserServices sut)
+		{
+			// Arrange
+
+			// Act
+			var exception = Record.Exception(() => sut.Login(username, password));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<PasswordException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.User_PasswordEmpty);
+		}
+
+		[Theory, FixtureData]
+		public void Login_WhenUserDoesNotExist_ShouldThrowException(
+			string password,
+			string username,
+			UserServices sut)
+		{
+			// Arrange
+
+			// Act
+			var exception = Record.Exception(() => sut.Login(username, password));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<UserException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.User_InvalidLogin);
+		}
+
+		[Theory, FixtureData]
+		public void Login_WhenThePasswordIsNotVerified_ShouldThrowException(
+			(string username, string password) user,
+			string otherPassword,
+			UserServices sut)
+		{
+			// Arrange
+			sut.CreateUser(user.username, user.password);
+			// Act
+			var exception = Record.Exception(() => sut.Login(user.username, otherPassword));
+
+			// Assert
+			exception.ShouldNotBeNull();
+			exception.ShouldBeOfType<UserException>();
+			exception.Message.ShouldBe(Contract.Resources.Validations.User_InvalidLogin);
+		}
+
+		[Theory, FixtureData]
+		public void Login_WhenTheUserAndThePasswordAreVerified_ShouldReturnUser(
+			(string username, string password) user,
+			UserServices sut)
+		{
+			// Arrange
+			var expectedUser = sut.CreateUser(user.username, user.password);
+
+			// Act
+			var result = sut.Login(user.username, user.password);
+
+			// Assert
+			result.ShouldNotBeNull();
+			result.Id.ShouldBe(expectedUser.Id);
+			result.UserName.ShouldBe(expectedUser.UserName);
+			result.Claims.Count.ShouldBe(expectedUser.Claims.Count);
+		}
+
 
 		private static AccountsDbContext GetDbContext()
 		{

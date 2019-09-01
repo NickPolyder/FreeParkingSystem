@@ -2,7 +2,6 @@
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
-using FreeParkingSystem.Accounts;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Hashing;
 using FreeParkingSystem.Testing;
@@ -11,7 +10,7 @@ using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace FreeParkingSystem.Accounts.Tests.User
+namespace FreeParkingSystem.Accounts.Tests
 {
 	public class PasswordHasherTests
 	{

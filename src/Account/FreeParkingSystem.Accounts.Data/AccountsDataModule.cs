@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Core;
 using FreeParkingSystem.Accounts.Data.Mappers;
 using FreeParkingSystem.Accounts.Data.Models;
 using FreeParkingSystem.Accounts.Data.Repositories;

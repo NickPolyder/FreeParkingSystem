@@ -2,7 +2,6 @@
 using AutoFixture.Xunit;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Exceptions;
-using FreeParkingSystem.Accounts;
 using FreeParkingSystem.Accounts.Contract.Options;
 using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;
@@ -14,7 +13,7 @@ using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace FreeParkingSystem.Accounts.Tests.User
+namespace FreeParkingSystem.Accounts.Tests
 {
 	public class PasswordManagerTests
 	{
@@ -29,10 +28,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 
 		private static void ContainerSetup(IFixture fixture)
 		{
-			var secretKey = new byte[32]
-			{
-				237, 201, 222, 52, 18, 152, 49, 135, 198, 143, 48, 247, 22, 185, 5, 216, 43, 6, 37, 243, 13, 52, 149, 119, 74, 104, 70, 130, 246, 76, 231, 147
-			};
+			var secretKey = TestConstants.SecretKey;
 
 			fixture.Build<EncryptionOptions>()
 				.FromFactory(() => new EncryptionOptions(secretKey))
@@ -54,7 +50,7 @@ namespace FreeParkingSystem.Accounts.Tests.User
 				.Customize(fixture);
 
 			fixture.Build<IValidate<Password>>()
-				.FromFactory(() => new PasswordValidator(new PasswordOptions(0, 0, PasswordRequirements.None)))
+				.FromFactory(() => new PasswordValidator(new PasswordOptions(TestConstants.MinimumCharacters, TestConstants.MaximumCharacters, TestConstants.DefaultPasswordRequirements)))
 				.ToCustomization()
 				.Customize(fixture);
 

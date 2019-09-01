@@ -21,10 +21,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 
 		private static void ContainerSetup(IFixture fixture)
 		{
-			var secretKey = new byte[32]
-			{
-				237, 201, 222, 52, 18, 152, 49, 135, 198, 143, 48, 247, 22, 185, 5, 216, 43, 6, 37, 243, 13, 52, 149, 119, 74, 104, 70, 130, 246, 76, 231, 147
-			};
+			var secretKey = CommonTestsConstants.SecretKey;
 
 			fixture.Build<EncryptionOptions>()
 				.FromFactory(() => new EncryptionOptions(secretKey))
@@ -32,7 +29,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Customize(fixture);
 
 			fixture.Build<IEncrypt<byte[]>>()
-				.FromFactory((EncryptionOptions options) =>new AesByteEncryptor(options))
+				.FromFactory((EncryptionOptions options) => new AesByteEncryptor(options))
 				.ToCustomization()
 				.Customize(fixture);
 		}
@@ -47,7 +44,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 			byteEncryptorMock
 				.Setup(encryptor => encryptor.Encrypt(It.IsAny<byte[]>()))
 				.Returns(new byte[0]);
-			
+
 			// Act
 			sut.Encrypt(input);
 
@@ -68,7 +65,7 @@ namespace FreeParkingSystem.Common.Tests.Encryption
 				.Returns(new byte[0]);
 
 			var base64Input = Convert.ToBase64String(input);
-			
+
 			// Act
 
 			sut.Decrypt(base64Input);

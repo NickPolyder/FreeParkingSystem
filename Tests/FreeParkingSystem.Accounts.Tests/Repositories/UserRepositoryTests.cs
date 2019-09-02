@@ -111,6 +111,51 @@ namespace FreeParkingSystem.Accounts.Tests.Repositories
 			}
 		}
 
+		[Theory]
+		[InlineFixtureData(null)]
+		[InlineFixtureData("")]
+		[InlineFixtureData(" ")]
+		public void GetByUsername_WhenUsernameInvalid_ShouldReturnNull(
+			string userName,
+			IMap<DbUser, Contract.User> mapper)
+		{
+			// Arrange
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new UserRepository(dbContext, mapper))
+			{
+
+				// Act
+				var result = sut.GetByUsername(userName);
+
+				// Assert
+				result.ShouldBeNull();
+			}
+		}
+
+		[Theory,FixtureData]
+		public void GetByUsername_ShouldReturnNull(
+			IMap<DbUser, Contract.User> mapper,
+			Contract.User[] users)
+		{
+			// Arrange
+
+			var dbContext = GetDbContext();
+
+			using (var sut = new UserRepository(dbContext, mapper))
+			{
+				sut.AddRange(users);
+
+				// Act
+				var result = sut.GetByUsername(users[0].UserName);
+
+				// Assert
+				result.ShouldNotBeNull();
+				result.UserName.ShouldBe(users[0].UserName);
+				result.Id.ShouldBe(users[0].Id);
+			}
+		}
 		private static AccountsDbContext GetDbContext()
 		{
 			var options = new DbContextOptionsBuilder<AccountsDbContext>()

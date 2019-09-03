@@ -20,6 +20,7 @@ namespace FreeParkingSystem.Accounts.Commands
 		public Task<BaseResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
 		{
 			var user = _userServices.CreateUser(request.UserName, request.Password);
+
 			if (!string.IsNullOrWhiteSpace(request.Email))
 				_userServices.AddClaim(user, ClaimTypes.Email.ToString(), request.Email);
 

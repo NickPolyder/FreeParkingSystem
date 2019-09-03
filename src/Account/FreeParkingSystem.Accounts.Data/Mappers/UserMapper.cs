@@ -28,7 +28,7 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 				Id = input.Id,
 				UserName = input.UserName,
 				Password = new Password(input.Password, input.SaltAsString(), true, true),
-				Claims = _claimsMapper.Map(input.Claims).ToArray()
+				Claims = _claimsMapper.Map(input.Claims).ToList()
 			};
 		}
 
@@ -43,7 +43,7 @@ namespace FreeParkingSystem.Accounts.Data.Mappers
 				UserName = input.UserName,
 				Password = input.Password.ToString(),
 				Salt = input.Password.SaltAsBytes(),
-				Claims = _claimsMapper.Map(input.Claims).ToArray()
+				Claims = _claimsMapper.Map(input.Claims).ToList()
 			};
 		}
 

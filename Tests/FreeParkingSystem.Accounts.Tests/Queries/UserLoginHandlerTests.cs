@@ -31,13 +31,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 {
 	public class UserLoginHandlerTests
 	{
-		private readonly ITestOutputHelper _testOutputHelper;
-
-		public UserLoginHandlerTests(ITestOutputHelper testOutputHelper)
-		{
-			_testOutputHelper = testOutputHelper;
-		}
-
+		
 		private static void ContainerSetup(IFixture fixture)
 		{
 			fixture.Build<IMap<UserClaim, Claim>>()

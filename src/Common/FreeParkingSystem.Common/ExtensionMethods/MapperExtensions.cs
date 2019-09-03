@@ -19,7 +19,7 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 		public static IEnumerable<TOutput> Map<TInput, TOutput>(this IMap<TInput, TOutput> map, IEnumerable<TInput> input, IDictionary<object, object> dictionary = null)
 		{
 			if (input == null)
-				return Array.Empty<TOutput>();
+				return new List<TOutput>(0);
 
 			if (dictionary == null)
 				dictionary = new Dictionary<object, object>(0);
@@ -30,7 +30,7 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 		public static IEnumerable<TInput> Map<TInput, TOutput>(this IMap<TInput, TOutput> map, IEnumerable<TOutput> input, IDictionary<object, object> dictionary = null)
 		{
 			if (input == null)
-				return Array.Empty<TInput>();
+				return new List<TInput>(0);
 
 			if (dictionary == null)
 				dictionary = new Dictionary<object, object>(0);

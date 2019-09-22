@@ -58,13 +58,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{165F1D1B-14E3-47AB-AAF4-B2F08CDB365F}"
 	ProjectSection(SolutionItems) = preProject
 		tools\Build-Dockerfiles.ps1 = tools\Build-Dockerfiles.ps1
+		tools\coverage.ps1 = tools\coverage.ps1
+		tools\install-tools.ps1 = tools\install-tools.ps1
+		tools\Run-Docker-Service.ps1 = tools\Run-Docker-Service.ps1
 		tools\Setup-dev-certificates.ps1 = tools\Setup-dev-certificates.ps1
 		tools\SetupEnvironmentVariables.ps1 = tools\SetupEnvironmentVariables.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Client", "src\Common\FreeParkingSystem.Common.Client\FreeParkingSystem.Common.Client.csproj", "{A0462788-B877-420A-A9BC-743C98035366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Client.Tests", "Tests\FreeParkingSystem.Common.Client.Tests\FreeParkingSystem.Common.Client.Tests.csproj", "{65E2A99E-EF0D-475E-9AB6-328A700394BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Client.Tests", "Tests\FreeParkingSystem.Common.Client.Tests\FreeParkingSystem.Common.Client.Tests.csproj", "{65E2A99E-EF0D-475E-9AB6-328A700394BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -75,6 +75,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{AC7DAAC0-2D68-448B-888D-2625714080AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Contract", "src\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj", "{AB11F94D-6F83-4D2D-835C-B2F977434A54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Data", "src\Parking\FreeParkingSystem.Parking.Data\FreeParkingSystem.Parking.Data.csproj", "{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{F5B4D665-97F5-4322-8F7A-D7DC8B485453}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +165,18 @@ Global
 		{AC7DAAC0-2D68-448B-888D-2625714080AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC7DAAC0-2D68-448B-888D-2625714080AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC7DAAC0-2D68-448B-888D-2625714080AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB11F94D-6F83-4D2D-835C-B2F977434A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB11F94D-6F83-4D2D-835C-B2F977434A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB11F94D-6F83-4D2D-835C-B2F977434A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB11F94D-6F83-4D2D-835C-B2F977434A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B4D665-97F5-4322-8F7A-D7DC8B485453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B4D665-97F5-4322-8F7A-D7DC8B485453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B4D665-97F5-4322-8F7A-D7DC8B485453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B4D665-97F5-4322-8F7A-D7DC8B485453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +201,9 @@ Global
 		{1F9C5833-78C2-4A99-A3C4-260CAB7D9929} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}
 		{F430C77E-362B-4040-9457-52EA477EBEB6} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}
 		{AC7DAAC0-2D68-448B-888D-2625714080AB} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}
+		{AB11F94D-6F83-4D2D-835C-B2F977434A54} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
+		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
+		{F5B4D665-97F5-4322-8F7A-D7DC8B485453} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

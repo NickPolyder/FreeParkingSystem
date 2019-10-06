@@ -9,4 +9,19 @@
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Resources\Validation.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Validation.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Validation.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
 </Project>

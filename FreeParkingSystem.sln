@@ -69,17 +69,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Client.Tests", "Tests\FreeParkingSystem.Common.Client.Tests\FreeParkingSystem.Common.Client.Tests.csproj", "{65E2A99E-EF0D-475E-9AB6-328A700394BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders.Contract", "src\Orders\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj", "{1F9C5833-78C2-4A99-A3C4-260CAB7D9929}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders.Contract", "src\Orders\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj", "{1F9C5833-78C2-4A99-A3C4-260CAB7D9929}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders.Data", "src\Orders\FreeParkingSystem.Orders.Data\FreeParkingSystem.Orders.Data.csproj", "{F430C77E-362B-4040-9457-52EA477EBEB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders.Data", "src\Orders\FreeParkingSystem.Orders.Data\FreeParkingSystem.Orders.Data.csproj", "{F430C77E-362B-4040-9457-52EA477EBEB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{AC7DAAC0-2D68-448B-888D-2625714080AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders", "src\Orders\FreeParkingSystem.Orders\FreeParkingSystem.Orders.csproj", "{AC7DAAC0-2D68-448B-888D-2625714080AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Contract", "src\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj", "{AB11F94D-6F83-4D2D-835C-B2F977434A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking.Contract", "src\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj", "{AB11F94D-6F83-4D2D-835C-B2F977434A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Data", "src\Parking\FreeParkingSystem.Parking.Data\FreeParkingSystem.Parking.Data.csproj", "{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking.Data", "src\Parking\FreeParkingSystem.Parking.Data\FreeParkingSystem.Parking.Data.csproj", "{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{F5B4D665-97F5-4322-8F7A-D7DC8B485453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{F5B4D665-97F5-4322-8F7A-D7DC8B485453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

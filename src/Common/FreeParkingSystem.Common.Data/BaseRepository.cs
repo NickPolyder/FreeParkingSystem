@@ -41,7 +41,7 @@ namespace FreeParkingSystem.Common.Data
 			_dbSet = DbContext.Set<TEntity>();
 		}
 
-		public TBusinessObject Get(int id)
+		public virtual TBusinessObject Get(int id)
 		{
 			var entity = Set.Find(id);
 

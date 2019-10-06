@@ -10,7 +10,7 @@ using FreeParkingSystem.Common.ExtensionMethods;
 
 namespace FreeParkingSystem.Accounts.Data.Repositories
 {
-	public class ClaimsRepository : BaseRepository<UserClaim,DbClaims>, IClaimsRepository
+	public class ClaimsRepository: BaseRepository<UserClaim,DbClaims>, IClaimsRepository
 	{
 		public ClaimsRepository(AccountsDbContext dbContext, IMap<DbClaims, UserClaim> claimsMapper):base(dbContext,claimsMapper)
 		{

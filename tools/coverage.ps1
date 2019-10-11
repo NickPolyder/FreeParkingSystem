@@ -1,35 +1,51 @@
-param(
-[Parameter(Mandatory=$false)]
-[string]$Path,
-[Parameter(Mandatory=$false)]
-[string]$Configuration,
-[Parameter(Mandatory=$false)]
-[string]$Framework
-)
+$Path = [System.IO.Path]::Combine((Split-Path $PSScriptRoot),"Tests")
 
-if([System.String]::IsNullOrWhiteSpace($Path))
+$Configuration = 'Debug';
+
+$regexConfiguration = '^*.'+$Configuration+'*.';
+
+$testProjects = (Get-ChildItem $Path -Include *Tests.csproj -Exclude 'FreeParkingSystem.Testing' -Recurse -Force);
+
+$length = $testProjects.Length
+$activityName = "Run coverage";
+
+if($length -le 0)
 {
-    $Path = Split-Path $PSScriptRoot
-}
- 
-if([System.String]::IsNullOrWhiteSpace($Configuration))
-{ 
-    $Configuration = 'Debug';
-}
- 
-if([System.String]::IsNullOrWhiteSpace($Framework))
-{ 
-    $Framework = 'netcoreapp2.1';
+    Write-Output 'No scripts to run.'
+    return;
 }
 
+Write-Progress -Activity $activityName -Status 'Progress->' -PercentComplete 0 -CurrentOperation "Starting..."
 
-foreach($item in (Get-ChildItem $Path -Include *Tests.csproj -Recurse -Force))
+for($index = 0; $index -lt $length; $index++)
 {
+    $item = $testProjects[$index];
+    
+     Write-Progress -Activity $activityName -Status 'Progress->' -PercentComplete (($index * 100) / $length) -CurrentOperation $item.Name
     $dllName = $item.Name -replace $item.Extension, '.dll';
-    $dllPath = $item.Directory.FullName + '\bin\' + $Configuration + '\' + $Framework + '\' + $dllName;
-    $command = '& coverlet ' + $dllPath + ' --target "dotnet" --targetargs "test ' + $item.FullName + ' --no-build" --merge-with .\coverage.opencover.xml --format opencover';
-    Write-Host $command
-    Invoke-Expression $command
 
+    $dllPath = (Get-ChildItem $item.Directory.FullName -Include $dllName -Recurse -Force `
+    | Where-Object { $_.Directory.FullName -Match $regexConfiguration } `
+    | Select -First 1).FullName;
+    
+    if($dllPath -ne $null -And -Not (Test-Path $dllPath))
+    {
+        Write-Output ''
+        Write-Warning 'Cannot find dll for:' $item.Name
+        continue;
+    }
+
+    $command = '& coverlet ' + $dllPath + ' --target "dotnet" --targetargs "test ' + 
+    $item.FullName + 
+    ' --no-build -c '+ $Configuration + '" --merge-with .\coverage.json ';
+
+    if($index + 1 -eq $testProjects.Length)
+    {
+        $command = $command + ' --format opencover';
+    }
+    Invoke-Expression $command | Out-File .\coverage.log -Append
 }
-#coverlet .\bin\Debug\netcoreapp2.1\FreeParkingSystem.Accounts.Tests.dll --target "dotnet" --targetargs "test .\FreeParkingSystem.Accounts.Tests.csproj --no-build"
+
+& reportgenerator -reports:coverage.opencover.xml -targetdir:.\cover | Out-File .\coverage.log -Append
+
+& start .\cover\index.htm

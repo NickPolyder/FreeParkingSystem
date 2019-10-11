@@ -52,3 +52,11 @@ INSERT [dbo].[ParkingType] ([Id], [Name]) VALUES (3, N'Public')
 GO
 SET IDENTITY_INSERT [dbo].[ParkingType] OFF
 GO
+SET IDENTITY_INSERT [dbo].[FavoriteType] ON 
+GO
+INSERT [dbo].[FavoriteType] ([Id], [Name]) VALUES (1, N'Parking Site')
+GO
+INSERT [dbo].[FavoriteType] ([Id], [Name]) VALUES (2, N'Parking Spot')
+GO
+SET IDENTITY_INSERT [dbo].[FavoriteType] OFF
+GO

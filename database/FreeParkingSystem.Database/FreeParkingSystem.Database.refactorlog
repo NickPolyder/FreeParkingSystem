@@ -49,4 +49,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IsActive" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6eeda397-1596-411c-a6eb-6727640805ef" ChangeDateTime="10/11/2019 21:03:23">
+    <Property Name="ElementName" Value="[dbo].[Favorites].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Favorites]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FavoriteTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c876e055-9b51-41c1-ba7a-36faef48ba1a" ChangeDateTime="10/11/2019 21:05:27">
+    <Property Name="ElementName" Value="[dbo].[FK_Favorites_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Favorites]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Favorites_ToFavoriteTypes]" />
+  </Operation>
 </Operations>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace FreeParkingSystem.Parking.Data.Models
 {
@@ -26,14 +25,9 @@ namespace FreeParkingSystem.Parking.Data.Models
 
 			modelBuilder.Entity<DbParkingSpot>()
 				.ToTable("ParkingSpot");
+
+			modelBuilder.Entity<DbFavorite>()
+				.ToTable("Favorite");
 		}
-
-		public DbSet<DbParkingType> ParkingTypes { get; set; }
-
-		public DbSet<DbParkingSpotType> ParkingSpotTypes { get; set; }
-
-		public DbSet<DbParkingSite> ParkingSites { get; set; }
-
-		public DbSet<DbParkingSpot> ParkingSpots { get; set; }
 	}
 }

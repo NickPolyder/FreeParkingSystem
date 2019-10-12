@@ -1,0 +1,38 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Data.SqlClient" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ output extension="generated.cs" #>
+
+namespace FreeParkingSystem.Parking.Contract.Constants
+{
+	<#
+		var connectionString =	"Server=localhost,3306;Database=FreeParkingSystem.Database;user id=sa;password=S1mple@password";				
+	#>
+	public enum FavoriteType {	
+	<# 
+		using (var connection = new SqlConnection(connectionString))
+				{
+					connection.Open();
+					using (var command = connection.CreateCommand())
+					{
+						command.CommandText = "SELECT Id,Name FROM FavoriteType";
+						using (var reader = command.ExecuteReader())
+						{
+							int tabs = 0;
+							while (reader.Read())
+							{
+								Write("\t\t");
+								Write(new String('\t',tabs++));
+								WriteLine(reader.GetString(1).Replace(" ","") + " = " + reader.GetInt32(0) + ",");
+							}
+						}
+					}
+				}
+	#>
+		}
+}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,14 +33,17 @@ namespace FreeParkingSystem.Accounts.Queries
 			var user = _userServices.Login(request.Username, request.Password);
 			user.Password = Password.Empty;
 
-			var userToken = _authenticationServices.CreateToken(user.UserName,Map(user));
+			var userToken = _authenticationServices.CreateToken(user.UserName, Map(user));
 
 			return Task.FromResult(request.ToSuccessResponse(userToken));
 		}
 
 		private IEnumerable<Claim> Map(User user)
 		{
-			return _claimMapper.Map(user.Claims);
+			var claims = _claimMapper.Map(user.Claims).ToList();
+			claims.Add(new Claim(UserClaimTypes.Id.ToString(), user.Id.ToString()));
+
+			return claims;
 		}
 	}
 }

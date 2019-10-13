@@ -21,7 +21,6 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Shouldly;
 using Xunit;
-using ClaimTypes = FreeParkingSystem.Accounts.Contract.ClaimTypes;
 using static FreeParkingSystem.Accounts.Tests.TestConstants;
 
 namespace FreeParkingSystem.Accounts.Tests.Commands
@@ -95,7 +94,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
 
 			// Assert
-			userServicesMock.Verify(svc => svc.AddClaim(user, ClaimTypes.Role.ToString(), request.Role.ToString()), Times.Once);
+			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Role.ToString(), request.Role.ToString()), Times.Once);
 		}
 
 		[Theory, FixtureData(RunContainerSetup = false)]
@@ -113,7 +112,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
 
 			// Assert
-			userServicesMock.Verify(svc => svc.AddClaim(user, ClaimTypes.Email.ToString(), request.Email), Times.Once);
+			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Email.ToString(), request.Email), Times.Once);
 		}
 
 		[Theory]
@@ -140,7 +139,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
 
 			// Assert
-			userServicesMock.Verify(svc => svc.AddClaim(user, ClaimTypes.Email.ToString(), request.Email), Times.Never);
+			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Email.ToString(), request.Email), Times.Never);
 		}
 
 		[Theory, FixtureData(RunContainerSetup = false)]

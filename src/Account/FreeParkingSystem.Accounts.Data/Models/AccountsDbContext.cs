@@ -18,9 +18,5 @@ namespace FreeParkingSystem.Accounts.Data.Models
 			modelBuilder.Entity<DbClaims>()
 				.ToTable("Claims");
 		}
-
-		public DbSet<DbUser> Users { get; set; }
-
-		public DbSet<DbClaims> Claims { get; set; }
 	}
 }

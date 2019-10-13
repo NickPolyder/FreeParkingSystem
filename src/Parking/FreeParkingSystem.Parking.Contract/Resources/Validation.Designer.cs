@@ -59,5 +59,23 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site you requested does not exist..
+        /// </summary>
+        public static string ParkingSite_DoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSite_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking spot you requested does not exist..
+        /// </summary>
+        public static string ParkingSpot_DoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSpot_DoesNotExist", resourceCulture);
+            }
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Accounts.Mappers
 				type = System.Security.Claims.ClaimTypes.Role;
 			}
 
-			return  new Claim(type, input.Value);
+			return new Claim(type, input.Value);
 		}
 
 		public UserClaim Map(Claim input, IDictionary<object, object> context)

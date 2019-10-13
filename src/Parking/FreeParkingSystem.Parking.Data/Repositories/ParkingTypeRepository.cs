@@ -1,4 +1,5 @@
-﻿using FreeParkingSystem.Common;
+﻿using System.Linq;
+using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Data;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Repositories;
@@ -10,6 +11,11 @@ namespace FreeParkingSystem.Parking.Data.Repositories
 	{
 		public ParkingTypeRepository(ParkingDbContext dbContext, IMap<DbParkingType, ParkingType> mapper) : base(dbContext, mapper)
 		{
+		}
+
+		public bool Exists(int parkingTypeId)
+		{
+			return Set.Any(item => item.Id == parkingTypeId);
 		}
 	}
 }

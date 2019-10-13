@@ -6,7 +6,7 @@ namespace FreeParkingSystem.Accounts.Contract.Exceptions
 	[ExcludeFromCodeCoverage]
 	public class PasswordValidationException : PasswordException
 	{
-		public PasswordValidationException() : base()
+		public PasswordValidationException()
 		{
 		}
 

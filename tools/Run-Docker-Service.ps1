@@ -1,31 +1,95 @@
-$DockerDesktopPath = 'C:\Program Files\Docker\Docker\Docker Desktop.exe'
-$DockerServiceName = 'Docker'
-$DockerDesktopProcessName = 'Docker Desktop'
+param(
+[Parameter(Mandatory = $false)]
+[string]$configuration
+)
 
-$dockerService = (Get-Service -Name $DockerServiceName -ErrorAction SilentlyContinue);
-
-if($dockerService -ne $null -and $dockerService.Status -ne [System.ServiceProcess.ServiceControllerStatus]::Running)
+Function StartService() 
 {
-    Write-Host 'Starting Service: ' $dockerService.DisplayName
-    Start-Service $dockerService.ServiceName
+    $DockerDesktopPath = 'C:\Program Files\Docker\Docker\Docker Desktop.exe'
+    $DockerServiceName = 'Docker'
+    $DockerDesktopProcessName = 'Docker Desktop'
+    
+    $dockerService = (Get-Service -Name $DockerServiceName -ErrorAction SilentlyContinue);
+    
+    if($dockerService -ne $null -and $dockerService.Status -ne [System.ServiceProcess.ServiceControllerStatus]::Running)
+    {
+        Write-Host 'Starting Service: ' $dockerService.DisplayName
+        Start-Service $dockerService.ServiceName
+    }
+    
+    Remove-Variable dockerService
+    
+    $dockerDesktop = Get-Process $DockerDesktopProcessName -ErrorAction SilentlyContinue
+    
+    if ($dockerDesktop -eq $null) 
+    {
+        Write-Host 'Starting App: ' $DockerDesktopProcessName
+        Start-Process $DockerDesktopPath -Verb runAs
+        
+        for($i = 1;$i -le 5; $i++)
+        {
+            Write-Host 'Waiting for service to start.' ([System.String]::new('.',$i))
+            [System.Threading.Thread]::Sleep(1000);    
+        }    
+    }
+    
+    Remove-Variable dockerDesktop
 }
 
-Remove-Variable dockerService
+Function ReplaceWithActiveConfiguration($defaultConfiguration)
+{
+    $pathToActiveConfig = (Split-Path $PSScriptRoot) +'\docker-compose.' + $configuration + '.yml'
 
-$dockerDesktop = Get-Process $DockerDesktopProcessName -ErrorAction SilentlyContinue
+    if(Test-Path $pathToActiveConfig)
+    {
+        $yamlActiveConfigurationContent = Get-Content $pathToActiveConfig -Raw
+    
+        $activeConfiguration = ConvertFrom-Yaml $yamlActiveConfigurationContent;
+    
+        foreach($serviceKey in $activeConfiguration.services.Keys)
+        {
+            $currentService = $activeConfiguration.services.Item($serviceKey)
 
-if ($dockerDesktop -eq $null) {
-    Write-Host 'Starting App: ' $DockerDesktopProcessName
-    Start-Process $DockerDesktopPath -Verb runAs
+            if($defaultConfiguration.services.ContainsKey($serviceKey))
+            {
+                $defaultService = $defaultConfiguration.services.Item($serviceKey)
+
+                foreach($key in $currentService.Keys)
+                {
+                    if($defaultService.ContainsKey($key))
+                    {
+                        $defaultService.Item($key) = $currentService.Item($key)
+                    }
+                    else
+                    {
+                        $defaultService.Add($key,$currentService.Item($key))
+                    }
+
+                }
+            }
+            else
+            {
+                $defaultConfiguration.services.Add($serviceKey, $currentService)
+            }
+           
+        }
+    }
 }
 
-Remove-Variable dockerDesktop
+StartService
+
+if([System.String]::IsNullOrWhiteSpace($configuration))
+{
+    $configuration = "dev";
+}
 
 $path = (Split-Path $PSScriptRoot) +'\docker-compose.yml'
 
 $yamlContent = Get-Content $path -Raw
 
 $dockerComposeConfiguration = ConvertFrom-Yaml $yamlContent;
+
+ReplaceWithActiveConfiguration $dockerComposeConfiguration
 
 $options = New-Object -TypeName 'System.Collections.Generic.Dictionary[int,string]'
 
@@ -61,6 +125,7 @@ if($service.depends_on -ne $null)
         Write-Host "`t - " $dependentService
     }
 }
+Invoke-Expression 'docker network create -d "nat" free-parking-system' -ErrorAction Ignore
 
 $commandBuilder = New-Object -TypeName 'System.Text.StringBuilder'
 
@@ -113,9 +178,12 @@ if($service.environment -ne $null)
 
     [void]$commandBuilder.Append(" ")
 }
+[void]$commandBuilder.Append(' --network free-parking-system ')
+
+[void]$commandBuilder.Append(' --name ' + $serviceKey +' ')
 
 [void]$commandBuilder.Append($service.image);
 
 $command = $commandBuilder.ToString();
 
- Invoke-Expression $command
+Invoke-Expression $command

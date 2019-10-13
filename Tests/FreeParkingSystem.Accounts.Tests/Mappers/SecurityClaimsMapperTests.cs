@@ -2,6 +2,7 @@
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Mappers;
 using FreeParkingSystem.Common;
+using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Testing;
 using Shouldly;
@@ -35,7 +36,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 			// Assert
 			result.Id.ShouldBe(default);
-			result.Type.ShouldBe(ClaimTypes.Email.ToString());
+			result.Type.ShouldBe(UserClaimTypes.Email.ToString());
 			result.Value.ShouldBe(value);
 		}
 
@@ -53,7 +54,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 
 			// Assert
 			result.Id.ShouldBe(default);
-			result.Type.ShouldBe(ClaimTypes.Role.ToString());
+			result.Type.ShouldBe(UserClaimTypes.Role.ToString());
 			result.Value.ShouldBe(value);
 		}
 
@@ -82,7 +83,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 		)
 		{
 			// Arrange
-			claim.Type = ClaimTypes.Email.ToString();
+			claim.Type = UserClaimTypes.Email.ToString();
 
 			// Act
 			var result = sut.Map(claim);
@@ -99,7 +100,7 @@ namespace FreeParkingSystem.Accounts.Tests.Mappers
 		)
 		{
 			// Arrange
-			claim.Type = ClaimTypes.Role.ToString();
+			claim.Type = UserClaimTypes.Role.ToString();
 
 			// Act
 			var result = sut.Map(claim);

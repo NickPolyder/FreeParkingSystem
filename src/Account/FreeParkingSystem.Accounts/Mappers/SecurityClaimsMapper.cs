@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Common;
-using ClaimTypes = FreeParkingSystem.Accounts.Contract.ClaimTypes;
+using FreeParkingSystem.Common.Authorization;
 
 namespace FreeParkingSystem.Accounts.Mappers
 {
@@ -11,17 +11,18 @@ namespace FreeParkingSystem.Accounts.Mappers
 		public Claim Map(UserClaim input, IDictionary<object, object> context)
 		{
 			var type = input.Type;
-			if (type.Equals(ClaimTypes.Email.ToString()))
+			
+			if (type.Equals(UserClaimTypes.Email.ToString()))
 			{
 				type = System.Security.Claims.ClaimTypes.Email;
 			}
 
-			if (type.Equals(ClaimTypes.Role.ToString()))
+			if (type.Equals(UserClaimTypes.Role.ToString()))
 			{
 				type = System.Security.Claims.ClaimTypes.Role;
 			}
 
-			return  new Claim(type, input.Value);
+			return new Claim(type, input.Value);
 		}
 
 		public UserClaim Map(Claim input, IDictionary<object, object> context)
@@ -29,12 +30,12 @@ namespace FreeParkingSystem.Accounts.Mappers
 			var type = input.Type;
 			if (type.Equals(System.Security.Claims.ClaimTypes.Email))
 			{
-				type = ClaimTypes.Email.ToString();
+				type = UserClaimTypes.Email.ToString();
 			}
 
 			if (type.Equals(System.Security.Claims.ClaimTypes.Role))
 			{
-				type = ClaimTypes.Role.ToString();
+				type = UserClaimTypes.Role.ToString();
 			}
 		
 			return new UserClaim

@@ -12,12 +12,15 @@ namespace FreeParkingSystem.Common.API
 	public class JwtAuthenticationServices : IAuthenticationServices
 	{
 		private readonly JwtAuthenticationOptions _jwtAuthenticationOptions;
+		private readonly IEncrypt<UserToken> _userTokenEncryptor;
 		private JwtSecurityTokenHandler _jwtSecurityTokenHandler;
 		private readonly SigningCredentials _signingCredentials;
 
-		public JwtAuthenticationServices(JwtAuthenticationOptions jwtAuthenticationOptions)
+		public JwtAuthenticationServices(JwtAuthenticationOptions jwtAuthenticationOptions,
+			IEncrypt<UserToken> userTokenEncryptor)
 		{
 			_jwtAuthenticationOptions = jwtAuthenticationOptions;
+			_userTokenEncryptor = userTokenEncryptor;
 			_jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
 
 			_signingCredentials = new SigningCredentials(new SymmetricSecurityKey(_jwtAuthenticationOptions.Secret), SecurityAlgorithms.HmacSha256Signature);
@@ -43,12 +46,14 @@ namespace FreeParkingSystem.Common.API
 			var securityToken = _jwtSecurityTokenHandler.CreateToken(tokenDescriptor);
 			var token = _jwtSecurityTokenHandler.WriteToken(securityToken);
 
-			return new UserToken
+			var userToken = new UserToken
 			{
 				Username = username,
 				Claims = subjectClaims,
 				Token = token
 			};
+
+			return _userTokenEncryptor.Encrypt(userToken);
 		}
 
 		public bool VerifyToken(string token, out UserToken userToken)
@@ -62,15 +67,15 @@ namespace FreeParkingSystem.Common.API
 			};
 
 			var principal = _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out var _);
-			
+
 			if (principal != null && principal.Identity.IsAuthenticated)
 			{
-				userToken = new UserToken
+				userToken = _userTokenEncryptor.Decrypt(new UserToken
 				{
 					Username = principal.Identity.Name,
 					Claims = principal.Claims,
 					Token = token
-				};
+				});
 
 				return true;
 			}

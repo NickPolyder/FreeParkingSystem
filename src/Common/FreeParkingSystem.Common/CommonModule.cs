@@ -27,6 +27,7 @@ namespace FreeParkingSystem.Common
 			builder.RegisterType<ShaStringHasher>().AsImplementedInterfaces();
 			builder.RegisterType<AesByteEncryptor>().AsImplementedInterfaces();
 			builder.RegisterType<AesStringEncryptor>().AsImplementedInterfaces();
+			builder.RegisterType<UserTokenEncryptor>().AsImplementedInterfaces();
 		}
 	}
 }

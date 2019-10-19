@@ -20,7 +20,7 @@ namespace FreeParkingSystem.Common.Client.Tests
 		{
 			// Arrange
 			var messageHandler = new HttpMessageHandlerMock();
-			var sut = new HttpService(new ParkingHttpClient(new HttpClient(messageHandler)));
+			var sut = new HttpService(new ParkingHttpClient(new HttpClient(messageHandler)),new HttpJsonSerializer());
 
 			// Act
 			var result = await sut.SendAsync<UserCredentials, UserCredentials>(new UserCredentials

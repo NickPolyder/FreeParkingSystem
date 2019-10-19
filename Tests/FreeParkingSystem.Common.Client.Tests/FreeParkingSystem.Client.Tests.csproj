@@ -21,7 +21,7 @@
 		</PackageReference>
 	</ItemGroup>
   <ItemGroup>
-	<ProjectReference Include="..\..\src\Common\FreeParkingSystem.Common.Client\FreeParkingSystem.Common.Client.csproj" />
+	<ProjectReference Include="..\..\src\Client\FreeParkingSystem.Client\FreeParkingSystem.Client.csproj" />
 	<ProjectReference Include="..\FreeParkingSystem.Testing\FreeParkingSystem.Testing.csproj" />
   </ItemGroup>
 

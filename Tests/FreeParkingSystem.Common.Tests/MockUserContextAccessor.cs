@@ -8,12 +8,10 @@ namespace FreeParkingSystem.Common.Tests
 	{
 		public IUserContext GetUserContext()
 		{
-			return new DefaultUserContext(new UserToken
-			{
-				Token = Guid.NewGuid().ToString(),
-				Username = Guid.NewGuid().ToString(),
-				Claims = Array.Empty<Claim>()
-			});
+			return new DefaultUserContext(new UserToken(
+				Guid.NewGuid().ToString(),
+				Array.Empty<Claim>(),
+				Guid.NewGuid().ToString()));
 		}
 	}
 }

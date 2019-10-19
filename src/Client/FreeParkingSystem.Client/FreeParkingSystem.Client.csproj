@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

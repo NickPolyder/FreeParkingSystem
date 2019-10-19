@@ -5,7 +5,7 @@ using FreeParkingSystem.Common.Client.Http.Attributes;
 namespace FreeParkingSystem.Common.Client.Models
 {
 	[HttpRoute(HttpMethodConstants.POST, "/login")]
-	public class UserLoginViewModel
+	public class UserCredentials
 	{
 		public string Username { get; set; }
 

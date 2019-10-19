@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using FreeParkingSystem.Common.Client.Http;
 using FreeParkingSystem.Common.Client.Models;
 using Xunit;
 using Xunit.Abstractions;
@@ -18,10 +20,10 @@ namespace FreeParkingSystem.Common.Client.Tests
 		{
 			// Arrange
 			var messageHandler = new HttpMessageHandlerMock();
-			var sut = new HttpService(() => messageHandler);
+			var sut = new HttpService(new ParkingHttpClient(new HttpClient(messageHandler)));
 
 			// Act
-			var result = await sut.SendAsync<UserLoginViewModel, UserLoginViewModel>(new UserLoginViewModel
+			var result = await sut.SendAsync<UserCredentials, UserCredentials>(new UserCredentials
 			{
 				Username = "admin",
 				Password = "admin"

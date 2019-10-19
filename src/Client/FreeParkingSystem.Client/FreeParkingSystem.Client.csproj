@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Orders\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj" />
+    <ProjectReference Include="..\..\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Http\Exceptions\" />
+  </ItemGroup>
+
+</Project>

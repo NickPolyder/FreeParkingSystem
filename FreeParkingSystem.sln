@@ -66,9 +66,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{165F1D1B
 		tools\SetupEnvironmentVariables.ps1 = tools\SetupEnvironmentVariables.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Client", "src\Common\FreeParkingSystem.Common.Client\FreeParkingSystem.Common.Client.csproj", "{A0462788-B877-420A-A9BC-743C98035366}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Client", "src\Client\FreeParkingSystem.Client\FreeParkingSystem.Client.csproj", "{A0462788-B877-420A-A9BC-743C98035366}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Client.Tests", "Tests\FreeParkingSystem.Common.Client.Tests\FreeParkingSystem.Common.Client.Tests.csproj", "{65E2A99E-EF0D-475E-9AB6-328A700394BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Client.Tests", "Tests\FreeParkingSystem.Common.Client.Tests\FreeParkingSystem.Client.Tests.csproj", "{65E2A99E-EF0D-475E-9AB6-328A700394BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Orders.Contract", "src\Orders\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj", "{1F9C5833-78C2-4A99-A3C4-260CAB7D9929}"
 EndProject
@@ -81,6 +81,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking.Data", "src\Parking\FreeParkingSystem.Parking.Data\FreeParkingSystem.Parking.Data.csproj", "{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking", "src\Parking\FreeParkingSystem.Parking\FreeParkingSystem.Parking.csproj", "{F5B4D665-97F5-4322-8F7A-D7DC8B485453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{73A41517-DC11-4F2E-9629-0A6BAA93E8B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,7 +199,7 @@ Global
 		{9E296FA2-CD17-4A74-9DA4-C23BD5B8CB91} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
 		{0374DF97-B1AB-4A1C-BAEC-C8849E6FD2F7} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
 		{1EB0BB89-46D1-410B-8B0D-90B2F0C9EE8B} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
-		{A0462788-B877-420A-A9BC-743C98035366} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
+		{A0462788-B877-420A-A9BC-743C98035366} = {73A41517-DC11-4F2E-9629-0A6BAA93E8B1}
 		{65E2A99E-EF0D-475E-9AB6-328A700394BB} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
 		{1F9C5833-78C2-4A99-A3C4-260CAB7D9929} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}
 		{F430C77E-362B-4040-9457-52EA477EBEB6} = {D405FC28-475C-4A1B-9B62-FF1107BCCC78}

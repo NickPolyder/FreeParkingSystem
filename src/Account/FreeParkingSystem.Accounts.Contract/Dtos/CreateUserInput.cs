@@ -1,4 +1,4 @@
-﻿namespace FreeParkingSystem.Accounts.API.Models
+﻿namespace FreeParkingSystem.Accounts.Contract.Dtos
 {
 	public class CreateUserInput
 	{

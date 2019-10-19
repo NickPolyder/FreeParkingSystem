@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace FreeParkingSystem.Common.Client.Http
+namespace FreeParkingSystem.Client.Http
 {
 	[SuppressMessage("ReSharper", "InconsistentNaming")]
 	public static class HttpMethodConstants

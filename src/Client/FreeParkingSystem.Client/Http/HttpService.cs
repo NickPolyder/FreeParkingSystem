@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using FreeParkingSystem.Common.Client.Http;
-using FreeParkingSystem.Common.Client.Http.Attributes;
-using Newtonsoft.Json;
+using FreeParkingSystem.Client.Http.Attributes;
 
-namespace FreeParkingSystem.Common.Client
+namespace FreeParkingSystem.Client.Http
 {
 
 	public interface IHttpService : IDisposable
 	{
-
+		Task<TResponse> SendAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default);
 	}
 
-	public delegate HttpMessageHandler CreateHttpMessageHandlerFactory();
 	public class HttpService : IHttpService
 	{
-		private readonly HttpClient _httpClient;
+		private readonly IHttpClient _httpClient;
 
 		private readonly IHttpSerializer _httpSerializer;
-		public HttpService(CreateHttpMessageHandlerFactory createHttpMessageHandlerFactory)
+		public HttpService(IHttpClient httpClient, IHttpSerializer httpSerializer)
 		{
-			_httpClient = new HttpClient(createHttpMessageHandlerFactory(), true);
-			_httpSerializer = new HttpJsonSerializer();
+			_httpClient = httpClient;
+			_httpSerializer = httpSerializer;
 		}
 
 		public async Task<TResponse> SendAsync<TRequest, TResponse>(TRequest request,

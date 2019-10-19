@@ -13,11 +13,7 @@ namespace FreeParkingSystem.Common.API
 			{
 				if (IsAuthenticated())
 				{
-					return new UserToken
-					{
-						Username = _context.User.Identity.Name,
-						Claims = _context.User.Claims,
-					};
+					return new UserToken(_context.User.Identity.Name, _context.User.Claims);
 				}
 
 				return UserToken.Empty;

@@ -46,12 +46,7 @@ namespace FreeParkingSystem.Common.API
 			var securityToken = _jwtSecurityTokenHandler.CreateToken(tokenDescriptor);
 			var token = _jwtSecurityTokenHandler.WriteToken(securityToken);
 
-			var userToken = new UserToken
-			{
-				Username = username,
-				Claims = subjectClaims,
-				Token = token
-			};
+			var userToken = new UserToken(username,subjectClaims,token);
 
 			return _userTokenEncryptor.Encrypt(userToken);
 		}
@@ -70,12 +65,10 @@ namespace FreeParkingSystem.Common.API
 
 			if (principal != null && principal.Identity.IsAuthenticated)
 			{
-				userToken = _userTokenEncryptor.Decrypt(new UserToken
-				{
-					Username = principal.Identity.Name,
-					Claims = principal.Claims,
-					Token = token
-				});
+				userToken = _userTokenEncryptor.Decrypt(new UserToken(
+					principal.Identity.Name,
+					principal.Claims,
+					token));
 
 				return true;
 			}

@@ -33,8 +33,7 @@ namespace FreeParkingSystem.Common.Encryption
 				}
 			}
 
-			input.Claims = claims;
-			return input;
+			return new UserToken(input.Username, claims, input.Token);
 		}
 
 		public UserToken Decrypt(UserToken input)
@@ -50,8 +49,7 @@ namespace FreeParkingSystem.Common.Encryption
 				}
 			}
 
-			input.Claims = claims;
-			return input;
+			return new UserToken(input.Username, claims, input.Token);
 		}
 
 	}

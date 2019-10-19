@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace FreeParkingSystem.Common.Client.Http
+namespace FreeParkingSystem.Client.Http
 {
 	public interface IHttpSerializer
 	{

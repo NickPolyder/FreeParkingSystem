@@ -3,9 +3,9 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using FreeParkingSystem.Common.Client.Http.Attributes;
+using FreeParkingSystem.Client.Http.Attributes;
 
-namespace FreeParkingSystem.Common.Client.Http
+namespace FreeParkingSystem.Client.Http
 {
 
 	public interface IHttpService : IDisposable
@@ -18,10 +18,10 @@ namespace FreeParkingSystem.Common.Client.Http
 		private readonly IHttpClient _httpClient;
 
 		private readonly IHttpSerializer _httpSerializer;
-		public HttpService(IHttpClient httpClient)
+		public HttpService(IHttpClient httpClient, IHttpSerializer httpSerializer)
 		{
 			_httpClient = httpClient;
-			_httpSerializer = new HttpJsonSerializer();
+			_httpSerializer = httpSerializer;
 		}
 
 		public async Task<TResponse> SendAsync<TRequest, TResponse>(TRequest request,

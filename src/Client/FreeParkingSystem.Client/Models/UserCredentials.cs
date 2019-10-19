@@ -1,8 +1,7 @@
-﻿using System.Net.Http;
-using FreeParkingSystem.Common.Client.Http;
-using FreeParkingSystem.Common.Client.Http.Attributes;
+﻿using FreeParkingSystem.Client.Http;
+using FreeParkingSystem.Client.Http.Attributes;
 
-namespace FreeParkingSystem.Common.Client.Models
+namespace FreeParkingSystem.Client.Models
 {
 	[HttpRoute(HttpMethodConstants.POST, "/login")]
 	public class UserCredentials

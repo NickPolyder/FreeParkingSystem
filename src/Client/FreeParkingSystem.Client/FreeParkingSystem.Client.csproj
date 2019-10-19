@@ -9,7 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Account\FreeParkingSystem.Accounts.Contract\FreeParkingSystem.Accounts.Contract.csproj" />
     <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Orders\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj" />
+    <ProjectReference Include="..\..\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj" />
   </ItemGroup>
 
   <ItemGroup>

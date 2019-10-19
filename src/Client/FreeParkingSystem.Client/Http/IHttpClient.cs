@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FreeParkingSystem.Common.Client.Http
+namespace FreeParkingSystem.Client.Http
 {
 	public interface IHttpClient: IDisposable
 	{

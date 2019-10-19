@@ -24,6 +24,9 @@ namespace FreeParkingSystem.Accounts
 			builder.RegisterType<UserServices>().AsImplementedInterfaces();
 
 			builder.RegisterType<SecurityClaimsMapper>().AsImplementedInterfaces();
+			builder.RegisterType<UserLoginInputMapper>().AsImplementedInterfaces();
+			builder.RegisterType<CreateUserInputMapper>().AsImplementedInterfaces();
+			
 
 		}
 	}

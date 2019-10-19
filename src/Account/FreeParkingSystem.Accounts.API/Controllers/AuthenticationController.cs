@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
-using FreeParkingSystem.Accounts.API.Models;
+using FreeParkingSystem.Accounts.Contract.Dtos;
 using FreeParkingSystem.Accounts.Contract.Queries;
+using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.API.ExtensionMethods;
 using FreeParkingSystem.Common.Authorization;
+using FreeParkingSystem.Common.ExtensionMethods;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +17,18 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 	public class AuthenticationController : ControllerBase
 	{
 		private readonly IMediator _mediator;
+		private readonly IMap<UserLoginInput, UserLoginRequest> _userLoginMapper;
 
-		public AuthenticationController(IMediator mediator)
+		public AuthenticationController(IMediator mediator, IMap<UserLoginInput, UserLoginRequest> userLoginMapper)
 		{
 			_mediator = mediator;
+			_userLoginMapper = userLoginMapper;
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Post(UserLoginInput input)
 		{
-			var result = await _mediator.Send(new UserLoginRequest(input.UserName, input.Password));
+			var result = await _mediator.Send(_userLoginMapper.Map(input));
 
 			return result.ToActionResult<UserToken>();
 		}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace FreeParkingSystem.Common.Client.Http.Attributes
+namespace FreeParkingSystem.Client.Http.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 	public class HttpRouteAttribute : Attribute

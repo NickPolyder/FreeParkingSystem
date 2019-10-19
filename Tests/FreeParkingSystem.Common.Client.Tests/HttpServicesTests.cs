@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using FreeParkingSystem.Common.Client.Http;
-using FreeParkingSystem.Common.Client.Models;
+using FreeParkingSystem.Client.Http;
+using FreeParkingSystem.Client.Models;
 using Xunit;
 using Xunit.Abstractions;
 

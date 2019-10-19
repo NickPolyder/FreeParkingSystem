@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FreeParkingSystem.Common.Authorization;
 
-namespace FreeParkingSystem.Common.Client
+namespace FreeParkingSystem.Client
 {
 	public interface IClientAuthorizationService : IDisposable
 	{

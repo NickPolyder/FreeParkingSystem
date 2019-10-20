@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Accounts\Models\" />
     <Folder Include="Http\Exceptions\" />
   </ItemGroup>
 

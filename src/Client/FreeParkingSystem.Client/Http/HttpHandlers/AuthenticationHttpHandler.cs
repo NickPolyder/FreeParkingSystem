@@ -2,39 +2,32 @@
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using FreeParkingSystem.Common.Authorization;
 
 namespace FreeParkingSystem.Client.Http.HttpHandlers
 {
 	public class AuthenticationHttpHandler : DelegatingHandler
 	{
-		private readonly IClientAuthorizationService _clientAuthorizationService;
+		private readonly IUserContextAccessor _userContextAccessor;
 
-		public AuthenticationHttpHandler(IClientAuthorizationService clientAuthorizationService,
+		public AuthenticationHttpHandler(IUserContextAccessor userContextAccessor,
 			HttpMessageHandler innerHandler) : base(innerHandler)
 		{
-			_clientAuthorizationService = clientAuthorizationService;
+			_userContextAccessor = userContextAccessor;
 		}
 
-		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 
-			var currentUser = await _clientAuthorizationService.AuthorizeAsync(cancellationToken);
+			var currentUser = _userContextAccessor.GetUserContext().UserToken;
 
 			if (!string.IsNullOrWhiteSpace(currentUser?.Token))
 			{
 				request.Headers.Authorization = new AuthenticationHeaderValue("BEARER", currentUser.Token);
 			}
 
-			return await base.SendAsync(request, cancellationToken);
+			return base.SendAsync(request, cancellationToken);
 		}
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				_clientAuthorizationService.Dispose();
-			}
-			base.Dispose(disposing);
-		}
 	}
 }

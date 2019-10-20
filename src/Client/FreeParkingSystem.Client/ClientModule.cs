@@ -2,6 +2,7 @@
 using Autofac;
 using FreeParkingSystem.Client.Http;
 using FreeParkingSystem.Client.Http.HttpHandlers;
+using FreeParkingSystem.Common.Authorization;
 
 namespace FreeParkingSystem.Client
 {
@@ -15,29 +16,12 @@ namespace FreeParkingSystem.Client
 			{
 				var httpHandler = new HttpClientHandler();
 				var authenticationHandler =
-					new AuthenticationHttpHandler(container.Resolve<IClientAuthorizationService>(), httpHandler);
+					new AuthenticationHttpHandler(container.Resolve<IUserContextAccessor>(), httpHandler);
 
-				return CreateParkingHttpClient(authenticationHandler);
+				return new ParkingHttpClient(new HttpClient(authenticationHandler, true));
 			});
 
-			builder.Register<IClientAuthorizationService>((container) =>
-			{
-				var httpHandler = new HttpClientHandler();
-				var parkingHttpClient = CreateParkingHttpClient(httpHandler);
-				var httpService = CreateHttpService(parkingHttpClient, container);
-
-				return new DefaultClientAuthorizationService(httpService);
-			});
-
-		}
-
-		private static HttpService CreateHttpService(IHttpClient client, IComponentContext container)
-		{
-			return new HttpService(client,container.Resolve<IHttpSerializer>());
-		}
-		private static ParkingHttpClient CreateParkingHttpClient(HttpMessageHandler httpHandler)
-		{
-			return new ParkingHttpClient(new HttpClient(httpHandler, true));
+			builder.RegisterType<HttpService>().AsImplementedInterfaces();
 		}
 	}
 }

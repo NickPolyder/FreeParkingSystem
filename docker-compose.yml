@@ -11,9 +11,17 @@ services:
         ACCEPT_EULA: "Y"
         COMPOSE_CONVERT_WINDOWS_PATHS: 1
         attach_dbs: '[ { "dbName": "FreeParkingSystem.Database", "dbFiles": [ "C:\\Repos\\data\\FreeParkingSystem.Database_Primary.mdf", "C:\\Repos\\data\\FreeParkingSystem.Database_Primary.ldf" ] } ]'
+  rabbitmq:
+    image: "rabbitmq:3"
+    hostname: "free-parking-rabbitmq"
+    ports:
+        - "15672:15672"
+    volumes:
+        - E:/Repos/data/rabbitmq:/var/lib/rabbitmq
   accounts:
     depends_on:
         - main.database
+        - rabbitmq
     image: free-parking-system-accounts
     build: 
         context: .

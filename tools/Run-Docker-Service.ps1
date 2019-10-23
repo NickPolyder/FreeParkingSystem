@@ -155,6 +155,15 @@ if($service.volumes -ne $null)
     [void]$commandBuilder.Append(" ")
 }
 
+if($service.hostname -ne $null)
+{
+    Write-Host "`r`nIncluding hostname: "
+    
+    [void]$commandBuilder.Append(" -h " + $service.hostname);
+
+    Write-Host "`t - " $service.hostname
+    [void]$commandBuilder.Append(" ")
+}
 
 if($service.environment -ne $null)
 {
@@ -178,6 +187,7 @@ if($service.environment -ne $null)
 
     [void]$commandBuilder.Append(" ")
 }
+
 [void]$commandBuilder.Append(' --network free-parking-system ')
 
 [void]$commandBuilder.Append(' --name ' + $serviceKey +' ')

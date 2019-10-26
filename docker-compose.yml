@@ -13,9 +13,7 @@ services:
         attach_dbs: '[ { "dbName": "FreeParkingSystem.Database", "dbFiles": [ "C:\\Repos\\data\\FreeParkingSystem.Database_Primary.mdf", "C:\\Repos\\data\\FreeParkingSystem.Database_Primary.ldf" ] } ]'
   rabbitmq:
     image: "rabbitmq:3"
-    hostname: "free-parking-rabbitmq"
-    ports:
-        - "15672:15672"
+    hostname: "free-parking-rabbitmq"    
     volumes:
         - E:/Repos/data/rabbitmq:/var/lib/rabbitmq
   accounts:

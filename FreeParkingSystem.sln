@@ -84,7 +84,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Parking",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{73A41517-DC11-4F2E-9629-0A6BAA93E8B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.MessageBroker", "src\Common\FreeParkingSystem.Common.MessageBroker\FreeParkingSystem.Common.MessageBroker.csproj", "{8F45FDCD-EC39-4EAB-A576-5325CC508F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.MessageBroker", "src\Common\FreeParkingSystem.Common.MessageBroker\FreeParkingSystem.Common.MessageBroker.csproj", "{8F45FDCD-EC39-4EAB-A576-5325CC508F63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.MessageBroker.Tests", "Tests\FreeParkingSystem.Common.MessageBroker.Tests\FreeParkingSystem.Common.MessageBroker.Tests.csproj", "{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -186,6 +188,10 @@ Global
 		{8F45FDCD-EC39-4EAB-A576-5325CC508F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F45FDCD-EC39-4EAB-A576-5325CC508F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F45FDCD-EC39-4EAB-A576-5325CC508F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -214,6 +220,7 @@ Global
 		{0019571C-B1B6-40EC-A8E0-E9B7C9C62B14} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 		{F5B4D665-97F5-4322-8F7A-D7DC8B485453} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 		{8F45FDCD-EC39-4EAB-A576-5325CC508F63} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
+		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

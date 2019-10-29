@@ -1,8 +1,7 @@
 ﻿using System;
-using Polly.Retry;
 using RabbitMQ.Client;
 
-namespace FreeParkingSystem.Common.MessageBroker
+namespace FreeParkingSystem.Common.MessageBroker.Contract
 {
 	public interface IBrokerConnection : IDisposable
 	{

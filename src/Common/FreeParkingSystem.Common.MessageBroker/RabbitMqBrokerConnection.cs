@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using FreeParkingSystem.Common.MessageBroker.Contract;
+using FreeParkingSystem.Common.MessageBroker.Contract.Options;
 using Microsoft.Extensions.Logging;
 using Polly;
 using RabbitMQ.Client;
@@ -12,7 +14,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 	public class RabbitMqBrokerConnection : IBrokerConnection
 	{
 		private readonly IConnectionFactory _connectionFactory;
-		private readonly ConnectionOptions _options;
+		private readonly MessageBrokerOptions _options;
 		private readonly ILogger _logger;
 		private IConnection _connection;
 		private bool _disposed;
@@ -20,7 +22,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 
 		public RabbitMqBrokerConnection(IConnectionFactory connectionFactory,
 			ILoggerFactory loggerFactory,
-			ConnectionOptions options)
+			MessageBrokerOptions options)
 		{
 			_connectionFactory = connectionFactory;
 			_options = options;
@@ -31,10 +33,11 @@ namespace FreeParkingSystem.Common.MessageBroker
 
 		public IModel CreateModel()
 		{
-			if (!IsConnected && !Connect())
+			if (!Connect())
 			{
-				throw new InvalidOperationException(Resources.Errors.NotConnected);
+				throw new InvalidOperationException(Contract.Resources.Errors.NotConnected);
 			}
+
 			return _connection.CreateModel();
 		}
 
@@ -42,13 +45,15 @@ namespace FreeParkingSystem.Common.MessageBroker
 		{
 			if (_disposed) return false;
 
+			if (IsConnected) return IsConnected;
+
 			lock (_lock)
 			{
 				var policy = Policy.Handle<SocketException>()
 					.Or<BrokerUnreachableException>()
 					.WaitAndRetry(_options.RetryAttempts, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
 						{
-							_logger.LogWarning(ex, string.Format(Resources.Errors.RetryFailure, ex.Message));
+							_logger.LogWarning(ex, string.Format(Contract.Resources.Errors.RetryFailure, ex.Message));
 						}
 					);
 
@@ -66,7 +71,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 				}
 				else
 				{
-					_logger.LogCritical(Resources.Errors.ConnectionFailed);
+					_logger.LogCritical(Contract.Resources.Errors.ConnectionFailed);
 				}
 
 				return IsConnected;

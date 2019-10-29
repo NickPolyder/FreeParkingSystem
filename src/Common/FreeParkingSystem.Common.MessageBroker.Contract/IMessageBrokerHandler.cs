@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace FreeParkingSystem.Common.MessageBroker
+namespace FreeParkingSystem.Common.MessageBroker.Contract
 {
 	public interface IMessageBrokerHandler<in TMessageBrokerRequest> where TMessageBrokerRequest : BaseMessageBrokerRequest
 	{
-		Task Handle(TMessageBrokerRequest message);
+		void Handle(TMessageBrokerRequest message);
 	}
 }

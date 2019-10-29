@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FreeParkingSystem.Common.MessageBroker
+namespace FreeParkingSystem.Common.MessageBroker.Contract
 {
 	public abstract class BaseMessageBrokerRequest
 	{

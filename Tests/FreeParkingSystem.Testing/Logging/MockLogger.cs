@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
+using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Common.Tests.Logging
 {
 	[ExcludeFromCodeCoverage]
 	public class MockLogger<TClass> : ILogger<TClass>
 	{
+		private readonly ITestOutputHelper _testOutputHelper;
 		private readonly string _category;
 
-		public MockLogger(string category = null)
+		public MockLogger(ITestOutputHelper testOutputHelper, string category = null)
 		{
+			_testOutputHelper = testOutputHelper;
 			_category = category;
 		}
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
@@ -38,6 +41,7 @@ namespace FreeParkingSystem.Common.Tests.Logging
 		private void Write(string msg)
 		{
 			var categoryFormat = string.IsNullOrWhiteSpace(_category) ? $"{_category} :==>" : null;
+			_testOutputHelper?.WriteLine($"{categoryFormat}{msg}");
 			System.Diagnostics.Debug.WriteLine($"{categoryFormat}{msg}");
 		}
 

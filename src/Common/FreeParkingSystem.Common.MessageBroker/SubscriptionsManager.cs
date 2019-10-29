@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FreeParkingSystem.Common.ExtensionMethods;
+using FreeParkingSystem.Common.MessageBroker.Contract;
 
 namespace FreeParkingSystem.Common.MessageBroker
 {
@@ -16,6 +17,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 			_messageHandlers = new Dictionary<string, List<Type>>();
 			_messageTypes = new List<Type>();
 		}
+
 		public bool IsEmpty => _messageHandlers.Keys.Count == 0;
 
 		public void Clear()
@@ -102,8 +104,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 		{
 			return typeof(TMessage).Name;
 		}
-
-
+		
 		public void Dispose()
 		{
 			if (_disposed) return;

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\FreeParkingSystem.Common.MessageBroker.Contract\FreeParkingSystem.Common.MessageBroker.Contract.csproj" />
     <ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
   </ItemGroup>
 

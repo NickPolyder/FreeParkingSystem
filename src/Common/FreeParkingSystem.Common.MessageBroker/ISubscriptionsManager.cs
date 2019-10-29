@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FreeParkingSystem.Common.MessageBroker.Contract;
 
 namespace FreeParkingSystem.Common.MessageBroker
 {

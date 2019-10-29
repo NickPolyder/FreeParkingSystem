@@ -2,9 +2,12 @@
 using FreeParkingSystem.Accounts.Commands;
 using FreeParkingSystem.Accounts.Data;
 using FreeParkingSystem.Accounts.Mappers;
+using FreeParkingSystem.Accounts.Messages;
+using FreeParkingSystem.Accounts.Seeder;
 using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.ExtensionMethods;
+using FreeParkingSystem.Common.MessageBroker;
 
 namespace FreeParkingSystem.Accounts
 {
@@ -14,6 +17,7 @@ namespace FreeParkingSystem.Accounts
 		{
 			builder.RegisterModule<CommonModule>();
 			builder.RegisterModule<AccountsDataModule>();
+			builder.RegisterModule<MessageBrokerModule>();
 
 			builder.AddAssemblyForMediatR<CreateUserHandler>();
 
@@ -26,8 +30,10 @@ namespace FreeParkingSystem.Accounts
 			builder.RegisterType<SecurityClaimsMapper>().AsImplementedInterfaces();
 			builder.RegisterType<UserLoginInputMapper>().AsImplementedInterfaces();
 			builder.RegisterType<CreateUserInputMapper>().AsImplementedInterfaces();
-			
 
+			builder.RegisterType<UserCreatedParkingSiteHandler>();
+			builder.RegisterType<SubscriptionStarter>().As<IStartable>().SingleInstance();
 		}
+
 	}
 }

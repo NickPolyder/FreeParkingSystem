@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FreeParkingSystem.Common.MessageBroker.Resources {
+namespace FreeParkingSystem.Common.MessageBroker.Contract.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FreeParkingSystem.Common.MessageBroker.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FreeParkingSystem.Common.MessageBroker.Resources.Errors", typeof(Errors).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FreeParkingSystem.Common.MessageBroker.Contract.Resources.Errors", typeof(Errors).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

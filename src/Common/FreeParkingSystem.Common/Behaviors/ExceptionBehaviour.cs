@@ -14,7 +14,7 @@ namespace FreeParkingSystem.Common.Behaviors
 
 		public ExceptionBehaviour(ILoggerFactory loggerFactory)
 		{
-			_logger = loggerFactory.CreateLogger($"{typeof(TRequest).Name}"); ;
+			_logger = loggerFactory.CreateLogger<TRequest>();
 		}
 
 		public async Task<BaseResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<BaseResponse> next)

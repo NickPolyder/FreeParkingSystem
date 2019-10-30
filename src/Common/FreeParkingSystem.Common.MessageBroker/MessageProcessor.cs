@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 
 namespace FreeParkingSystem.Common.MessageBroker
 {
-	public class MessageProcessor: IMessageProcessor
+	public class MessageProcessor : IMessageProcessor
 	{
 		private const string AutofacScopeName = "RabbitMq_Message_Broker";
 		private readonly ILifetimeScope _lifeTimeScope;
 		private readonly ISubscriptionsManager _subscriptionsManager;
 		private readonly IMessageConverter _messageConverter;
 
-		public MessageProcessor(ILifetimeScope lifeTimeScope, 
+		public MessageProcessor(ILifetimeScope lifeTimeScope,
 			ISubscriptionsManager subscriptionsManager,
 			IMessageConverter messageConverter)
 		{
@@ -39,12 +39,9 @@ namespace FreeParkingSystem.Common.MessageBroker
 				{
 					var handler = scope.ResolveOptional(subscription);
 					if (handler == null) continue;
-					
-					new Action( () =>
-					{
-						handleMethod.Invoke(handler, new[] {serializedMessage});
-					}).AddLogging(scope.Resolve<ILoggerFactory>());
-					
+
+					handleMethod.Invoke(handler, new[] { serializedMessage });
+
 				}
 			}
 		}

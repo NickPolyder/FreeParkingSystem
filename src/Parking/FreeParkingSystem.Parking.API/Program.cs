@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace FreeParkingSystem.Parking.API
@@ -12,6 +13,7 @@ namespace FreeParkingSystem.Parking.API
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.ConfigureServices(services => services.AddAutofac())
 				.UseStartup<Startup>();
 	}
 }

@@ -5,7 +5,7 @@ services:
     ports:
         - "3306:1433"
     volumes:
-        - E:/Repos/data:C:/Repos/data
+        - E:/Repos/data/Sql:C:/Repos/data
     environment:
         SA_PASSWORD: "S1mple@password"
         ACCEPT_EULA: "Y"
@@ -43,3 +43,30 @@ services:
         ASPNETCORE_Kestrel__Certificates__Default__Password: "P@55w0rd"
         ASPNETCORE_HTTPS_PORT: 1001
         ASPNETCORE_HTTP_PORT: 1000
+  parking:
+    depends_on:
+        - main.database
+        - rabbitmq
+    image: free-parking-system-parking
+    build: 
+        context: .
+        dockerfile: .\src\Parking\FreeParkingSystem.Parking.API\dockerfile
+    ports: 
+        - "2000:80"
+        - "2001:443"
+    volumes: 
+        - ${HOME}/.aspnet/https/:/https/
+    environment: 
+        Deployment_Environment_Name: "Staging" 
+        Deployment_LogLevel_Default: "Information"
+        Deployment_Db_Server: "main.database,1433"
+        Deployment_Db_Name: "FreeParkingSystem.Database"
+        Deployment_Db_User: "sa" 
+        Deployment_Db_Password: "S1mple@password" 
+        Deployment_PasswordOptions_MinimumCharacters: 4
+        ASPNETCORE_ENVIRONMENT: "Staging"
+        ASPNETCORE_URLS: "https://+;http://+"
+        ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+        ASPNETCORE_Kestrel__Certificates__Default__Password: "P@55w0rd"
+        ASPNETCORE_HTTPS_PORT: 2001
+        ASPNETCORE_HTTP_PORT: 2000

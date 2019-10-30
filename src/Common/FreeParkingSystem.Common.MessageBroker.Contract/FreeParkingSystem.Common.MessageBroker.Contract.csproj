@@ -8,11 +8,26 @@
 		<PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+	    <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.logging.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
   <ItemGroup>
 	<Compile Update="Resources\Errors.Designer.cs">
 	  <DependentUpon>Errors.resx</DependentUpon>
 	  <DesignTime>True</DesignTime>
 	  <AutoGen>True</AutoGen>
+	</Compile>
+	<Compile Update="Resources\Messages.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>Messages.resx</DependentUpon>
 	</Compile>
   </ItemGroup>
 
@@ -20,6 +35,10 @@
 	<EmbeddedResource Update="Resources\Errors.resx">
 	  <LastGenOutput>Errors.Designer.cs</LastGenOutput>
 	  <Generator>PublicResXFileCodeGenerator</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Resources\Messages.resx">
+	  <Generator>PublicResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Messages.Designer.cs</LastGenOutput>
 	</EmbeddedResource>
   </ItemGroup>
 

@@ -22,6 +22,11 @@ namespace FreeParkingSystem.Accounts
 			_passwordManager = passwordManager;
 		}
 
+		public User GetById(int id)
+		{
+			return _userRepository.Get(id);
+		}
+
 		public User CreateUser(string userName, string password)
 		{
 			if (_userRepository.UserExists(userName))

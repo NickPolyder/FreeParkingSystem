@@ -30,6 +30,14 @@ namespace FreeParkingSystem.Accounts.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddLogging(options => options.AddConsole());
+			var rabbitMqOptions = Configuration.GetSection("rabbitmq").Get<RabbitMqOptions>();
+
+			services.AddRabbitMq((rabbitMqBuilder) => { rabbitMqBuilder.SetQueueName(rabbitMqOptions.QueueName); },
+				(connection) =>
+				{
+					connection.HostName = rabbitMqOptions.HostName;
+					connection.Port = rabbitMqOptions.Port;
+				});
 
 			var jwtOptions = Configuration.GetSection("jwt").Get<JwtAuthenticationOptions>();
 			services.AddJwtAuthentication((options =>
@@ -51,8 +59,7 @@ namespace FreeParkingSystem.Accounts.API
 
 			var secretKey =
 				Configuration.GetSection($"{nameof(EncryptionOptions)}:{nameof(EncryptionOptions.SecretKey)}").Get<byte[]>();
-			builder.RegisterInstance(
-				new EncryptionOptions(secretKey));
+			builder.RegisterInstance(new EncryptionOptions(secretKey));
 
 			builder.RegisterInstance(GetPasswordOptions());
 

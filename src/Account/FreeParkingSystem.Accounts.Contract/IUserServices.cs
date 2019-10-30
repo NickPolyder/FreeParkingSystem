@@ -2,6 +2,7 @@
 {
 	public interface IUserServices
 	{
+		User GetById(int id);
 		User CreateUser(string userName, string password);
 
 		void AddClaim(User user, string type,string value);

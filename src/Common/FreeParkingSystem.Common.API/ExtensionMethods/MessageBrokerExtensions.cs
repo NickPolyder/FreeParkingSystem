@@ -7,7 +7,7 @@ namespace FreeParkingSystem.Common.API.ExtensionMethods
 {
 	public static class MessageBrokerExtensions
 	{
-		public static void AddJwtAuthentication(this IServiceCollection services,
+		public static void AddRabbitMq(this IServiceCollection services,
 			Action<RabbitMqOptionsBuilder> configureAction, 
 			Action<ConnectionFactory> configureConnectionFactory = null)
 		{

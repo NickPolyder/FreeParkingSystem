@@ -1,0 +1,24 @@
+﻿using Autofac;
+using FreeParkingSystem.Common;
+using FreeParkingSystem.Common.ExtensionMethods;
+using FreeParkingSystem.Common.MessageBroker;
+using FreeParkingSystem.Parking.Commands;
+using FreeParkingSystem.Parking.Data;
+
+namespace FreeParkingSystem.Parking
+{
+	public class ParkingModule:Module
+	{
+		protected override void Load(ContainerBuilder builder)
+		{
+			builder.RegisterModule<CommonModule>();
+			builder.RegisterModule<ParkingDataModule>();
+			builder.RegisterModule<MessageBrokerModule>();
+
+			builder.AddAssemblyForMediatR<AddParkingSiteHandler>();
+
+			builder.RegisterType<ParkingSiteServices>().AsImplementedInterfaces();
+			builder.RegisterType<FavoriteServices>().AsImplementedInterfaces();
+		}
+	}
+}

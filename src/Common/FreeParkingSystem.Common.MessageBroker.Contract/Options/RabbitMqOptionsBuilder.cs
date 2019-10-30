@@ -7,7 +7,7 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 	{
 		public int RetryAttempts { get; private set; } = 2;
 		public string ExchangeName { get; private set; } = "FreeParking_System";
-		public string QueueName { get; private set; }
+		public string QueueName { get; private set; } = "ParkingDefault";
 		public bool IsDurable { get; private set; } = true;
 		public bool IsExclusive { get; private set; } = false;
 		public bool IsAutoDelete { get; private set; } = false;

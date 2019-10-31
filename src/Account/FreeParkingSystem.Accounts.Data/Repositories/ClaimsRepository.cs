@@ -40,5 +40,6 @@ namespace FreeParkingSystem.Accounts.Data.Repositories
 
 			return Mapper.Map(claimItem);
 		}
+
 	}
 }

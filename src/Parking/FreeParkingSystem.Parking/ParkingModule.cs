@@ -4,6 +4,7 @@ using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Common.MessageBroker;
 using FreeParkingSystem.Parking.Commands;
 using FreeParkingSystem.Parking.Data;
+using FreeParkingSystem.Parking.Mappers;
 
 namespace FreeParkingSystem.Parking
 {
@@ -19,6 +20,8 @@ namespace FreeParkingSystem.Parking
 
 			builder.RegisterType<ParkingSiteServices>().AsImplementedInterfaces();
 			builder.RegisterType<FavoriteServices>().AsImplementedInterfaces();
+
+			builder.RegisterType<AddParkingSiteInputMapper>().AsImplementedInterfaces();
 		}
 	}
 }

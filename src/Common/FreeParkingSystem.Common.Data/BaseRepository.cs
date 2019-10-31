@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using FreeParkingSystem.Common.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,21 +42,38 @@ namespace FreeParkingSystem.Common.Data
 			_dbSet = DbContext.Set<TEntity>();
 		}
 
+		public bool Exists(int id)
+		{
+			return Set.Any(GetPrimaryKey(id));
+		}
+
 		public virtual TBusinessObject Get(int id)
 		{
-			var entity = Set.Find(id);
+			var entity = GetDataSetWithIncludes().FirstOrDefault(GetPrimaryKey(id));
 
-			if (entity == null)
-				return null;
-
-			return Mapper.Map(entity);
+			return entity == null ? null : Mapper.Map(entity);
 		}
 
 		public virtual IEnumerable<TBusinessObject> GetAll()
 		{
-			var dbClaims = Set.ToArray();
+			var query = GetDataSetWithIncludes();
 
-			return Mapper.Map(dbClaims);
+			var entities = query.ToArray();
+
+			return Mapper.Map(entities);
+		}
+
+		protected IQueryable<TEntity> GetDataSetWithIncludes()
+		{
+			var includes = GetIncludes().ToArray();
+			IQueryable<TEntity> query = Set;
+
+			foreach (var expression in includes)
+			{
+				query = query.Include(expression);
+			}
+
+			return query;
 		}
 
 		public virtual TBusinessObject Add(TBusinessObject entity)
@@ -156,6 +174,12 @@ namespace FreeParkingSystem.Common.Data
 			DbContext.SaveChanges();
 		}
 
+		protected virtual IEnumerable<Expression<Func<TEntity, object>>> GetIncludes()
+		{
+			return Enumerable.Empty<Expression<Func<TEntity, object>>>();
+		}
+
+		protected virtual Expression<Func<TEntity, bool>> GetPrimaryKey(int id) => entity => entity.Id == id;
 
 		protected virtual void Dispose(bool disposing)
 		{

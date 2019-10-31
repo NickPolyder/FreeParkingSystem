@@ -5,6 +5,8 @@ namespace FreeParkingSystem.Common
 {
 	public interface IRepository<TBusinessModel> : IDisposable
 	{
+		bool Exists(int id);
+
 		TBusinessModel Get(int id);
 
 		IEnumerable<TBusinessModel> GetAll();

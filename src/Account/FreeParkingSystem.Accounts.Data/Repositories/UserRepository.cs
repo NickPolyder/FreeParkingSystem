@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using FreeParkingSystem.Accounts.Contract;
 using FreeParkingSystem.Accounts.Contract.Repositories;
 using FreeParkingSystem.Accounts.Data.Models;
@@ -14,6 +16,14 @@ namespace FreeParkingSystem.Accounts.Data.Repositories
 	{
 		public UserRepository(AccountsDbContext dbContext, IMap<DbUser, User> mapper) : base(dbContext, mapper)
 		{
+		}
+
+		protected override IEnumerable<Expression<Func<DbUser, object>>> GetIncludes()
+		{
+			return new Expression<Func<DbUser, object>>[]
+			{
+				user => user.Claims,
+			};
 		}
 
 		public bool UserExists(string userName)

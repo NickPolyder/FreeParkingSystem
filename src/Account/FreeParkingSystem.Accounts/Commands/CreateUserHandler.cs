@@ -27,7 +27,7 @@ namespace FreeParkingSystem.Accounts.Commands
 
 			_userServices.AddClaim(user, UserClaimTypes.Role.ToString(), request.Role.ToString());
 			
-			return Task.FromResult(request.ToSuccessResponse());
+			return request.ToSuccessResponse().AsTask();
 		}
 	}
 }

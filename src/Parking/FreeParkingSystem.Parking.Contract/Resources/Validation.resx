@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ParkignSite_NameAlreadyExists" xml:space="preserve">
+    <value>The parking site name already exists.</value>
+  </data>
+  <data name="ParkingSite_CannotUseAddWIthId" xml:space="preserve">
+    <value>Cannot Add parking site when using a valid Id.</value>
+  </data>
+  <data name="ParkingSite_CannotUseUpdateWithNoId" xml:space="preserve">
+    <value>The parking site cannot be updated. Id is required</value>
+  </data>
   <data name="ParkingSite_DoesNotExist" xml:space="preserve">
     <value>The parking site you requested does not exist.</value>
+  </data>
+  <data name="ParkingSite_IsNotTheOwner" xml:space="preserve">
+    <value>In order to change the details of this parking site you must be the owner of the parking.</value>
+  </data>
+  <data name="ParkingSite_NameCannotBeNullOrEmpty" xml:space="preserve">
+    <value>The parking site name cannot be empty</value>
+  </data>
+  <data name="ParkingSite_TypeDoesNotExist" xml:space="preserve">
+    <value>The parking type selected does not exist.</value>
   </data>
   <data name="ParkingSpot_DoesNotExist" xml:space="preserve">
     <value>The parking spot you requested does not exist.</value>

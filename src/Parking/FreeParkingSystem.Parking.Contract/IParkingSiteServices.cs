@@ -5,5 +5,7 @@
 		ParkingSite Get(int parkingSiteId);
 
 		ParkingSite Add(ParkingSite parking);
+
+		ParkingSite Update(ParkingSite parking);
 	}
 }

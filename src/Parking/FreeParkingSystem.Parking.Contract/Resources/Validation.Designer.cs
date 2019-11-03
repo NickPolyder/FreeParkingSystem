@@ -61,11 +61,65 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parking site name already exists..
+        /// </summary>
+        public static string ParkignSite_NameAlreadyExists {
+            get {
+                return ResourceManager.GetString("ParkignSite_NameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Add parking site when using a valid Id..
+        /// </summary>
+        public static string ParkingSite_CannotUseAddWIthId {
+            get {
+                return ResourceManager.GetString("ParkingSite_CannotUseAddWIthId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site cannot be updated. Id is required.
+        /// </summary>
+        public static string ParkingSite_CannotUseUpdateWithNoId {
+            get {
+                return ResourceManager.GetString("ParkingSite_CannotUseUpdateWithNoId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parking site you requested does not exist..
         /// </summary>
         public static string ParkingSite_DoesNotExist {
             get {
                 return ResourceManager.GetString("ParkingSite_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In order to change the details of this parking site you must be the owner of the parking..
+        /// </summary>
+        public static string ParkingSite_IsNotTheOwner {
+            get {
+                return ResourceManager.GetString("ParkingSite_IsNotTheOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site name cannot be empty.
+        /// </summary>
+        public static string ParkingSite_NameCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ParkingSite_NameCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking type selected does not exist..
+        /// </summary>
+        public static string ParkingSite_TypeDoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSite_TypeDoesNotExist", resourceCulture);
             }
         }
         

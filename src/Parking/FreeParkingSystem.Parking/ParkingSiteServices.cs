@@ -27,18 +27,35 @@ namespace FreeParkingSystem.Parking
 		public ParkingSite Add(ParkingSite parking)
 		{
 			if (parking.Id > 0)
-				throw new ParkingException();
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_CannotUseAddWIthId);
 
 			if (string.IsNullOrWhiteSpace(parking.Name))
-				throw new ParkingException();
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
 
 			if (_parkingSiteRepository.Exists(parking.Name))
-				throw new ParkingException();
+				throw new ParkingException(Contract.Resources.Validation.ParkignSite_NameAlreadyExists);
 
 			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
-				throw new ParkingException();
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);
 
 			return _parkingSiteRepository.Add(parking);
+		}
+
+		public ParkingSite Update(ParkingSite parking)
+		{
+			if (parking.Id == 0)
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_CannotUseUpdateWithNoId);
+
+			if (string.IsNullOrWhiteSpace(parking.Name))
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
+
+			if (_parkingSiteRepository.Exists(parking.Name))
+				throw new ParkingException(Contract.Resources.Validation.ParkignSite_NameAlreadyExists);
+
+			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);
+
+			return _parkingSiteRepository.Update(parking);
 		}
 	}
 }

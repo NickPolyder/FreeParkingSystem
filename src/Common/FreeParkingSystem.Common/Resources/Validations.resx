@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Expressions_FieldMustBeAProperty" xml:space="preserve">
+    <value>Expression must be a property access</value>
+  </data>
+  <data name="Expression_MustBeAMemberExpression" xml:space="preserve">
+    <value>Expression should be of MemberExpression</value>
+  </data>
   <data name="Unauthenticated_Message" xml:space="preserve">
     <value>This request requires authentication</value>
   </data>

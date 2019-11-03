@@ -35,7 +35,7 @@ namespace FreeParkingSystem.Accounts.Queries
 
 			var userToken = _authenticationServices.CreateToken(user.UserName, Map(user));
 
-			return Task.FromResult(request.ToSuccessResponse(userToken));
+			return request.ToSuccessResponse(userToken).AsTask();
 		}
 
 		private IEnumerable<Claim> Map(User user)

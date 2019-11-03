@@ -17,6 +17,7 @@ using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.Encryption;
+using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Common.Hashing;
 using FreeParkingSystem.Common.Messages;
 using FreeParkingSystem.Testing;
@@ -96,7 +97,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				.Returns(user);
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			userServicesMock.Verify(svc => svc.Login(request.Username, request.Password), Times.Once);
@@ -116,7 +117,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				.Returns(user);
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			user.Password.ShouldBe(Password.Empty);
@@ -153,7 +154,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				});
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			authenticationServicesMock.Verify(svc => svc.CreateToken(user.UserName, It.IsAny<IEnumerable<Claim>>()), Times.Once);
@@ -195,7 +196,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				});
 
 			// Act
-			var result = sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			var result = sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			result.RequestId.ShouldBe(request.Id);
@@ -222,7 +223,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			var request = new UserLoginRequest(username, password);
 
 			// Act
-			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult());
+			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).RunSync());
 
 			// Assert
 			exception.ShouldNotBeNull();
@@ -241,7 +242,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			var request = new UserLoginRequest(username, password);
 
 			// Act
-			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult());
+			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).RunSync());
 
 			// Assert
 			exception.ShouldNotBeNull();
@@ -255,7 +256,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			// Arrange
 
 			// Act
-			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult());
+			var exception = Record.Exception(() => sut.Handle(request, CancellationToken.None).RunSync());
 
 			// Assert
 			exception.ShouldNotBeNull();
@@ -271,7 +272,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			userService.CreateUser(request.Username, request.Password);
 
 			// Act
-			var result = sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			var result = sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			result.ShouldNotBeNull();

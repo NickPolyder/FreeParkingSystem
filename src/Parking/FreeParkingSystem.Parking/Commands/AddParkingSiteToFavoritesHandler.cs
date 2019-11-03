@@ -32,7 +32,7 @@ namespace FreeParkingSystem.Parking.Commands
 
 			_favoriteServices.AddFavorite(userId, parkingSite);
 
-			return Task.FromResult(request.ToSuccessResponse());
+			return request.ToSuccessResponse().AsTask();
 		}
 	}
 }

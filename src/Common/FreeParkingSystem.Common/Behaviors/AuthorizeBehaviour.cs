@@ -30,7 +30,7 @@ namespace FreeParkingSystem.Common.Behaviors
 
 			if (hasAuthorizeAttribute && !userContext.IsAuthenticated())
 			{
-				return Task.FromResult(request.ToUnauthenticatedResponse());
+				return request.ToUnauthenticatedResponse().AsTask();
 			}
 
 			if (hasAuthorizeAttribute && !authorizedRoles.Any(role => role.HasValue && userContext.HasRole(role.Value)))
@@ -38,7 +38,7 @@ namespace FreeParkingSystem.Common.Behaviors
 				var roles = authorizedRoles.Where(attr => attr.HasValue)
 					.Select(attr => attr.Value);
 
-				return Task.FromResult(request.ToUnauthorizedResponse(roles));
+				return request.ToUnauthorizedResponse(roles).AsTask();
 			}
 
 			return next();

@@ -14,6 +14,7 @@ using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.Encryption;
+using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Common.Hashing;
 using FreeParkingSystem.Common.Messages;
 using FreeParkingSystem.Testing;
@@ -72,7 +73,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 			// Arrange
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			userServicesMock.Verify(svc => svc.CreateUser(request.UserName, request.Password), Times.Once);
@@ -91,7 +92,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 				.Returns(user);
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Role.ToString(), request.Role.ToString()), Times.Once);
@@ -109,7 +110,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 				.Returns(user);
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Email.ToString(), request.Email), Times.Once);
@@ -136,7 +137,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 				.Returns(user);
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			userServicesMock.Verify(svc => svc.AddClaim(user, UserClaimTypes.Email.ToString(), request.Email), Times.Never);
@@ -154,7 +155,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 				.Returns(user);
 
 			// Act
-			var result = sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			var result = sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			result.ShouldNotBeNull();
@@ -172,7 +173,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 			// Arrange
 
 			// Act
-			sut.Handle(request, CancellationToken.None).GetAwaiter().GetResult();
+			sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
 			var user = userRepository.GetByUsername(request.UserName);

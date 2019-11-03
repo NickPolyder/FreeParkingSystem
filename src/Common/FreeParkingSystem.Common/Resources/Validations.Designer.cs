@@ -61,6 +61,24 @@ namespace FreeParkingSystem.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expression should be of MemberExpression.
+        /// </summary>
+        public static string Expression_MustBeAMemberExpression {
+            get {
+                return ResourceManager.GetString("Expression_MustBeAMemberExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression must be a property access.
+        /// </summary>
+        public static string Expressions_FieldMustBeAProperty {
+            get {
+                return ResourceManager.GetString("Expressions_FieldMustBeAProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This request requires authentication.
         /// </summary>
         public static string Unauthenticated_Message {

@@ -195,5 +195,5 @@ if($service.environment -ne $null)
 [void]$commandBuilder.Append($service.image);
 
 $command = $commandBuilder.ToString();
-
+Write-Output $command
 Invoke-Expression $command

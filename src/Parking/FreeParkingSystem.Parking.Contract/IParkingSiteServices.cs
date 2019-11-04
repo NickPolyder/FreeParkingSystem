@@ -1,7 +1,11 @@
-﻿namespace FreeParkingSystem.Parking.Contract
+﻿using System.Collections.Generic;
+
+namespace FreeParkingSystem.Parking.Contract
 {
 	public interface IParkingSiteServices
 	{
+		IEnumerable<ParkingSiteView> GetViews();
+		ParkingSiteView GetView(int parkingSiteId);
 		ParkingSite Get(int parkingSiteId);
 
 		ParkingSite Add(ParkingSite parking);

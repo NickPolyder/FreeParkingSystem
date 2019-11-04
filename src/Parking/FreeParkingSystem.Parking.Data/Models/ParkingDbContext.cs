@@ -15,8 +15,7 @@ namespace FreeParkingSystem.Parking.Data.Models
 
 			modelBuilder.Entity<DbParkingType>()
 				.ToTable("ParkingType");
-
-
+			
 			modelBuilder.Entity<DbParkingSpotType>()
 				.ToTable("ParkingSpotType");
 
@@ -28,6 +27,9 @@ namespace FreeParkingSystem.Parking.Data.Models
 
 			modelBuilder.Entity<DbFavorite>()
 				.ToTable("Favorite");
+
+			modelBuilder.Entity<DbParkingSiteView>()
+				.ToTable("ParkingSiteView");
 		}
 	}
 }

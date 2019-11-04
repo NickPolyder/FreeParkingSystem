@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 
 			var getterFunc = new Func<T, TProperty>((T instance) => (TProperty)getterMethod.Invoke(instance, Array.Empty<object>()));
 
-			var setterMethod = propertyInfo.GetGetMethod();
+			var setterMethod = propertyInfo.GetSetMethod();
 
 			var setterAction = new Action<T, TProperty>((T instance, TProperty value) => setterMethod.Invoke(instance, new object[] { value }));
 

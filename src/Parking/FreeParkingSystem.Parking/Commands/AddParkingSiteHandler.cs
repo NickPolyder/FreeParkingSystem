@@ -42,7 +42,8 @@ namespace FreeParkingSystem.Parking.Commands
 			var result = _parkingSiteServices.Add(parking);
 
 			_publishBroker.Publish(new UserCreatedParkingSiteMessage(userId));
-			return request.ToSuccessResponse(result).AsTask();
+
+			return request.ToCreatedResponse(result.Id, result).AsTask();
 		}
 	}
 }

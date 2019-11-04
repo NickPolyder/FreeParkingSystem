@@ -2,7 +2,7 @@
 using FreeParkingSystem.Accounts.Contract.Dtos;
 using FreeParkingSystem.Accounts.Contract.Queries;
 using FreeParkingSystem.Common;
-using FreeParkingSystem.Common.API.ExtensionMethods;
+using FreeParkingSystem.Common.API.Controllers;
 using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.ExtensionMethods;
 using MediatR;
@@ -14,7 +14,7 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 	[Route("api/auth")]
 	[ApiController]
 	[AllowAnonymous]
-	public class AuthenticationController : ControllerBase
+	public class AuthenticationController : BaseController
 	{
 		private readonly IMediator _mediator;
 		private readonly IMap<UserLoginInput, UserLoginRequest> _userLoginMapper;
@@ -30,7 +30,7 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 		{
 			var result = await _mediator.Send(_userLoginMapper.Map(input));
 
-			return result.ToActionResult<UserToken>();
+			return ActionResult<UserToken>(result);
 		}
 	}
 }

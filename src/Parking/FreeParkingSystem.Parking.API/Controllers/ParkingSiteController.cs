@@ -42,6 +42,14 @@ namespace FreeParkingSystem.Parking.API.Controllers
 			return ActionResult<List<ParkingSiteView>>(result);
 		}
 
+		[HttpGet("{id}")]
+		public async Task<IActionResult> Get(int id)
+		{
+			var result = await _mediator.Send(new GetParkingSiteByIdRequest(id));
+
+			return ActionResult<ParkingSiteView>(result);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Post(AddParkingSiteInput input)
 		{

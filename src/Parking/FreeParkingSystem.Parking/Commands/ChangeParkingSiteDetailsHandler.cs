@@ -64,7 +64,7 @@ namespace FreeParkingSystem.Parking.Commands
 
 			if (patchComposite.Any(item => item.HasChanged))
 			{
-				
+				_parkingSiteServices.Update(currentParkingSite);
 			}
 
 			return request.ToSuccessResponse().AsTask();

@@ -18,6 +18,16 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 			return new SuccessResponse(@this.Id);
 		}
 
+		public static BaseResponse ToCreatedResponse<TData>(this BaseRequest @this,int createdId, TData data)
+		{
+			return new CreatedResponse<TData>(@this.Id, createdId, data);
+		}
+
+		public static BaseResponse ToCreatedResponse(this BaseRequest @this, int createdId)
+		{
+			return new CreatedResponse(@this.Id,createdId);
+		}
+
 		public static BaseResponse ToValidationResponse(this BaseRequest @this, ErrorException ex)
 		{
 			return new ValidationResponse(@this.Id, ex);

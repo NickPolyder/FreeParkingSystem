@@ -1,4 +1,5 @@
-﻿using FreeParkingSystem.Parking.Contract;
+﻿using System.Collections.Generic;
+using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Exceptions;
 using FreeParkingSystem.Parking.Contract.Repositories;
 
@@ -8,12 +9,28 @@ namespace FreeParkingSystem.Parking
 	{
 		private readonly IParkingSiteRepository _parkingSiteRepository;
 		private readonly IParkingTypeRepository _parkingTypeRepository;
+		private readonly IParkingSiteViewRepository _parkingSiteViewRepository;
 
 		public ParkingSiteServices(IParkingSiteRepository parkingSiteRepository,
-			IParkingTypeRepository parkingTypeRepository)
+			IParkingTypeRepository parkingTypeRepository,
+			IParkingSiteViewRepository parkingSiteViewRepository)
 		{
 			_parkingSiteRepository = parkingSiteRepository;
 			_parkingTypeRepository = parkingTypeRepository;
+			_parkingSiteViewRepository = parkingSiteViewRepository;
+		}
+
+		public IEnumerable<ParkingSiteView> GetViews()
+		{
+			return _parkingSiteViewRepository.GetAll();
+		}
+
+		public ParkingSiteView GetView(int parkingSiteId)
+		{
+			if (parkingSiteId < 1)
+				return null;
+
+			return _parkingSiteViewRepository.Get(parkingSiteId);
 		}
 
 		public ParkingSite Get(int parkingSiteId)

@@ -1,16 +1,19 @@
 ﻿using System.Net;
 using FreeParkingSystem.Common.Messages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FreeParkingSystem.Common.API.ExtensionMethods
+namespace FreeParkingSystem.Common.API.Controllers
 {
-	public static class ResponseExtensions
+	public abstract class BaseController : ControllerBase
 	{
-
-		public static IActionResult ToActionResult(this BaseResponse response)
+		protected IActionResult ActionResult(BaseResponse response)
 		{
 			switch (response)
 			{
+				case CreatedResponse created:
+					var idPath = Request.Path.Add(new PathString("/" + created.CreatedId)).Value;
+					return new CreatedResult(idPath, null);
 				case SuccessResponse _:
 					return new OkResult();
 				case ValidationResponse validation:
@@ -40,14 +43,17 @@ namespace FreeParkingSystem.Common.API.ExtensionMethods
 			}
 		}
 
-		public static IActionResult ToActionResult<TData>(this BaseResponse response)
+		protected IActionResult ActionResult<TData>(BaseResponse response)
 		{
 			switch (response)
 			{
+				case CreatedResponse<TData> created:
+					var idPath = Request.Path.Add(new PathString("/" + created.CreatedId)).Value;
+					return new CreatedResult(idPath, created.Data);
 				case SuccessResponse<TData> dataResponse:
 					return new OkObjectResult(dataResponse.Data);
 				default:
-					return ToActionResult(response);
+					return ActionResult(response);
 			}
 		}
 	}

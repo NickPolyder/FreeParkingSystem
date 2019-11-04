@@ -2,7 +2,7 @@
 using FreeParkingSystem.Accounts.Contract.Commands;
 using FreeParkingSystem.Accounts.Contract.Dtos;
 using FreeParkingSystem.Common;
-using FreeParkingSystem.Common.API.ExtensionMethods;
+using FreeParkingSystem.Common.API.Controllers;
 using FreeParkingSystem.Common.ExtensionMethods;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +13,7 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 	[Route("api/[controller]")]
 	[ApiController]
 	[Authorize]
-	public class UsersController : ControllerBase
+	public class UsersController : BaseController
 	{
 		private readonly IMediator _mediator;
 		private readonly IMap<CreateUserInput, CreateUserRequest> _createUserMapper;
@@ -29,7 +29,7 @@ namespace FreeParkingSystem.Accounts.API.Controllers
 		{
 			var result = await _mediator.Send(_createUserMapper.Map(input));
 
-			return result.ToActionResult();
+			return ActionResult(result);
 		}
 	}
 }

@@ -15,6 +15,8 @@ services:
         Deployment_Db_User: "sa" 
         Deployment_Db_Password: "S1mple@password" 
         Deployment_PasswordOptions_MinimumCharacters: 4
+        Deployment_RabbitMq_host: "rabbitmq"
+        Deployment_RabbitMq_port: 5672
         ASPNETCORE_ENVIRONMENT: "Development"
         ASPNETCORE_URLS: "https://+;http://+"
         ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"

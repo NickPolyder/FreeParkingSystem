@@ -70,7 +70,7 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot Add parking site when using a valid Id..
+        ///   Looks up a localized string similar to Cannot Add parking site when using SiteRequestId..
         /// </summary>
         public static string ParkingSite_CannotUseAddWIthId {
             get {
@@ -79,7 +79,16 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parking site cannot be updated. Id is required.
+        ///   Looks up a localized string similar to Cannot Delete parking site. SiteRequestId is required.
+        /// </summary>
+        public static string ParkingSite_CannotUseDeleteWithNoId {
+            get {
+                return ResourceManager.GetString("ParkingSite_CannotUseDeleteWithNoId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site cannot be updated. SiteRequestId is required.
         /// </summary>
         public static string ParkingSite_CannotUseUpdateWithNoId {
             get {
@@ -93,6 +102,15 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         public static string ParkingSite_DoesNotExist {
             get {
                 return ResourceManager.GetString("ParkingSite_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This parking site has active orders and cannot be deleted..
+        /// </summary>
+        public static string ParkingSite_HasActiveOrder {
+            get {
+                return ResourceManager.GetString("ParkingSite_HasActiveOrder", resourceCulture);
             }
         }
         

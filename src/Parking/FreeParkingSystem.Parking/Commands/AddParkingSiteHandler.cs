@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using FreeParkingSystem.Accounts.Contract.Commands;
 using FreeParkingSystem.Accounts.Contract.Messages;
 using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.ExtensionMethods;

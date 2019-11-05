@@ -74,5 +74,13 @@ namespace FreeParkingSystem.Parking
 
 			return _parkingSiteRepository.Update(parking);
 		}
+
+		public void Delete(int parkingSiteId)
+		{
+			if (parkingSiteId <= 0)
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_CannotUseDeleteWithNoId);
+
+			_parkingSiteRepository.Delete(parkingSiteId);
+		}
 	}
 }

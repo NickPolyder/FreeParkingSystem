@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema requestId="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -130,7 +130,7 @@
     <value>The password cannot be hashed while being encrypted</value>
   </data>
   <data name="PasswordValidation_CannotValidateEncryptedPassword" xml:space="preserve">
-    <value>The password is encrypted and cannot be validated.</value>
+    <value>The password is encrypted and cannot be valrequestIdated.</value>
   </data>
   <data name="PasswordValidation_CapitalsRequired" xml:space="preserve">
     <value>The password needs to have at least one Capital letter.</value>
@@ -153,13 +153,13 @@
     <value>The password needs to have at least one special character.</value>
   </data>
   <data name="Password_GeneralMessage" xml:space="preserve">
-    <value>The password is not valid</value>
+    <value>The password is not valrequestId</value>
   </data>
   <data name="User_AlreadyExists" xml:space="preserve">
     <value>Username is unavailable</value>
   </data>
   <data name="User_InvalidLogin" xml:space="preserve">
-    <value>The username/password combination is invalid.</value>
+    <value>The username/password combination is invalrequestId.</value>
   </data>
   <data name="User_PasswordEmpty" xml:space="preserve">
     <value>The Password cannot be empty.</value>

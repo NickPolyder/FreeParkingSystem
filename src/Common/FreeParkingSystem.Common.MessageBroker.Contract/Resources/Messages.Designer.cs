@@ -61,7 +61,7 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Processing event: {0} with Id: {1}.
+        ///   Looks up a localized string similar to Processing event: {0} with RequestId: {1}.
         /// </summary>
         public static string Process_Event {
             get {

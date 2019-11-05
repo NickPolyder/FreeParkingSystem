@@ -10,42 +10,42 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 	{
 		public static BaseResponse ToSuccessResponse<TData>(this BaseRequest @this, TData data)
 		{
-			return new SuccessResponse<TData>(@this.Id, data);
+			return new SuccessResponse<TData>(@this.RequestId, data);
 		}
 
 		public static BaseResponse ToSuccessResponse(this BaseRequest @this)
 		{
-			return new SuccessResponse(@this.Id);
+			return new SuccessResponse(@this.RequestId);
 		}
 
 		public static BaseResponse ToCreatedResponse<TData>(this BaseRequest @this,int createdId, TData data)
 		{
-			return new CreatedResponse<TData>(@this.Id, createdId, data);
+			return new CreatedResponse<TData>(@this.RequestId, createdId, data);
 		}
 
 		public static BaseResponse ToCreatedResponse(this BaseRequest @this, int createdId)
 		{
-			return new CreatedResponse(@this.Id,createdId);
+			return new CreatedResponse(@this.RequestId,createdId);
 		}
 
 		public static BaseResponse ToValidationResponse(this BaseRequest @this, ErrorException ex)
 		{
-			return new ValidationResponse(@this.Id, ex);
+			return new ValidationResponse(@this.RequestId, ex);
 		}
 
 		public static BaseResponse ToUnhandledResponse(this BaseRequest @this, Exception ex)
 		{
-			return new UnhandledResponse(@this.Id, ex);
+			return new UnhandledResponse(@this.RequestId, ex);
 		}
 
 		public static BaseResponse ToUnauthenticatedResponse(this BaseRequest @this)
 		{
-			return new UnauthenticatedResponse(@this.Id);
+			return new UnauthenticatedResponse(@this.RequestId);
 		}
 
 		public static BaseResponse ToUnauthorizedResponse(this BaseRequest @this, IEnumerable<Role> roles)
 		{
-			return new UnauthorizedResponse(@this.Id, roles.ToArray());
+			return new UnauthorizedResponse(@this.RequestId, roles.ToArray());
 		}
 	}
 }

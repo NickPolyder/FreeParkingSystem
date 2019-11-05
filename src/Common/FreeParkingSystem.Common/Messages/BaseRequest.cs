@@ -5,16 +5,16 @@ namespace FreeParkingSystem.Common.Messages
 {
 	public abstract class BaseRequest : IRequest<BaseResponse> 
 	{
-		public Guid Id { get; }
+		public Guid RequestId { get; }
 
 		protected BaseRequest() : this(Guid.NewGuid())
 		{
 
 		}
 
-		protected BaseRequest(Guid id)
+		protected BaseRequest(Guid requestId)
 		{
-			Id = id;
+			RequestId = requestId;
 		}
 	}
 }

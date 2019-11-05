@@ -11,5 +11,7 @@ namespace FreeParkingSystem.Parking.Contract
 		ParkingSite Add(ParkingSite parking);
 
 		ParkingSite Update(ParkingSite parking);
+
+		void Delete(int parkingSiteId);
 	}
 }

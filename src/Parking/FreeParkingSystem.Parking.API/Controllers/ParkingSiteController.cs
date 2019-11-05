@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.API.Controllers;
-using FreeParkingSystem.Common.API.ExtensionMethods;
 using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Commands;
@@ -65,6 +64,14 @@ namespace FreeParkingSystem.Parking.API.Controllers
 			input.ParkingSiteId = id;
 
 			var result = await _mediator.Send(_parkingSiteChangeDetailsMapper.Map(input));
+
+			return ActionResult(result);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(int id)
+		{
+			var result = await _mediator.Send(new DeleteParkingSiteRequest(id));
 
 			return ActionResult(result);
 		}

@@ -121,13 +121,19 @@
     <value>The parking site name already exists.</value>
   </data>
   <data name="ParkingSite_CannotUseAddWIthId" xml:space="preserve">
-    <value>Cannot Add parking site when using a valid Id.</value>
+    <value>Cannot Add parking site when using SiteRequestId.</value>
+  </data>
+  <data name="ParkingSite_CannotUseDeleteWithNoId" xml:space="preserve">
+    <value>Cannot Delete parking site. SiteRequestId is required</value>
   </data>
   <data name="ParkingSite_CannotUseUpdateWithNoId" xml:space="preserve">
-    <value>The parking site cannot be updated. Id is required</value>
+    <value>The parking site cannot be updated. SiteRequestId is required</value>
   </data>
   <data name="ParkingSite_DoesNotExist" xml:space="preserve">
     <value>The parking site you requested does not exist.</value>
+  </data>
+  <data name="ParkingSite_HasActiveOrder" xml:space="preserve">
+    <value>This parking site has active orders and cannot be deleted.</value>
   </data>
   <data name="ParkingSite_IsNotTheOwner" xml:space="preserve">
     <value>In order to change the details of this parking site you must be the owner of the parking.</value>

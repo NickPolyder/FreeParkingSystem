@@ -199,7 +199,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			var result = sut.Handle(request, CancellationToken.None).RunSync();
 
 			// Assert
-			result.RequestId.ShouldBe(request.Id);
+			result.RequestId.ShouldBe(request.RequestId);
 			result.ShouldBeOfType<SuccessResponse<UserToken>>();
 
 			var resultToken = (result as SuccessResponse<UserToken>).Data;
@@ -276,7 +276,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 
 			// Assert
 			result.ShouldNotBeNull();
-			result.RequestId.ShouldBe(request.Id);
+			result.RequestId.ShouldBe(request.RequestId);
 			var resultToken = (result as SuccessResponse<UserToken>).Data;
 
 			resultToken.Username.ShouldBe(request.Username);

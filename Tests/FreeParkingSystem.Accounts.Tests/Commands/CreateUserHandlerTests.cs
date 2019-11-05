@@ -159,7 +159,7 @@ namespace FreeParkingSystem.Accounts.Tests.Commands
 
 			// Assert
 			result.ShouldNotBeNull();
-			result.RequestId.ShouldBe(request.Id);
+			result.RequestId.ShouldBe(request.RequestId);
 			result.ShouldBeOfType<SuccessResponse>();
 		}
 

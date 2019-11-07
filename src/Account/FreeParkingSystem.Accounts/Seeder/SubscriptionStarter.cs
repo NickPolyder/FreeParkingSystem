@@ -15,6 +15,7 @@ namespace FreeParkingSystem.Accounts.Seeder
 		public void Start()
 		{
 			_subscriptionBroker.Subscribe<UserCreatedParkingSiteMessage, UserCreatedParkingSiteHandler>();
+			_subscriptionBroker.Subscribe<UserDeletedParkingSiteMessage, UserDeletedParkingSiteHandler>();
 		}
 	}
 }

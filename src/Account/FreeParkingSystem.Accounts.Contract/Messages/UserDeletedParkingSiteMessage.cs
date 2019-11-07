@@ -2,11 +2,11 @@
 
 namespace FreeParkingSystem.Accounts.Contract.Messages
 {
-	public class UserCreatedParkingSiteMessage : BaseMessageBrokerRequest
+	public class UserDeletedParkingSiteMessage : BaseMessageBrokerRequest
 	{
 		public int UserId { get; }
 
-		public UserCreatedParkingSiteMessage(int userId)
+		public UserDeletedParkingSiteMessage(int userId)
 		{
 			UserId = userId;
 		}

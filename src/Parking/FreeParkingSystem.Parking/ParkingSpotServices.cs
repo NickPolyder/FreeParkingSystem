@@ -6,7 +6,7 @@ namespace FreeParkingSystem.Parking
 	{
 		public void DeleteBySiteId(int parkingSiteId)
 		{
-			throw new System.NotImplementedException();
+			//TODO: Implement Delete
 		}
 	}
 }

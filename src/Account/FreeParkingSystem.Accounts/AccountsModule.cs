@@ -32,6 +32,7 @@ namespace FreeParkingSystem.Accounts
 			builder.RegisterType<CreateUserInputMapper>().AsImplementedInterfaces();
 
 			builder.RegisterType<UserCreatedParkingSiteHandler>();
+			builder.RegisterType<UserDeletedParkingSiteHandler>();
 			builder.RegisterType<SubscriptionStarter>().As<IStartable>().SingleInstance();
 		}
 

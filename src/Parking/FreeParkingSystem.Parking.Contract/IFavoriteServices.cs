@@ -6,5 +6,8 @@ namespace FreeParkingSystem.Parking.Contract
 	{
 		void AddFavorite(int userId, ParkingSite parkingSite);
 		void AddFavorite(int userId, ParkingSpot parkingSpot);
+
+		void RemoveFavorite(int userId, ParkingSite parkingSite);
+		void RemoveFavorite(int userId, ParkingSpot parkingSpot);
 	}
 }

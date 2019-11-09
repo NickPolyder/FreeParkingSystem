@@ -26,7 +26,7 @@ namespace FreeParkingSystem.Parking.Data.Models
 				.ToTable("ParkingSpot");
 
 			modelBuilder.Entity<DbFavorite>()
-				.ToTable("Favorite");
+				.ToTable("Favorites");
 
 			modelBuilder.Entity<DbParkingSiteView>()
 				.ToTable("ParkingSiteView");

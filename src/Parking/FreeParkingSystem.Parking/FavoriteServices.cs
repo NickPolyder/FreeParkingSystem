@@ -50,5 +50,25 @@ namespace FreeParkingSystem.Parking
 
 			_favoriteRepository.Add(favorite);
 		}
+
+		public void RemoveFavorite(int userId, ParkingSite parkingSite)
+		{
+			if (parkingSite == null
+				|| parkingSite.Id < 0
+				|| !parkingSite.IsActive)
+				throw new FavoriteException(Contract.Resources.Validation.ParkingSite_DoesNotExist);
+
+			var favoriteItem = _favoriteRepository.GetBy(userId, FavoriteType.ParkingSite, parkingSite.Id);
+
+			if (favoriteItem == null)
+				return;
+
+			_favoriteRepository.Delete(favoriteItem.Id);
+		}
+
+		public void RemoveFavorite(int userId, ParkingSpot parkingSpot)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

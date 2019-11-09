@@ -71,6 +71,16 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				.Customize(fixture);
 		}
 
+		private static void ContainerClaimsAndMapperSetup(IFixture fixture)
+		{
+			fixture.Build<IMap<UserClaim, Claim>>()
+				.FromFactory(() => new SecurityClaimsMapper())
+				.ToCustomization()
+				.Customize(fixture);
+
+			ContainerClaimsSetup(fixture);
+		}
+
 		private static void ContainerClaimsSetup(IFixture fixture)
 		{
 			fixture.Build<Claim>()
@@ -84,7 +94,7 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 				.Customize(fixture);
 		}
 
-		[Theory, FixtureData(RunContainerSetup = false)]
+		[Theory, FixtureData(ContainerMethod = nameof(ContainerClaimsAndMapperSetup))]
 		public void Handle_ShouldCall_UserServices_Login(
 			[Frozen] Mock<IUserServices> userServicesMock,
 			UserLoginRequest request,
@@ -103,10 +113,9 @@ namespace FreeParkingSystem.Accounts.Tests.Queries
 			userServicesMock.Verify(svc => svc.Login(request.Username, request.Password), Times.Once);
 		}
 
-		[Theory, FixtureData(RunContainerSetup = false)]
+		[Theory, FixtureData(ContainerMethod = nameof(ContainerClaimsAndMapperSetup))]
 		public void Handle_ShouldMake_ThePassword_Empty(
 			[Frozen] Mock<IUserServices> userServicesMock,
-
 			UserLoginRequest request,
 			User user,
 			UserLoginHandler sut)

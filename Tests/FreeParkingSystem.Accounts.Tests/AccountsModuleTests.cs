@@ -11,19 +11,27 @@ using FreeParkingSystem.Accounts.Mappers;
 using FreeParkingSystem.Accounts.Queries;
 using FreeParkingSystem.Accounts.Validators;
 using FreeParkingSystem.Common;
+using FreeParkingSystem.Common.MessageBroker.Contract.Options;
 using FreeParkingSystem.Common.Messages;
+using FreeParkingSystem.Common.Tests.Logging;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace FreeParkingSystem.Accounts.Tests
 {
 	public class AccountsModuleTests : IDisposable
 	{
 		private readonly IContainer _sut;
-		public AccountsModuleTests()
+
+		private readonly ITestOutputHelper _testOutputHelper;
+		public AccountsModuleTests(ITestOutputHelper testOutputHelper)
 		{
+			_testOutputHelper = testOutputHelper;
 			var containerBuilder = new Autofac.ContainerBuilder();
 
 			// dummy setup
@@ -36,7 +44,16 @@ namespace FreeParkingSystem.Accounts.Tests
 			containerBuilder.RegisterInstance(new EncryptionOptions(TestConstants.SecretKey));
 
 			containerBuilder.RegisterType<MockAuthenticationService>().AsImplementedInterfaces();
+			containerBuilder.RegisterInstance<ILoggerFactory>(new MockLoggerFactory(_testOutputHelper));
+			var connectionFactory = new ConnectionFactory();
 
+			containerBuilder.RegisterInstance<IConnectionFactory>(connectionFactory);
+			containerBuilder.RegisterInstance(new RabbitMqOptionsBuilder()
+				.SetRetryAttempts(2)
+				.SetExchangeName("Testing")
+				.SetQueueName("Testing")
+				.Build());
+			
 			containerBuilder.RegisterModule<AccountsModule>();
 
 

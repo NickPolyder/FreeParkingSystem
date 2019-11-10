@@ -18,14 +18,14 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 			return new SuccessResponse(@this.RequestId);
 		}
 
-		public static BaseResponse ToCreatedResponse<TData>(this BaseRequest @this,int createdId, TData data)
+		public static BaseResponse ToCreatedResponse<TData>(this BaseRequest @this, int createdId, TData data)
 		{
 			return new CreatedResponse<TData>(@this.RequestId, createdId, data);
 		}
 
 		public static BaseResponse ToCreatedResponse(this BaseRequest @this, int createdId)
 		{
-			return new CreatedResponse(@this.RequestId,createdId);
+			return new CreatedResponse(@this.RequestId, createdId);
 		}
 
 		public static BaseResponse ToValidationResponse(this BaseRequest @this, ErrorException ex)
@@ -46,6 +46,11 @@ namespace FreeParkingSystem.Common.ExtensionMethods
 		public static BaseResponse ToUnauthorizedResponse(this BaseRequest @this, IEnumerable<Role> roles)
 		{
 			return new UnauthorizedResponse(@this.RequestId, roles.ToArray());
+		}
+
+		public static BaseResponse ToNotFoundResponse(this BaseRequest @this, ErrorException ex)
+		{
+			return new NotFoundResponse(@this.RequestId, ex);
 		}
 	}
 }

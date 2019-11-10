@@ -31,19 +31,15 @@ namespace FreeParkingSystem.Parking.Commands
 			var currentParkingSite = _parkingSiteServices.Get(request.ParkingSiteId);
 
 			if (currentParkingSite == null)
-			{
 				return request
-					.ToValidationResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_DoesNotExist))
+					.ToNotFoundResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_DoesNotExist))
 					.AsTask();
-			}
 
 			if (currentParkingSite.OwnerId != userId)
-			{
 				return request
 					.ToValidationResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_IsNotTheOwner))
 					.AsTask();
-			}
-
+			
 			var patchComposite = new List<IPropertyPatch<ParkingSite>>
 			{
 				currentParkingSite.CreatePatch(obj => obj.IsActive),

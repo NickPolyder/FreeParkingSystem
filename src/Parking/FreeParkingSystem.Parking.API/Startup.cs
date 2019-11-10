@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace FreeParkingSystem.Parking.API
 {
@@ -43,7 +44,13 @@ namespace FreeParkingSystem.Parking.API
 				options.ValidIssuer = jwtOptions.ValidIssuer;
 				options.ExpiresAfter = jwtOptions.ExpiresAfter;
 			}));
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services
+				.AddMvc()
+				.AddJsonOptions((jsonOptions) =>
+					{
+						jsonOptions.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+					})
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 		public void ConfigureContainer(ContainerBuilder builder)
 		{

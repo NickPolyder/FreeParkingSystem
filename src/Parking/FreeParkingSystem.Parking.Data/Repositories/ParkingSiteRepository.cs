@@ -14,9 +14,11 @@ namespace FreeParkingSystem.Parking.Data.Repositories
 		{
 		}
 
-		public bool Exists(string name)
+		public bool Exists(ParkingSite parkingSite)
 		{
-			return Set.Any(item => item.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+			return parkingSite.Id == 0 
+				? Set.Any(item => item.Name.Equals(parkingSite.Name, StringComparison.InvariantCultureIgnoreCase))
+				: Set.Any(item => item.Id != parkingSite.Id && item.Name.Equals(parkingSite.Name, StringComparison.InvariantCultureIgnoreCase));
 		}
 	}
 }

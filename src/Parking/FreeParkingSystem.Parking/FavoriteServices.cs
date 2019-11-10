@@ -68,7 +68,16 @@ namespace FreeParkingSystem.Parking
 
 		public void RemoveFavorite(int userId, ParkingSpot parkingSpot)
 		{
-			throw new System.NotImplementedException();
+			if (parkingSpot == null
+			    || parkingSpot.Id < 0)
+				throw new FavoriteException(Contract.Resources.Validation.ParkingSite_DoesNotExist);
+
+			var favoriteItem = _favoriteRepository.GetBy(userId, FavoriteType.ParkingSpot, parkingSpot.Id);
+
+			if (favoriteItem == null)
+				return;
+
+			_favoriteRepository.Delete(favoriteItem.Id);
 		}
 	}
 }

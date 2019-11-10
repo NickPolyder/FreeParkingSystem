@@ -1,10 +1,11 @@
-﻿using FreeParkingSystem.Parking.Contract;
+﻿using System.Collections.Generic;
+using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Exceptions;
 using FreeParkingSystem.Parking.Contract.Repositories;
 
 namespace FreeParkingSystem.Parking
 {
-	public class ParkingSpotServices: IParkingSpotServices
+	public class ParkingSpotServices : IParkingSpotServices
 	{
 		private readonly IParkingSpotRepository _parkingSpotRepository;
 		private readonly IParkingSpotTypeRepository _parkingSpotTypeRepository;
@@ -15,6 +16,23 @@ namespace FreeParkingSystem.Parking
 			_parkingSpotRepository = parkingSpotRepository;
 			_parkingSpotTypeRepository = parkingSpotTypeRepository;
 		}
+
+		public IEnumerable<ParkingSpot> GetViews(int parkingSiteId)
+		{
+			if (parkingSiteId < 0)
+				return new List<ParkingSpot>(0);
+
+			return _parkingSpotRepository.GetAllBy(parkingSiteId);
+		}
+
+		public ParkingSpot GetView(int parkingSpotId, int parkingSiteId)
+		{
+			if (parkingSpotId < 0 || parkingSiteId < 0)
+				return null;
+
+			return _parkingSpotRepository.GetBy(parkingSpotId, parkingSiteId);
+		}
+
 		public ParkingSpot Get(int parkingSpotId)
 		{
 			if (parkingSpotId < 1)
@@ -37,6 +55,8 @@ namespace FreeParkingSystem.Parking
 			if (!_parkingSpotTypeRepository.Exists(parkingSpot.ParkingSpotTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSpot_TypeDoesNotExist);
 
+			parkingSpot.ParkingSite = null;
+			parkingSpot.ParkingSpotType = null;
 			return _parkingSpotRepository.Add(parkingSpot);
 		}
 
@@ -48,12 +68,14 @@ namespace FreeParkingSystem.Parking
 			if (parkingSpot.ParkingSiteId < 1)
 				throw new ParkingException(Contract.Resources.Validation.ParkingSpot_ParkingSiteIsNotValid);
 
-			if (_parkingSpotRepository.Exists(parkingSpot))
-				throw new ParkingException(Contract.Resources.Validation.ParkingSpot_AlreadyExists);
+			if (!_parkingSpotRepository.Exists(parkingSpot))
+				throw new ParkingException(Contract.Resources.Validation.ParkingSpot_DoesNotExist);
 
 			if (!_parkingSpotTypeRepository.Exists(parkingSpot.ParkingSpotTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSpot_TypeDoesNotExist);
 
+			parkingSpot.ParkingSite = null;
+			parkingSpot.ParkingSpotType = null;
 			return _parkingSpotRepository.Update(parkingSpot);
 		}
 

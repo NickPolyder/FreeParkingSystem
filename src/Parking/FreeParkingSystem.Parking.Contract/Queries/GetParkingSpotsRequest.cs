@@ -4,13 +4,13 @@ using FreeParkingSystem.Common.Messages;
 namespace FreeParkingSystem.Parking.Contract.Queries
 {
 	[AuthorizeRequest]
-	public class GetParkingSiteByIdRequest : BaseRequest
+	public class GetParkingSpotsRequest : BaseRequest
 	{
-		public int Id { get; }
+		public int ParkingSiteId { get; }
 
-		public GetParkingSiteByIdRequest(int id)
+		public GetParkingSpotsRequest(int parkingSiteId)
 		{
-			Id = id;
+			ParkingSiteId = parkingSiteId;
 		}
 	}
 }

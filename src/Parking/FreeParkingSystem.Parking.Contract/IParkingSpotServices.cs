@@ -4,8 +4,8 @@ namespace FreeParkingSystem.Parking.Contract
 {
 	public interface IParkingSpotServices
 	{
-		//IEnumerable<ParkingSpotView> GetViews();
-		//ParkingSpotView GetView(int parkingSpotId);
+		IEnumerable<ParkingSpot> GetViews(int parkingSiteId);
+		ParkingSpot GetView(int parkingSpotId,int parkingSiteId);
 		ParkingSpot Get(int parkingSpotId);
 
 		ParkingSpot Add(ParkingSpot parkingSpot);

@@ -5,6 +5,7 @@ using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Common.Messages;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Commands;
+using FreeParkingSystem.Parking.Contract.Exceptions;
 using MediatR;
 
 namespace FreeParkingSystem.Parking.Commands
@@ -29,6 +30,9 @@ namespace FreeParkingSystem.Parking.Commands
 			var userContext = _userContextAccessor.GetUserContext();
 			var userId = userContext.UserToken.Get<int>(UserClaimTypes.Id);
 			var parkingSite = _parkingSiteServices.Get(request.ParkingSiteId);
+
+			if (parkingSite == null)
+				return request.ToNotFoundResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_DoesNotExist)).AsTask();
 
 			_favoriteServices.AddFavorite(userId, parkingSite);
 

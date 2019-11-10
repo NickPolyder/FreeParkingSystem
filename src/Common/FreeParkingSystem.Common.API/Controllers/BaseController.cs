@@ -16,6 +16,11 @@ namespace FreeParkingSystem.Common.API.Controllers
 					return new CreatedResult(idPath, null);
 				case SuccessResponse _:
 					return new OkResult();
+				case NotFoundResponse notFoundError:
+					return new ObjectResult(notFoundError.Error)
+					{
+						StatusCode = (int)HttpStatusCode.NotFound
+					};
 				case ValidationResponse validation:
 					return new BadRequestObjectResult(validation.Error);
 				case UnauthenticatedResponse unauthenticated:

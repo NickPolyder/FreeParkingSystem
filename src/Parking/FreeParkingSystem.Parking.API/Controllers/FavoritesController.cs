@@ -17,7 +17,7 @@ namespace FreeParkingSystem.Parking.API.Controllers
 		}
 
 		[HttpPost("api/parking-site/{id}/favorite")]
-		public async Task<IActionResult> Post(int id)
+		public async Task<IActionResult> PostParkingSite(int id)
 		{
 			var result = await _mediator.Send(new AddParkingSiteToFavoritesRequest(id));
 
@@ -25,9 +25,25 @@ namespace FreeParkingSystem.Parking.API.Controllers
 		}
 
 		[HttpDelete("api/parking-site/{id}/favorite")]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> DeleteParkingSite(int id)
 		{
 			var result = await _mediator.Send(new DeleteParkingSiteFromFavoritesRequest(id));
+
+			return ActionResult(result);
+		}
+
+		[HttpPost("api/parking-site/{parkingSiteId}/parking-spots/{id}/favorite")]
+		public async Task<IActionResult> PostParkingSpot(int id)
+		{
+			var result = await _mediator.Send(new AddParkingSpotToFavoritesRequest(id));
+
+			return ActionResult(result);
+		}
+
+		[HttpDelete("api/parking-site/{parkingSiteId}/parking-spots/{id}/favorite")]
+		public async Task<IActionResult> DeleteParkingSpot(int id)
+		{
+			var result = await _mediator.Send(new DeleteParkingSpotFromFavoritesRequest(id));
 
 			return ActionResult(result);
 		}

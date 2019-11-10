@@ -22,9 +22,14 @@ namespace FreeParkingSystem.Parking
 			builder.RegisterType<FavoriteServices>().AsImplementedInterfaces();
 			builder.RegisterType<OrderApiServices>().AsImplementedInterfaces();
 			builder.RegisterType<ParkingSpotServices>().AsImplementedInterfaces();
+			builder.RegisterType<ParkingTypeServices>().AsImplementedInterfaces();
+			builder.RegisterType<ParkingSpotTypeServices>().AsImplementedInterfaces();
+
 
 			builder.RegisterType<AddParkingSiteInputMapper>().AsImplementedInterfaces();
 			builder.RegisterType<ChangeParkingSiteDetailsInputMapper>().AsImplementedInterfaces();
+			builder.RegisterType<AddParkingSpotInputMapper>().AsImplementedInterfaces();
+			builder.RegisterType<ChangeParkingSpotInputMapper>().AsImplementedInterfaces();
 		}
 	}
 }

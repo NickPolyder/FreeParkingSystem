@@ -9,19 +9,26 @@ namespace FreeParkingSystem.Common
 		private readonly T _instance;
 		private readonly Func<T, TProperty> _getter;
 		private readonly Action<T, TProperty> _setter;
+		private readonly IEqualityComparer<TProperty> _propertyEqualityComparer;
 
-		public PropertyPatch(T instance, Func<T, TProperty> getter, Action<T, TProperty> setter)
+		public PropertyPatch(T instance, Func<T, TProperty> getter, Action<T, TProperty> setter):
+			this(instance,getter,setter, EqualityComparer<TProperty>.Default)
+		{
+		}
+
+		public PropertyPatch(T instance, Func<T, TProperty> getter, Action<T, TProperty> setter, IEqualityComparer<TProperty> propertyEqualityComparer)
 		{
 			_instance = instance;
 			_getter = getter;
 			_setter = setter;
+			_propertyEqualityComparer = propertyEqualityComparer;
 		}
 
 		public bool HasChanged { get; private set; }
 
 		public void Patch(T obj)
 		{
-			Patch(obj, EqualityComparer<TProperty>.Default);
+			Patch(obj, _propertyEqualityComparer);
 		}
 
 		public void Patch(T obj, IEqualityComparer<TProperty> propertyEqualityComparer)

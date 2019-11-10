@@ -1,7 +1,10 @@
-﻿namespace FreeParkingSystem.Parking.Contract.Dtos
+﻿using Newtonsoft.Json;
+
+namespace FreeParkingSystem.Parking.Contract.Dtos
 {
 	public class ChangeParkingSiteDetailsInput
 	{
+		[JsonIgnore]
 		public int ParkingSiteId { get; set; }
 		public string Name { get; set; }
 		public int ParkingTypeId { get; set; }

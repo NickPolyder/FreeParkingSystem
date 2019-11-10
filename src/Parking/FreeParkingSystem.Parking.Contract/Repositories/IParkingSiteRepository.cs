@@ -4,6 +4,6 @@ namespace FreeParkingSystem.Parking.Contract.Repositories
 {
 	public interface IParkingSiteRepository : IRepository<ParkingSite>
 	{
-		bool Exists(string name);
+		bool Exists(ParkingSite parkingSite);
 	}
 }

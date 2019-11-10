@@ -23,7 +23,7 @@ namespace FreeParkingSystem.Parking.Queries
 		{
 			var list = _parkingSiteServices.GetViews().ToList();
 
-			return request.ToSuccessResponse<List<ParkingSiteView>>(list).AsTask();
+			return request.ToSuccessResponse(list).AsTask();
 		}
 	}
 }

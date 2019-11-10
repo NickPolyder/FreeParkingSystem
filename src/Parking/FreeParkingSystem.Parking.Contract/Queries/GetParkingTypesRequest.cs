@@ -4,7 +4,8 @@ using FreeParkingSystem.Common.Messages;
 namespace FreeParkingSystem.Parking.Contract.Queries
 {
 	[AuthorizeRequest]
-	public class GetParkingSitesRequest : BaseRequest
+	public class GetParkingTypesRequest : BaseRequest
 	{
+
 	}
 }

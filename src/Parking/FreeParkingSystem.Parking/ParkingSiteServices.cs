@@ -49,12 +49,13 @@ namespace FreeParkingSystem.Parking
 			if (string.IsNullOrWhiteSpace(parking.Name))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
 
-			if (_parkingSiteRepository.Exists(parking.Name))
+			if (_parkingSiteRepository.Exists(parking))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameAlreadyExists);
 
 			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);
 
+			parking.ParkingType = null;
 			return _parkingSiteRepository.Add(parking);
 		}
 
@@ -66,12 +67,13 @@ namespace FreeParkingSystem.Parking
 			if (string.IsNullOrWhiteSpace(parking.Name))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
 
-			if (_parkingSiteRepository.Exists(parking.Name))
+			if (_parkingSiteRepository.Exists(parking))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameAlreadyExists);
 
 			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);
 
+			parking.ParkingType = null;
 			return _parkingSiteRepository.Update(parking);
 		}
 

@@ -10,31 +10,31 @@ using MediatR;
 
 namespace FreeParkingSystem.Parking.Commands
 {
-	public class DeleteParkingSiteFromFavoritesHandler : IRequestHandler<DeleteParkingSiteFromFavoritesRequest, BaseResponse>
+	public class DeleteParkingSpotFromFavoritesHandler : IRequestHandler<DeleteParkingSpotFromFavoritesRequest, BaseResponse>
 	{
 		private readonly IFavoriteServices _favoriteServices;
 		private readonly IUserContextAccessor _userContextAccessor;
-		private readonly IParkingSiteServices _parkingSiteServices;
+		private readonly IParkingSpotServices _parkingSpotServices;
 
-		public DeleteParkingSiteFromFavoritesHandler(IFavoriteServices favoriteServices,
+		public DeleteParkingSpotFromFavoritesHandler(IFavoriteServices favoriteServices,
 			IUserContextAccessor userContextAccessor,
-			IParkingSiteServices parkingSiteServices)
+			IParkingSpotServices parkingSpotServices)
 		{
 			_favoriteServices = favoriteServices;
 			_userContextAccessor = userContextAccessor;
-			_parkingSiteServices = parkingSiteServices;
+			_parkingSpotServices = parkingSpotServices;
 		}
 
-		public Task<BaseResponse> Handle(DeleteParkingSiteFromFavoritesRequest request, CancellationToken cancellationToken)
+		public Task<BaseResponse> Handle(DeleteParkingSpotFromFavoritesRequest request, CancellationToken cancellationToken)
 		{
 			var userContext = _userContextAccessor.GetUserContext();
 			var userId = userContext.UserToken.Get<int>(UserClaimTypes.Id);
-			var parkingSite = _parkingSiteServices.Get(request.ParkingSiteId);
+			var parkingSpot = _parkingSpotServices.Get(request.ParkingSpotId);
 
-			if (parkingSite == null)
-				return request.ToNotFoundResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_DoesNotExist)).AsTask();
+			if (parkingSpot == null)
+				return request.ToNotFoundResponse(new ParkingException(Contract.Resources.Validation.ParkingSpot_DoesNotExist)).AsTask();
 
-			_favoriteServices.RemoveFavorite(userId, parkingSite);
+			_favoriteServices.RemoveFavorite(userId, parkingSpot);
 
 			return request.ToSuccessResponse().AsTask();
 		}

@@ -4,10 +4,10 @@ using FreeParkingSystem.Common.Messages;
 namespace FreeParkingSystem.Parking.Contract.Commands
 {
 	[AuthorizeRequest]
-	public class AddParkingSiteToFavoritesRequest : BaseRequest
+	public class DeleteParkingSiteFromFavoritesRequest : BaseRequest
 	{
 		public int ParkingSiteId { get; }
-		public AddParkingSiteToFavoritesRequest(int parkingSiteId)
+		public DeleteParkingSiteFromFavoritesRequest(int parkingSiteId)
 		{
 			ParkingSiteId = parkingSiteId;
 		}

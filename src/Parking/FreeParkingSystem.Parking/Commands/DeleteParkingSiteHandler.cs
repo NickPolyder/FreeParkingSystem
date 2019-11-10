@@ -46,7 +46,7 @@ namespace FreeParkingSystem.Parking.Commands
 			if (parkingSite.OwnerId != userId)
 				return request.ToValidationResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_IsNotTheOwner));
 			
-			var hasActiveOrders = await _orderApiServices.HasActiveOrder(request.Id,cancellationToken);
+			var hasActiveOrders = await _orderApiServices.ParkingSiteHasActiveOrders(request.Id,cancellationToken);
 
 			if (hasActiveOrders)
 				return request.ToValidationResponse(new ParkingException(Contract.Resources.Validation.ParkingSite_HasActiveOrder));

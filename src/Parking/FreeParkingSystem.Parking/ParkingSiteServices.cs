@@ -50,7 +50,7 @@ namespace FreeParkingSystem.Parking
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
 
 			if (_parkingSiteRepository.Exists(parking.Name))
-				throw new ParkingException(Contract.Resources.Validation.ParkignSite_NameAlreadyExists);
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameAlreadyExists);
 
 			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);
@@ -67,7 +67,7 @@ namespace FreeParkingSystem.Parking
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameCannotBeNullOrEmpty);
 
 			if (_parkingSiteRepository.Exists(parking.Name))
-				throw new ParkingException(Contract.Resources.Validation.ParkignSite_NameAlreadyExists);
+				throw new ParkingException(Contract.Resources.Validation.ParkingSite_NameAlreadyExists);
 
 			if (!_parkingTypeRepository.Exists(parking.ParkingTypeId))
 				throw new ParkingException(Contract.Resources.Validation.ParkingSite_TypeDoesNotExist);

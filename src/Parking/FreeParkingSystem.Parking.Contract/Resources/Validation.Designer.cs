@@ -61,15 +61,6 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parking site name already exists..
-        /// </summary>
-        public static string ParkignSite_NameAlreadyExists {
-            get {
-                return ResourceManager.GetString("ParkignSite_NameAlreadyExists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cannot Add parking site when using SiteRequestId..
         /// </summary>
         public static string ParkingSite_CannotUseAddWIthId {
@@ -124,6 +115,15 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parking site name already exists..
+        /// </summary>
+        public static string ParkingSite_NameAlreadyExists {
+            get {
+                return ResourceManager.GetString("ParkingSite_NameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parking site name cannot be empty.
         /// </summary>
         public static string ParkingSite_NameCannotBeNullOrEmpty {
@@ -142,11 +142,92 @@ namespace FreeParkingSystem.Parking.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parking spot already exists..
+        /// </summary>
+        public static string ParkingSpot_AlreadyExists {
+            get {
+                return ResourceManager.GetString("ParkingSpot_AlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Add parking spot when using SpotRequestId..
+        /// </summary>
+        public static string ParkingSpot_CannotUseAddWIthId {
+            get {
+                return ResourceManager.GetString("ParkingSpot_CannotUseAddWIthId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Delete parking spot. SpotRequestId is required.
+        /// </summary>
+        public static string ParkingSpot_CannotUseDeleteWithNoId {
+            get {
+                return ResourceManager.GetString("ParkingSpot_CannotUseDeleteWithNoId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking spot cannot be updated. SpotRequestId is required.
+        /// </summary>
+        public static string ParkingSpot_CannotUseUpdateWithNoId {
+            get {
+                return ResourceManager.GetString("ParkingSpot_CannotUseUpdateWithNoId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parking spot you requested does not exist..
         /// </summary>
         public static string ParkingSpot_DoesNotExist {
             get {
                 return ResourceManager.GetString("ParkingSpot_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This parking spot has active orders and cannot be deleted..
+        /// </summary>
+        public static string ParkingSpot_HasActiveOrder {
+            get {
+                return ResourceManager.GetString("ParkingSpot_HasActiveOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In order to change the details of this parking spot you must be the owner of the parking..
+        /// </summary>
+        public static string ParkingSpot_IsNotTheOwner {
+            get {
+                return ResourceManager.GetString("ParkingSpot_IsNotTheOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site id included in the parking spot does not exist..
+        /// </summary>
+        public static string ParkingSpot_ParkingSiteDoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSpot_ParkingSiteDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking site id included in the parking spot is not valid..
+        /// </summary>
+        public static string ParkingSpot_ParkingSiteIsNotValid {
+            get {
+                return ResourceManager.GetString("ParkingSpot_ParkingSiteIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking spot type selected does not exist..
+        /// </summary>
+        public static string ParkingSpot_TypeDoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSpot_TypeDoesNotExist", resourceCulture);
             }
         }
     }

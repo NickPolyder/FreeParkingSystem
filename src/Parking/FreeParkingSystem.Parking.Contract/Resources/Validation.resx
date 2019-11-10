@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ParkignSite_NameAlreadyExists" xml:space="preserve">
-    <value>The parking site name already exists.</value>
-  </data>
   <data name="ParkingSite_CannotUseAddWIthId" xml:space="preserve">
     <value>Cannot Add parking site when using SiteRequestId.</value>
   </data>
@@ -138,13 +135,43 @@
   <data name="ParkingSite_IsNotTheOwner" xml:space="preserve">
     <value>In order to change the details of this parking site you must be the owner of the parking.</value>
   </data>
+  <data name="ParkingSite_NameAlreadyExists" xml:space="preserve">
+    <value>The parking site name already exists.</value>
+  </data>
   <data name="ParkingSite_NameCannotBeNullOrEmpty" xml:space="preserve">
     <value>The parking site name cannot be empty</value>
   </data>
   <data name="ParkingSite_TypeDoesNotExist" xml:space="preserve">
     <value>The parking type selected does not exist.</value>
   </data>
+  <data name="ParkingSpot_AlreadyExists" xml:space="preserve">
+    <value>The parking spot already exists.</value>
+  </data>
+  <data name="ParkingSpot_CannotUseAddWIthId" xml:space="preserve">
+    <value>Cannot Add parking spot when using SpotRequestId.</value>
+  </data>
+  <data name="ParkingSpot_CannotUseDeleteWithNoId" xml:space="preserve">
+    <value>Cannot Delete parking spot. SpotRequestId is required</value>
+  </data>
+  <data name="ParkingSpot_CannotUseUpdateWithNoId" xml:space="preserve">
+    <value>The parking spot cannot be updated. SpotRequestId is required</value>
+  </data>
   <data name="ParkingSpot_DoesNotExist" xml:space="preserve">
     <value>The parking spot you requested does not exist.</value>
+  </data>
+  <data name="ParkingSpot_HasActiveOrder" xml:space="preserve">
+    <value>This parking spot has active orders and cannot be deleted.</value>
+  </data>
+  <data name="ParkingSpot_IsNotTheOwner" xml:space="preserve">
+    <value>In order to change the details of this parking spot you must be the owner of the parking.</value>
+  </data>
+  <data name="ParkingSpot_ParkingSiteDoesNotExist" xml:space="preserve">
+    <value>The parking site id included in the parking spot does not exist.</value>
+  </data>
+  <data name="ParkingSpot_ParkingSiteIsNotValid" xml:space="preserve">
+    <value>The parking site id included in the parking spot is not valid.</value>
+  </data>
+  <data name="ParkingSpot_TypeDoesNotExist" xml:space="preserve">
+    <value>The parking spot type selected does not exist.</value>
   </data>
 </root>

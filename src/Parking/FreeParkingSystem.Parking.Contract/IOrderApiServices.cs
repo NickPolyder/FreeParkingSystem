@@ -5,6 +5,8 @@ namespace FreeParkingSystem.Parking.Contract
 {
 	public interface IOrderApiServices
 	{
-		Task<bool> HasActiveOrder(int parkingSiteId, CancellationToken cts = default);
+		Task<bool> ParkingSiteHasActiveOrders(int parkingSiteId, CancellationToken cts = default);
+
+		Task<bool> ParkingSpotHasActiveOrders(int parkingSpotId, CancellationToken cts = default);
 	}
 }

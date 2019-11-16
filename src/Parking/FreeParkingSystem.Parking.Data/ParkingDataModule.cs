@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using FreeParkingSystem.Common.Data;
 using FreeParkingSystem.Parking.Data.Mappers;
 using FreeParkingSystem.Parking.Data.Models;
 using FreeParkingSystem.Parking.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreeParkingSystem.Parking.Data
 {
@@ -9,7 +11,9 @@ namespace FreeParkingSystem.Parking.Data
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<ParkingDbContext>();
+			builder.RegisterModule<CommonDataModule>();
+
+			builder.RegisterType<ParkingDbContext>().AsSelf().As<DbContext>();
 
 			builder.RegisterType<FavoriteMapper>().AsImplementedInterfaces();
 			builder.RegisterType<ParkingSiteMapper>().AsImplementedInterfaces();

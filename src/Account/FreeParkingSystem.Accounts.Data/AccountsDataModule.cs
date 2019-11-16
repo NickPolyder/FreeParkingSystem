@@ -2,6 +2,8 @@
 using FreeParkingSystem.Accounts.Data.Mappers;
 using FreeParkingSystem.Accounts.Data.Models;
 using FreeParkingSystem.Accounts.Data.Repositories;
+using FreeParkingSystem.Common.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreeParkingSystem.Accounts.Data
 {
@@ -10,7 +12,8 @@ namespace FreeParkingSystem.Accounts.Data
 
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<AccountsDbContext>();
+			builder.RegisterModule<CommonDataModule>();
+			builder.RegisterType<AccountsDbContext>().AsSelf().As<DbContext>();
 
 			builder.RegisterType<ClaimsMapper>().AsImplementedInterfaces();
 			builder.RegisterType<UserMapper>().AsImplementedInterfaces();

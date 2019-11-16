@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FreeParkingSystem.Parking.Data.Models;
 
 namespace FreeParkingSystem.Parking.Contract
 {

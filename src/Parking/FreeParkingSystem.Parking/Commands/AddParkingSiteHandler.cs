@@ -7,6 +7,7 @@ using FreeParkingSystem.Common.MessageBroker.Contract;
 using FreeParkingSystem.Common.Messages;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Commands;
+using FreeParkingSystem.Parking.Data.Models;
 using MediatR;
 
 namespace FreeParkingSystem.Parking.Commands

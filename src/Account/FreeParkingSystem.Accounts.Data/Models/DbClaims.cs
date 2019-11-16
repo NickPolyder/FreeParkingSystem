@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using FreeParkingSystem.Common.Data;
+using FreeParkingSystem.Common.Data.Models;
 
 namespace FreeParkingSystem.Accounts.Data.Models
 {

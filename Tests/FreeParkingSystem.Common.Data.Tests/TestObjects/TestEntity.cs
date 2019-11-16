@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FreeParkingSystem.Common.Data.Models;
 
 namespace FreeParkingSystem.Common.Data.Tests.TestObjects
 {

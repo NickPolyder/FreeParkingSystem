@@ -1,4 +1,4 @@
-﻿namespace FreeParkingSystem.Common.Data
+﻿namespace FreeParkingSystem.Common.Data.Models
 {
 	public interface IEntity
 	{

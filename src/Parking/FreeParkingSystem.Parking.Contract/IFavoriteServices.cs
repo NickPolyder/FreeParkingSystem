@@ -1,4 +1,4 @@
-﻿using FreeParkingSystem.Parking.Contract.Constants;
+﻿using FreeParkingSystem.Parking.Data.Models;
 
 namespace FreeParkingSystem.Parking.Contract
 {

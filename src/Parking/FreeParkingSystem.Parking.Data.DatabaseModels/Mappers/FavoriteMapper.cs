@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using FreeParkingSystem.Common;
-using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Constants;
 using FreeParkingSystem.Parking.Data.Models;
 
-namespace FreeParkingSystem.Parking.Data.Mappers
+namespace FreeParkingSystem.Parking.Data.DatabaseModels.Mappers
 {
 	public class FavoriteMapper: IMap<DbFavorite,Favorite>
 	{

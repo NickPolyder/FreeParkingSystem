@@ -6,14 +6,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common.MessageBroker.Contract\FreeParkingSystem.Common.MessageBroker.Contract.csproj" />
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+		<ProjectReference Include="..\FreeParkingSystem.Parking.Data.Models\FreeParkingSystem.Parking.Data.Models.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Constants\FavoriteType.generated.cs">
+	  <Compile Update="Resources\Messages.Designer.cs">
+	    <DependentUpon>Messages.resx</DependentUpon>
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
-	    <DependentUpon>FavoriteType.tt</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Validation.Designer.cs">
 	    <DesignTime>True</DesignTime>
@@ -23,17 +25,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Messages.resx">
+	    <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\Validation.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Validation.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="Constants\FavoriteType.tt">
-	    <LastGenOutput>FavoriteType.generated.cs</LastGenOutput>
-	    <Generator>TextTemplatingFileGenerator</Generator>
-	  </None>
 	</ItemGroup>
 
 	<ItemGroup>

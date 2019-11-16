@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FreeParkingSystem.Parking.Data.Models;
+using Newtonsoft.Json;
 
 namespace FreeParkingSystem.Parking.Contract.Dtos
 {

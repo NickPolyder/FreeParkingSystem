@@ -9,6 +9,7 @@ using FreeParkingSystem.Common.Messages;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Commands;
 using FreeParkingSystem.Parking.Contract.Exceptions;
+using FreeParkingSystem.Parking.Data.Models;
 using MediatR;
 
 namespace FreeParkingSystem.Parking.Commands

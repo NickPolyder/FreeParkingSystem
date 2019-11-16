@@ -1,4 +1,6 @@
-﻿namespace FreeParkingSystem.Parking.Contract.Dtos
+﻿using FreeParkingSystem.Parking.Data.Models;
+
+namespace FreeParkingSystem.Parking.Contract.Dtos
 {
 	public class AddParkingSiteInput
 	{

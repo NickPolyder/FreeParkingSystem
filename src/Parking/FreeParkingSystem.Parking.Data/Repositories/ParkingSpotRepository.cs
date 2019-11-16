@@ -5,11 +5,9 @@ using System.Linq.Expressions;
 using FreeParkingSystem.Common;
 using FreeParkingSystem.Common.Data;
 using FreeParkingSystem.Common.ExtensionMethods;
-using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Repositories;
+using FreeParkingSystem.Parking.Data.DatabaseModels;
 using FreeParkingSystem.Parking.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace FreeParkingSystem.Parking.Data.Repositories
 {

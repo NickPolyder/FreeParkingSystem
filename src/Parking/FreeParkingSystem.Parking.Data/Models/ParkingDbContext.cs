@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FreeParkingSystem.Parking.Data.DatabaseModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreeParkingSystem.Parking.Data.Models
 {
@@ -30,6 +31,9 @@ namespace FreeParkingSystem.Parking.Data.Models
 
 			modelBuilder.Entity<DbParkingSiteView>()
 				.ToTable("ParkingSiteView");
+
+			modelBuilder.Entity<DbParkingSpotView>()
+				.ToTable("ParkingSpotView");
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Repositories;
+using FreeParkingSystem.Parking.Data.Models;
 
 namespace FreeParkingSystem.Parking
 {

@@ -2,6 +2,7 @@
 using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Exceptions;
 using FreeParkingSystem.Parking.Contract.Repositories;
+using FreeParkingSystem.Parking.Data.Models;
 
 namespace FreeParkingSystem.Parking
 {

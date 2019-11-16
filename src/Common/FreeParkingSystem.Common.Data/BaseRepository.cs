@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using FreeParkingSystem.Common.Data.Models;
 using FreeParkingSystem.Common.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
 

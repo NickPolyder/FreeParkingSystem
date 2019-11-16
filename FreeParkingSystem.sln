@@ -88,7 +88,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.Me
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.MessageBroker.Tests", "Tests\FreeParkingSystem.Common.MessageBroker.Tests\FreeParkingSystem.Common.MessageBroker.Tests.csproj", "{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.MessageBroker.Contract", "src\Common\FreeParkingSystem.Common.MessageBroker.Contract\FreeParkingSystem.Common.MessageBroker.Contract.csproj", "{2175F035-A2F1-4159-A8D3-227A632A54BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeParkingSystem.Common.MessageBroker.Contract", "src\Common\FreeParkingSystem.Common.MessageBroker.Contract\FreeParkingSystem.Common.MessageBroker.Contract.csproj", "{2175F035-A2F1-4159-A8D3-227A632A54BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Data.Models", "src\Parking\FreeParkingSystem.Parking.Data.Models\FreeParkingSystem.Parking.Data.Models.csproj", "{45B254DE-1A31-44E7-A22D-EA8925FD6586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Common.Data.Models", "src\Common\FreeParkingSystem.Common.Data.Models\FreeParkingSystem.Common.Data.Models.csproj", "{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeParkingSystem.Parking.Data.DatabaseModels", "src\Parking\FreeParkingSystem.Parking.Data.DatabaseModels\FreeParkingSystem.Parking.Data.DatabaseModels.csproj", "{9E062936-1361-4EBC-9687-D76D11B8397A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -198,6 +204,18 @@ Global
 		{2175F035-A2F1-4159-A8D3-227A632A54BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2175F035-A2F1-4159-A8D3-227A632A54BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2175F035-A2F1-4159-A8D3-227A632A54BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45B254DE-1A31-44E7-A22D-EA8925FD6586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B254DE-1A31-44E7-A22D-EA8925FD6586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B254DE-1A31-44E7-A22D-EA8925FD6586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B254DE-1A31-44E7-A22D-EA8925FD6586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E062936-1361-4EBC-9687-D76D11B8397A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E062936-1361-4EBC-9687-D76D11B8397A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E062936-1361-4EBC-9687-D76D11B8397A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E062936-1361-4EBC-9687-D76D11B8397A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,6 +246,9 @@ Global
 		{8F45FDCD-EC39-4EAB-A576-5325CC508F63} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
 		{F6ABBDAB-A648-4A11-86ED-1D966C2CAB32} = {5B88D3B3-C328-4DCA-B3BD-05A93FB46E26}
 		{2175F035-A2F1-4159-A8D3-227A632A54BE} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
+		{45B254DE-1A31-44E7-A22D-EA8925FD6586} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
+		{1E73C95A-139B-45A3-A2F9-CC06AD5A7AAE} = {DD937B37-84CA-41C1-8A1A-FEA16FECAC64}
+		{9E062936-1361-4EBC-9687-D76D11B8397A} = {56B3E8E5-C0CE-442C-AFC5-2B5B931AAED4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E369FE5C-9E24-44D2-B526-3931FD54BEC4}

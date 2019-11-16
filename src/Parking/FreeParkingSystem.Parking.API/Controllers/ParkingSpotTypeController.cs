@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FreeParkingSystem.Common.API.Controllers;
-using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Contract.Queries;
+using FreeParkingSystem.Parking.Data.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

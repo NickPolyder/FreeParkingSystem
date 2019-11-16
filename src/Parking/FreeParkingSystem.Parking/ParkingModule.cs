@@ -8,7 +8,7 @@ using FreeParkingSystem.Parking.Mappers;
 
 namespace FreeParkingSystem.Parking
 {
-	public class ParkingModule:Module
+	public class ParkingModule : Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
@@ -30,6 +30,7 @@ namespace FreeParkingSystem.Parking
 			builder.RegisterType<ChangeParkingSiteDetailsInputMapper>().AsImplementedInterfaces();
 			builder.RegisterType<AddParkingSpotInputMapper>().AsImplementedInterfaces();
 			builder.RegisterType<ChangeParkingSpotInputMapper>().AsImplementedInterfaces();
+
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using FreeParkingSystem.Parking.Contract.Constants;
 
-namespace FreeParkingSystem.Parking.Contract
+namespace FreeParkingSystem.Parking.Data.Models
 {
 	public class Favorite
 	{

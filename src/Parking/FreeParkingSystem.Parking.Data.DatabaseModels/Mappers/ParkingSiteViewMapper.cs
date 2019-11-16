@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using FreeParkingSystem.Common;
-using FreeParkingSystem.Parking.Contract;
 using FreeParkingSystem.Parking.Data.Models;
 
-namespace FreeParkingSystem.Parking.Data.Mappers
+namespace FreeParkingSystem.Parking.Data.DatabaseModels.Mappers
 {
 	public class ParkingSiteViewMapper : IMap<DbParkingSiteView,ParkingSiteView>
 	{
 		public ParkingSiteView Map(DbParkingSiteView input, IDictionary<object, object> context)
 		{
+			if (input == null)
+				return null;
+
 			return new ParkingSiteView
 			{
 				Id = input.Id,
@@ -26,6 +28,9 @@ namespace FreeParkingSystem.Parking.Data.Mappers
 
 		public DbParkingSiteView Map(ParkingSiteView input, IDictionary<object, object> context)
 		{
+			if (input == null)
+				return null;
+
 			return new DbParkingSiteView
 			{
 				Id = input.Id,

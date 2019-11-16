@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using FreeParkingSystem.Common.Data;
 
-namespace FreeParkingSystem.Parking.Data.Models
+using FreeParkingSystem.Common.Data.Models;
+
+namespace FreeParkingSystem.Parking.Data.DatabaseModels
 {
 	public class DbParkingType : IEntity
 	{

@@ -1,5 +1,6 @@
 ﻿using FreeParkingSystem.Common.Authorization;
 using FreeParkingSystem.Common.Messages;
+using FreeParkingSystem.Parking.Data.Models;
 
 namespace FreeParkingSystem.Parking.Contract.Commands
 {

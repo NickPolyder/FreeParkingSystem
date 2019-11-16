@@ -1,4 +1,4 @@
-﻿namespace FreeParkingSystem.Parking.Contract
+﻿namespace FreeParkingSystem.Parking.Data.Models
 {
 	public class ParkingSpotType
 	{

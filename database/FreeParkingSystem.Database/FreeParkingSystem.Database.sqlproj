@@ -79,6 +79,10 @@
     <Build Include="Parking\Favorites.sql" />
     <Build Include="Parking\FavoriteType.sql" />
     <Build Include="Views\ParkingSiteView.sql" />
+    <Build Include="Views\OrderView.sql" />
+    <Build Include="Views\ParkingSpotView.sql" />
+    <None Include="Migrations\Add-ParkingSpotView.sql" />
+    <None Include="Migrations\Add-OrderView.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FreeParkingSystem.Database.refactorlog" />

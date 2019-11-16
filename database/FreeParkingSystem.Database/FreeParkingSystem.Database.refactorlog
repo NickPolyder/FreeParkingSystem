@@ -63,4 +63,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[FK_Favorites_ToFavoriteTypes]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0ac5ec2f-9cba-4044-95c3-63d8f3f6570f" ChangeDateTime="11/16/2019 13:26:56">
+    <Property Name="ElementName" Value="[dbo].[Order].[OrderDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Order]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LeaseStartDate" />
+  </Operation>
 </Operations>

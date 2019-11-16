@@ -32,4 +32,4 @@ if($environmentName -ne $Env:ASPNETCORE_ENVIRONMENT)
 
 & .\tools\SetupEnvironmentVariables.ps1 "./appsettings.{environment_name}.json" $dictionaryTemp
 
-& dotnet FreeParkingSystem.Parking.API.dll
+& dotnet FreeParkingSystem.Orders.API.dll

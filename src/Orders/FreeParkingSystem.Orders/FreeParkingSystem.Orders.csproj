@@ -6,7 +6,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common.MessageBroker\FreeParkingSystem.Common.MessageBroker.csproj" />
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+		<ProjectReference Include="..\..\Parking\FreeParkingSystem.Parking.Contract\FreeParkingSystem.Parking.Contract.csproj" />
 		<ProjectReference Include="..\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj" />
 		<ProjectReference Include="..\FreeParkingSystem.Orders.Data\FreeParkingSystem.Orders.Data.csproj" />
 	</ItemGroup>

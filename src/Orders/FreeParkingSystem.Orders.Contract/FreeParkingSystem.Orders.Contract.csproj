@@ -8,5 +8,23 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+		<ProjectReference Include="..\..\Parking\FreeParkingSystem.Parking.Data.Models\FreeParkingSystem.Parking.Data.Models.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Compile Update="Resources\Validations.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Validations.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Validations.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Validations.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 </Project>

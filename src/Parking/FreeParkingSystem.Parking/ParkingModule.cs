@@ -5,6 +5,8 @@ using FreeParkingSystem.Common.MessageBroker;
 using FreeParkingSystem.Parking.Commands;
 using FreeParkingSystem.Parking.Data;
 using FreeParkingSystem.Parking.Mappers;
+using FreeParkingSystem.Parking.Messages;
+using FreeParkingSystem.Parking.Seeder;
 
 namespace FreeParkingSystem.Parking
 {
@@ -31,6 +33,9 @@ namespace FreeParkingSystem.Parking
 			builder.RegisterType<AddParkingSpotInputMapper>().AsImplementedInterfaces();
 			builder.RegisterType<ChangeParkingSpotInputMapper>().AsImplementedInterfaces();
 
+			builder.RegisterType<StartLeaseOnParkingSpotHandler>();
+			builder.RegisterType<EndLeaseOnParkingSpotHandler>();
+			builder.RegisterType<SubscriptionStarter>().As<IStartable>().SingleInstance();
 		}
 	}
 }

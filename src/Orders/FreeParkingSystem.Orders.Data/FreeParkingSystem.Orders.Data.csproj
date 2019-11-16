@@ -12,6 +12,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common.Data\FreeParkingSystem.Common.Data.csproj" />
 		<ProjectReference Include="..\..\Common\FreeParkingSystem.Common\FreeParkingSystem.Common.csproj" />
+		<ProjectReference Include="..\..\Parking\FreeParkingSystem.Parking.Data.DatabaseModels\FreeParkingSystem.Parking.Data.DatabaseModels.csproj" />
 		<ProjectReference Include="..\FreeParkingSystem.Orders.Contract\FreeParkingSystem.Orders.Contract.csproj" />
 	</ItemGroup>
 </Project>

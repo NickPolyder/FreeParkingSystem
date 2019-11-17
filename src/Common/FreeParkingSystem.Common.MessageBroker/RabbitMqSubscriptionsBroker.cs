@@ -7,7 +7,7 @@ using RabbitMQ.Client.Events;
 
 namespace FreeParkingSystem.Common.MessageBroker
 {
-	public class RabbitMqSubscriptionsBroker: ISubscriptionBroker
+	public class RabbitMqSubscriptionsBroker : ISubscriptionBroker
 	{
 		private readonly ILogger _logger;
 		private readonly IBrokerConnection _brokerConnection;
@@ -44,7 +44,8 @@ namespace FreeParkingSystem.Common.MessageBroker
 
 			_consumerChannel.QueueBind(exchange: _options.ExchangeName,
 				queue: _options.QueueName,
-				routingKey: messageName);
+				routingKey: messageName,
+				arguments: _options.QueueArguments);
 
 			_subscriptionsManager.AddSubscription<TMessage, THandler>();
 
@@ -62,7 +63,8 @@ namespace FreeParkingSystem.Common.MessageBroker
 
 				_consumerChannel.QueueUnbind(exchange: _options.ExchangeName,
 					queue: _options.QueueName,
-					routingKey: messageName);
+					routingKey: messageName,
+					arguments: _options.QueueArguments);
 
 				if (_subscriptionsManager.IsEmpty)
 				{
@@ -95,16 +97,18 @@ namespace FreeParkingSystem.Common.MessageBroker
 			_consumerChannel.ExchangeDeclare(exchange: _options.ExchangeName,
 				durable: _options.IsDurable,
 				autoDelete: _options.IsAutoDelete,
-				type: ExchangeType.Direct);
+				type: ExchangeType.Direct,
+				arguments: _options.ExchangeArguments);
 
 			_consumerChannel.QueueDeclare(queue: _options.QueueName,
 				durable: _options.IsDurable,
 				exclusive: _options.IsExclusive,
 				autoDelete: _options.IsAutoDelete,
-				arguments: _options.Arguments);
+				arguments: _options.QueueArguments);
 
 			_consumerChannel.CallbackException += (sender, ea) =>
 			{
+				_logger.LogError(ea.Exception, ea.Exception.Message);
 				_consumerChannel.Dispose();
 				CreateConsumerChannel();
 				StartBasicConsume(_consumerChannel);
@@ -129,14 +133,13 @@ namespace FreeParkingSystem.Common.MessageBroker
 			try
 			{
 				_messageProcessor.Process(new Message(eventArgs.RoutingKey, eventArgs.Body));
+				_consumerChannel.BasicAck(eventArgs.DeliveryTag, multiple: false);
 			}
 			catch (Exception ex)
 			{
-				_logger.LogWarning(ex, ex.Message);
+				_logger.LogError(ex, ex.Message);
+				_consumerChannel.BasicReject(eventArgs.DeliveryTag, true);
 			}
-
-			_consumerChannel.BasicAck(eventArgs.DeliveryTag, multiple: false);
 		}
-
 	}
 }

@@ -89,12 +89,16 @@ namespace FreeParkingSystem.Common.MessageBroker
 		{
 			if (_disposed) return;
 
+			_logger.LogError(e.Exception, e.Exception.Message);
+
 			Connect();
 		}
 
 		void OnConnectionShutdown(object sender, ShutdownEventArgs reason)
 		{
 			if (_disposed) return;
+
+			_logger.LogWarning(reason.ReplyText);
 
 			Connect();
 		}

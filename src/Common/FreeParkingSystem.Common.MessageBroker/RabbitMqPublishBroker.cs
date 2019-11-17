@@ -53,7 +53,10 @@ namespace FreeParkingSystem.Common.MessageBroker
 
 				ExchangeDeclare();
 
-				_mainChannel.QueueBind(_options.QueueName, _options.ExchangeName,messageName);
+				_mainChannel.QueueBind(_options.QueueName, 
+					_options.ExchangeName,
+					messageName,
+				arguments: _options.QueueArguments);
 
 				var properties = _mainChannel.CreateBasicProperties();
 				properties.Persistent = true;
@@ -89,10 +92,11 @@ namespace FreeParkingSystem.Common.MessageBroker
 				durable: _options.IsDurable,
 				exclusive: _options.IsExclusive,
 				autoDelete: _options.IsAutoDelete,
-				arguments: _options.Arguments);
+				arguments: _options.QueueArguments);
 
 			_mainChannel.CallbackException += (sender, ea) =>
 			{
+				_logger.LogError(ea.Exception,ea.Exception.Message);
 				_mainChannel.Dispose();
 				CreateMainChannel();
 			};
@@ -103,7 +107,8 @@ namespace FreeParkingSystem.Common.MessageBroker
 			_mainChannel.ExchangeDeclare(exchange: _options.ExchangeName,
 				durable: _options.IsDurable,
 				autoDelete: _options.IsAutoDelete,
-				type: ExchangeType.Direct);
+				type: ExchangeType.Direct,
+				arguments: _options.ExchangeArguments);
 		}
 	}
 }

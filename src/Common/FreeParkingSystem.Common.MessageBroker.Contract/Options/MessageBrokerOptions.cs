@@ -10,7 +10,9 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 		public bool IsDurable { get; }
 		public bool IsExclusive { get; }
 		public bool IsAutoDelete { get; }
-		public Dictionary<string, object> Arguments { get; }
+		public Dictionary<string, object> ExchangeArguments { get; }
+
+		public Dictionary<string, object> QueueArguments { get; }
 
 		internal MessageBrokerOptions(int retryAttempts, 
 			string exchangeName,
@@ -18,7 +20,8 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 			bool isDurable, 
 			bool isExclusive,
 			bool isAutoDelete,
-			Dictionary<string, object> arguments)
+			Dictionary<string, object> exchangeArguments, 
+			Dictionary<string, object> queueArguments)
 		{
 			RetryAttempts = retryAttempts;
 			ExchangeName = exchangeName;
@@ -26,7 +29,8 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 			IsDurable = isDurable;
 			IsExclusive = isExclusive;
 			IsAutoDelete = isAutoDelete;
-			Arguments = arguments;
+			ExchangeArguments = exchangeArguments;
+			QueueArguments = queueArguments;
 		}
 
 	}

@@ -11,7 +11,9 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 		public bool IsDurable { get; private set; } = true;
 		public bool IsExclusive { get; private set; } = false;
 		public bool IsAutoDelete { get; private set; } = false;
-		public Dictionary<string, object> Arguments { get; private set; } = new Dictionary<string, object>();
+		public Dictionary<string, object> ExchangeArguments { get; private set; } = new Dictionary<string, object>();
+		
+		public Dictionary<string, object> QueueArguments { get; private set; } = new Dictionary<string, object>();
 
 		public RabbitMqOptionsBuilder SetRetryAttempts(int retryAttempts)
 		{
@@ -62,10 +64,18 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 			return this;
 		}
 
-		public RabbitMqOptionsBuilder SetArguments(Dictionary<string, object> arguments)
+		public RabbitMqOptionsBuilder SetExchangeArguments(Dictionary<string, object> arguments)
 		{
 			ValidateArguments(arguments);
-			Arguments = arguments;
+			ExchangeArguments = arguments;
+
+			return this;
+		}
+
+		public RabbitMqOptionsBuilder SetQueueArguments(Dictionary<string, object> arguments)
+		{
+			ValidateArguments(arguments);
+			QueueArguments = arguments;
 
 			return this;
 		}
@@ -75,7 +85,8 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 			ValidateRetryAttempts(RetryAttempts);
 			ValidateExchangeName(ExchangeName);
 			ValidateQueueName(QueueName);
-			ValidateArguments(Arguments);
+			ValidateArguments(ExchangeArguments);
+			ValidateArguments(QueueArguments);
 
 			return new MessageBrokerOptions(RetryAttempts,
 				ExchangeName,
@@ -83,7 +94,8 @@ namespace FreeParkingSystem.Common.MessageBroker.Contract.Options
 				IsDurable,
 				IsExclusive,
 				IsAutoDelete,
-				Arguments);
+				ExchangeArguments,
+				QueueArguments);
 		}
 		
 

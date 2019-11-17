@@ -29,11 +29,13 @@ namespace FreeParkingSystem.Orders
 		public Order StartLease(int parkingSpotId, int userId)
 		{
 			if (userId < 0)
-				throw new OrderException();
+				throw new OrderException(Contract.Resources.Validations.Order_UserIdNotValid);
 
 			if (parkingSpotId < 1 || !_commonFunctionsRepository.ParkingSpotExists(parkingSpotId))
-				throw new OrderException();
+				throw new OrderException(Contract.Resources.Validations.ParkingSpot_DoesNotExist);
 
+			if(_commonFunctionsRepository.HasActiveLeaseOnAParkingSpot(parkingSpotId))
+				throw new OrderException(Contract.Resources.Validations.ParkingSpot_IsAlreadyLeased);
 
 			return _orderRepository.Add(new Order
 			{

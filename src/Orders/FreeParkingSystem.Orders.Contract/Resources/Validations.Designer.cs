@@ -59,5 +59,32 @@ namespace FreeParkingSystem.Orders.Contract.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id is not valid..
+        /// </summary>
+        public static string Order_UserIdNotValid {
+            get {
+                return ResourceManager.GetString("Order_UserIdNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking spot does not exist..
+        /// </summary>
+        public static string ParkingSpot_DoesNotExist {
+            get {
+                return ResourceManager.GetString("ParkingSpot_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parking spot is already leased.
+        /// </summary>
+        public static string ParkingSpot_IsAlreadyLeased {
+            get {
+                return ResourceManager.GetString("ParkingSpot_IsAlreadyLeased", resourceCulture);
+            }
+        }
     }
 }

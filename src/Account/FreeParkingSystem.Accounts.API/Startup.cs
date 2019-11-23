@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+using Autofac;
 using FreeParkingSystem.Accounts.Contract.Options;
 using FreeParkingSystem.Accounts.Data.Models;
 using FreeParkingSystem.Common;
@@ -33,7 +34,15 @@ namespace FreeParkingSystem.Accounts.API
 			services.AddLogging(options => options.AddConsole());
 			var rabbitMqOptions = Configuration.GetSection("rabbitmq").Get<RabbitMqOptions>();
 
-			services.AddRabbitMq((rabbitMqBuilder) => { rabbitMqBuilder.SetQueueName(rabbitMqOptions.QueueName); },
+			services.AddRabbitMq((rabbitMqBuilder) =>
+				{
+					rabbitMqBuilder.SetQueueName(rabbitMqOptions.QueueName)
+						.SetExchangeArguments(new Dictionary<string, object>
+						{
+							["x-dead-letter-exchange"] = "Dead-Letters",
+							["x-message-ttl"] = 60000
+						});
+				},
 				(connection) =>
 				{
 					connection.HostName = rabbitMqOptions.HostName;

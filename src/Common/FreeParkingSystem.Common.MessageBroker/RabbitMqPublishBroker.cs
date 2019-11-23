@@ -59,14 +59,16 @@ namespace FreeParkingSystem.Common.MessageBroker
 				arguments: _options.QueueArguments);
 
 				var properties = _mainChannel.CreateBasicProperties();
+				properties.DeliveryMode = 2;
 				properties.Persistent = true;
-				
+
 				_mainChannel.BasicPublish(
 					exchange: _options.ExchangeName,
 					routingKey: messageName,
 					mandatory: true,
 					basicProperties: properties,
 					body: body);
+				
 			});
 		}
 
@@ -93,7 +95,10 @@ namespace FreeParkingSystem.Common.MessageBroker
 				exclusive: _options.IsExclusive,
 				autoDelete: _options.IsAutoDelete,
 				arguments: _options.QueueArguments);
-
+			_mainChannel.BasicReturn += (sender, args) =>
+			{
+				_logger.LogError($"Message: {args.RoutingKey} could not be delivered with reason: {args.ReplyCode} => {args.ReplyText}");
+			};
 			_mainChannel.CallbackException += (sender, ea) =>
 			{
 				_logger.LogError(ea.Exception,ea.Exception.Message);
@@ -101,6 +106,7 @@ namespace FreeParkingSystem.Common.MessageBroker
 				CreateMainChannel();
 			};
 		}
+
 
 		private void ExchangeDeclare()
 		{

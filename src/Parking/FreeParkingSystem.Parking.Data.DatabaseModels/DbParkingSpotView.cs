@@ -12,6 +12,7 @@ namespace FreeParkingSystem.Parking.Data.DatabaseModels
 		public int ParkingTypeId { get; set; }
 		public string ParkingType { get; set; }
 		public bool IsActive { get; set; }
+		public int OwnerId { get; set; }
 		public string Owner { get; set; }
 		public string GeolocationX { get; set; }
 		public string GeolocationY { get; set; }

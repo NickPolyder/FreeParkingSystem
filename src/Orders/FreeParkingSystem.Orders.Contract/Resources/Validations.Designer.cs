@@ -61,6 +61,42 @@ namespace FreeParkingSystem.Orders.Contract.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested order is already cancelled..
+        /// </summary>
+        public static string Order_AlreadyCancelled {
+            get {
+                return ResourceManager.GetString("Order_AlreadyCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested order has already ended..
+        /// </summary>
+        public static string Order_AlreadyEnded {
+            get {
+                return ResourceManager.GetString("Order_AlreadyEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The order can only be cancelled by the parking owner or the tenant..
+        /// </summary>
+        public static string Order_CanOnlyBeCancelledByTheOwnerOrTheTennant {
+            get {
+                return ResourceManager.GetString("Order_CanOnlyBeCancelledByTheOwnerOrTheTennant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested order does not exist..
+        /// </summary>
+        public static string Order_DoesNotExist {
+            get {
+                return ResourceManager.GetString("Order_DoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Id is not valid..
         /// </summary>
         public static string Order_UserIdNotValid {
@@ -84,6 +120,15 @@ namespace FreeParkingSystem.Orders.Contract.Resources {
         public static string ParkingSpot_IsAlreadyLeased {
             get {
                 return ResourceManager.GetString("ParkingSpot_IsAlreadyLeased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Owner of the parking cannot lease the parking to himself.
+        /// </summary>
+        public static string ParkingSpot_OwnerCannotLeaseToHimself {
+            get {
+                return ResourceManager.GetString("ParkingSpot_OwnerCannotLeaseToHimself", resourceCulture);
             }
         }
     }

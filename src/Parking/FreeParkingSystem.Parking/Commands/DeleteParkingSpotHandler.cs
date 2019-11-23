@@ -27,8 +27,7 @@ namespace FreeParkingSystem.Parking.Commands
 
 		public async Task<BaseResponse> Handle(DeleteParkingSpotRequest request, CancellationToken cancellationToken)
 		{
-			var user = _userContextAccessor.GetUserContext().UserToken;
-			var userId = user.Get<int>(UserClaimTypes.Id);
+			var userId = _userContextAccessor.GetUserContext().GetUserId();
 
 			var parkingSpot = _parkingSpotServices.Get(request.Id);
 

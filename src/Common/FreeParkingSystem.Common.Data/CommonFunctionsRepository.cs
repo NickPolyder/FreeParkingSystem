@@ -18,7 +18,8 @@ namespace FreeParkingSystem.Common.Data
 				"SELECT COUNT(1) FROM [Order] ord JOIN [ParkingSpot] spot ON ord.ParkingSpotId = spot.Id " +
 				"WHERE spot.ParkingSiteId = @parkingSiteId AND ord.LeaseEndDate IS NULL";
 
-			using (var connection = _dbContext.Database.GetDbConnection())
+			var connection = _dbContext.Database.GetDbConnection();
+
 			using (var command = connection.CreateCommand())
 			{
 				command.CommandText = query;
@@ -39,7 +40,8 @@ namespace FreeParkingSystem.Common.Data
 			const string query = "SELECT COUNT(1) FROM [Order] ord " +
 								 "WHERE ord.ParkingSpotId = @parkingSpotId AND ord.LeaseEndDate IS NULL";
 
-			using (var connection = _dbContext.Database.GetDbConnection())
+			var connection = _dbContext.Database.GetDbConnection();
+
 			using (var command = connection.CreateCommand())
 			{
 				command.CommandText = query;
@@ -59,9 +61,10 @@ namespace FreeParkingSystem.Common.Data
 		public bool ParkingSpotExists(int parkingSpotId)
 		{
 			const string query = "SELECT COUNT(1) FROM [ParkingSpot] " +
-								 "WHERE Id = @parkingSpotId AND IsAvailable = 1";
+								 "WHERE Id = @parkingSpotId";
 
-			using (var connection = _dbContext.Database.GetDbConnection())
+			var connection = _dbContext.Database.GetDbConnection();
+
 			using (var command = connection.CreateCommand())
 			{
 				command.CommandText = query;
@@ -75,6 +78,36 @@ namespace FreeParkingSystem.Common.Data
 				connection.Close();
 
 				return result != null && result is int ordersAgainstParkingSpot && ordersAgainstParkingSpot >= 1;
+			}
+		}
+
+		public bool IsOwnerOfParkingSpot(int parkingSpotId, int userId)
+		{
+			const string query = "SELECT COUNT(1) FROM [ParkingSpot] spot " +
+								 "JOIN [ParkingSite] site ON spot.ParkingSiteId = site.Id " +
+								 "WHERE spot.Id = @parkingSpotId AND site.OwnerId = @ownerId";
+
+			var connection = _dbContext.Database.GetDbConnection();
+
+			using (var command = connection.CreateCommand())
+			{
+				command.CommandText = query;
+				var parkingSpotParameter = command.CreateParameter();
+				parkingSpotParameter.ParameterName = "@parkingSpotId";
+				parkingSpotParameter.DbType = DbType.Int32;
+				parkingSpotParameter.Value = parkingSpotId;
+				command.Parameters.Add(parkingSpotParameter);
+				var ownerIdParameter = command.CreateParameter();
+				ownerIdParameter.ParameterName = "@ownerId";
+				ownerIdParameter.DbType = DbType.Int32;
+				ownerIdParameter.Value = userId;
+				command.Parameters.Add(ownerIdParameter);
+
+				connection.Open();
+				var result = command.ExecuteScalar();
+				connection.Close();
+
+				return result != null && result is int isOwner && isOwner >= 1;
 			}
 		}
 	}

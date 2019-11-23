@@ -6,7 +6,7 @@ $regexConfiguration = '^*.'+$Configuration+'*.';
 
 $testProjects = (Get-ChildItem $Path -Include *Tests.csproj -Exclude 'FreeParkingSystem.Testing' -Recurse -Force);
 
-$length = $testProjects.Length
+$length = ($testProjects | measure).Count
 $activityName = "Run coverage";
 
 if($length -le 0)
@@ -14,8 +14,35 @@ if($length -le 0)
     Write-Output 'No scripts to run.'
     return;
 }
+$coverageLogFile = '.\coverage.log'
+$coverletCoveragePath = '.\coverage.json';
+$coverageFormatPath = '.\coverage.opencover.xml';
+$reportGeneratorResult = '.\cover\';
+$testResultsDirectory = $PSScriptRoot +'\test-results';
+
+if(Test-Path $coverageLogFile)
+{
+    Remove-Item $coverageLogFile -Force
+}
+
+if(Test-Path $coverletCoveragePath)
+{
+    Remove-Item $coverletCoveragePath -Force
+}
+
+if(Test-Path $coverageFormatPath)
+{
+    Remove-Item $coverageFormatPath -Force
+}
+
+if(Test-Path $testResultsDirectory)
+{
+    Remove-Item $testResultsDirectory -Force -Recurse
+}
 
 Write-Progress -Activity $activityName -Status 'Progress->' -PercentComplete 0 -CurrentOperation "Starting..."
+
+$commandBuilder = [System.Text.StringBuilder]::new();
 
 for($index = 0; $index -lt $length; $index++)
 {
@@ -35,17 +62,26 @@ for($index = 0; $index -lt $length; $index++)
         continue;
     }
 
-    $command = '& coverlet ' + $dllPath + ' --target "dotnet" --targetargs "test ' + 
-    $item.FullName + 
-    ' --no-build -c '+ $Configuration + '" --merge-with .\coverage.json ';
+    [void]$commandBuilder.Append('& coverlet ' + $dllPath);
+    [void]$commandBuilder.Append(' --target "dotnet" --targetargs "test ' + $item.FullName + ' --no-build')
+    [void]$commandBuilder.Append(' -c '+ $Configuration);
+    [void]$commandBuilder.Append(' -r ' + $testResultsDirectory);
+    [void]$commandBuilder.Append(' "');   
+    [void]$commandBuilder.Append(' --merge-with ' + $coverletCoveragePath);
 
-    if($index + 1 -eq $testProjects.Length)
+    if($index + 1 -eq $length)
     {
-        $command = $command + ' --format opencover';
+        [void]$commandBuilder.Append(' --format opencover');
     }
-    Invoke-Expression $command | Out-File .\coverage.log -Append
+
+    $command = $commandBuilder.ToString();
+    
+    Invoke-Expression $command | Out-File $coverageLogFile -Append
+
+    [void]$commandBuilder.Clear();
 }
 
-& reportgenerator -reports:coverage.opencover.xml -targetdir:.\cover | Out-File .\coverage.log -Append
+& reportgenerator -reports:$coverageFormatPath -targetdir:$reportGeneratorResult | Out-File $coverageLogFile -Append
 
-& start .\cover\index.htm
+$startIndex = $reportGeneratorResult + 'index.htm';
+& start $startIndex

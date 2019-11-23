@@ -11,30 +11,31 @@ using MediatR;
 
 namespace FreeParkingSystem.Orders.Commands
 {
-	public class StartLeaseHandler : IRequestHandler<StartLeaseCommand, BaseResponse>
+	public class CancelLeaseHandler : IRequestHandler<CancelLeaseCommand, BaseResponse>
 	{
 		private readonly IOrderServices _orderServices;
 		private readonly IPublishBroker _publishBroker;
 		private readonly IUserContextAccessor _userContextAccessor;
 
-		public StartLeaseHandler(IOrderServices orderServices,
-			IPublishBroker publishBroker,
+		public CancelLeaseHandler(IOrderServices orderServices, 
+			IPublishBroker publishBroker, 
 			IUserContextAccessor userContextAccessor)
 		{
 			_orderServices = orderServices;
 			_publishBroker = publishBroker;
 			_userContextAccessor = userContextAccessor;
 		}
-		public Task<BaseResponse> Handle(StartLeaseCommand request, CancellationToken cancellationToken)
+
+		public Task<BaseResponse> Handle(CancelLeaseCommand request, CancellationToken cancellationToken)
 		{
 			var userId = _userContextAccessor.GetUserContext().GetUserId();
 
-			var order = _orderServices.StartLease(request.ParkingSpotId, userId);
+			var order = _orderServices.CancelLease(request.OrderId, userId);
 
-			_publishBroker.Publish(new StartLeaseOnParkingSpotMessage(request.ParkingSpotId));
+			_publishBroker.Publish(new EndLeaseOnParkingSpotMessage(order.ParkingSpotId));
 
 			var orderView = _orderServices.GetView(order.Id, userId);
-			orderView.ParkingSpot.IsAvailable = false;
+			orderView.ParkingSpot.IsAvailable = true;
 
 			return request.ToSuccessResponse(orderView).AsTask();
 		}

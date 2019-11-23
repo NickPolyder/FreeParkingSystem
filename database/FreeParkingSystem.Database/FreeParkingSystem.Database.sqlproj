@@ -81,16 +81,18 @@
     <Build Include="Views\ParkingSiteView.sql" />
     <Build Include="Views\OrderView.sql" />
     <Build Include="Views\ParkingSpotView.sql" />
-    <None Include="Migrations\Add-ParkingSpotView.sql" />
-    <None Include="Migrations\Add-OrderView.sql" />
+    <None Include="Migrations\3-Add-ParkingSpotView.sql" />
+    <None Include="Migrations\4-Add-OrderView.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FreeParkingSystem.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FreeParkingSystem.Database.publish.xml" />
-    <None Include="Migrations\Add-Favorites.sql" />
-    <None Include="Migrations\Add-ParkingSiteView.sql" />
+    <None Include="Migrations\1-Add-Favorites.sql" />
+    <None Include="Migrations\2-Add-ParkingSiteView.sql" />
+    <None Include="Migrations\5-Add-IsCancelled-ToOrders.sql" />
+    <None Include="Migrations\6-Add-UserId-And-OwnerId-on-views.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\InsertConfiguration.PostDeployment.sql" />

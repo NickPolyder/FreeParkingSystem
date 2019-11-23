@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Order_AlreadyCancelled" xml:space="preserve">
+    <value>The requested order is already cancelled.</value>
+  </data>
+  <data name="Order_AlreadyEnded" xml:space="preserve">
+    <value>The requested order has already ended.</value>
+  </data>
+  <data name="Order_CanOnlyBeCancelledByTheOwnerOrTheTennant" xml:space="preserve">
+    <value>The order can only be cancelled by the parking owner or the tenant.</value>
+  </data>
+  <data name="Order_DoesNotExist" xml:space="preserve">
+    <value>The requested order does not exist.</value>
+  </data>
   <data name="Order_UserIdNotValid" xml:space="preserve">
     <value>User Id is not valid.</value>
   </data>
@@ -125,5 +137,8 @@
   </data>
   <data name="ParkingSpot_IsAlreadyLeased" xml:space="preserve">
     <value>The parking spot is already leased</value>
+  </data>
+  <data name="ParkingSpot_OwnerCannotLeaseToHimself" xml:space="preserve">
+    <value>The Owner of the parking cannot lease the parking to himself</value>
   </data>
 </root>

@@ -27,8 +27,7 @@ namespace FreeParkingSystem.Parking.Commands
 
 		public Task<BaseResponse> Handle(AddParkingSpotToFavoritesRequest request, CancellationToken cancellationToken)
 		{
-			var userContext = _userContextAccessor.GetUserContext();
-			var userId = userContext.UserToken.Get<int>(UserClaimTypes.Id);
+			var userId = _userContextAccessor.GetUserContext().GetUserId();
 			var parkingSpot = _parkingSpotServices.Get(request.ParkingSpotId);
 
 			if(parkingSpot == null)

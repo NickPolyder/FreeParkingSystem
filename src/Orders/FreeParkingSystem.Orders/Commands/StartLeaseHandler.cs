@@ -27,8 +27,7 @@ namespace FreeParkingSystem.Orders.Commands
 		}
 		public Task<BaseResponse> Handle(StartLeaseCommand request, CancellationToken cancellationToken)
 		{
-			var user = _userContextAccessor.GetUserContext().UserToken;
-			var userId = user.Get<int>(UserClaimTypes.Id);
+			var userId = _userContextAccessor.GetUserContext().GetUserId();
 			
 			var order = _orderServices.StartLease(request.ParkingSpotId, userId);
 			

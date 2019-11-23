@@ -29,8 +29,7 @@ namespace FreeParkingSystem.Parking.Commands
 
 		public Task<BaseResponse> Handle(AddParkingSpotRequest request, CancellationToken cancellationToken)
 		{
-			var user = _userContextAccessor.GetUserContext().UserToken;
-			var userId = user.Get<int>(UserClaimTypes.Id);
+			var userId = _userContextAccessor.GetUserContext().GetUserId();
 			var parkingSite = _parkingSiteServices.Get(request.ParkingSiteId);
 
 			if(parkingSite == null || !parkingSite.IsActive)

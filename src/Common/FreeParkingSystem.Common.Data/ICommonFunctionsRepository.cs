@@ -7,5 +7,7 @@
 		bool HasActiveLeaseOnAParkingSpot(int parkingSpotId);
 
 		bool ParkingSpotExists(int parkingSpotId);
+
+		bool IsOwnerOfParkingSpot(int parkingSpotId, int userId);
 	}
 }

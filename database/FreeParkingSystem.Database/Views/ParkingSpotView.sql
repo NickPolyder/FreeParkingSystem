@@ -6,6 +6,7 @@ AS SELECT
 	,siteView.IsActive
 	,siteView.ParkingTypeId
 	,siteView.ParkingType
+	,siteView.OwnerId
 	,siteView.Owner
 	,siteView.GeolocationX 
 	,siteView.GeolocationY

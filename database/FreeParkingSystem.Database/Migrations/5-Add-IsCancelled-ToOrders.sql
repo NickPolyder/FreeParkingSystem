@@ -25,6 +25,10 @@ BEGIN
 	PRINT N'Creating [dbo].[Order].[IsCancelled]...';
 	ALTER TABLE [dbo].[Order] 
 	ADD IsCancelled BIT NOT NULL DEFAULT 0
+	
+	PRINT N'Change dbo.Order.UserId to TenantId...';
+
+	EXEC sp_rename 'dbo.Order.UserId', 'TenantId', 'COLUMN';
 
 	PRINT N'Alter [dbo].[OrderView] to include [IsCancelled] column...';
 	EXEC('CREATE OR ALTER VIEW [dbo].[OrderView]
@@ -49,7 +53,7 @@ BEGIN
 	,spotView.ParkingSpotTypeId
 	,spotView.ParkingSpotType	
 	FROM [Order] ord
-	LEFT JOIN [User] usr ON ord.UserId = usr.Id
+	LEFT JOIN [User] usr ON ord.TenantId = usr.Id
 	LEFT JOIN [ParkingSpotView] spotView ON ord.ParkingSpotId = spotView.Id
 ')
 END

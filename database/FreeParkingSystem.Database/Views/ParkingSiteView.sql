@@ -3,8 +3,9 @@
 	site.Id
 	,site.Name AS 'Parking'
 	,site.IsActive
-	,site.ParkingTypeId
+	,site.ParkingTypeId	
 	,prkType.Name AS 'ParkingType'
+	,site.OwnerId
 	,usr.UserName AS 'Owner'
 	,site.GeolocationX 
 	,site.GeolocationY

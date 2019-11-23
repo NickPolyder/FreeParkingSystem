@@ -24,6 +24,7 @@ namespace FreeParkingSystem.Parking.Data.DatabaseModels.Mappers
 					Id = input.Id,
 					Name = input.Parking,
 					IsActive = input.IsActive,
+					OwnerId = input.OwnerId,
 					Owner = input.Owner,
 					ParkingType = new ParkingType
 					{
@@ -50,6 +51,7 @@ namespace FreeParkingSystem.Parking.Data.DatabaseModels.Mappers
 				ParkingType = input.ParkingSite.ParkingType.Name,
 				Parking = input.ParkingSite.Name,
 				IsActive = input.ParkingSite.IsActive,
+				OwnerId = input.ParkingSite.OwnerId,
 				Owner = input.ParkingSite.Owner,
 				GeolocationX = input.ParkingSite.Geolocation.X,
 				GeolocationY = input.ParkingSite.Geolocation.Y

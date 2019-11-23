@@ -61,7 +61,7 @@ namespace FreeParkingSystem.Common.Data
 		public bool ParkingSpotExists(int parkingSpotId)
 		{
 			const string query = "SELECT COUNT(1) FROM [ParkingSpot] " +
-								 "WHERE Id = @parkingSpotId AND IsAvailable = 1";
+								 "WHERE Id = @parkingSpotId";
 
 			var connection = _dbContext.Database.GetDbConnection();
 

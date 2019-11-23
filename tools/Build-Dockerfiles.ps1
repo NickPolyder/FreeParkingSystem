@@ -9,12 +9,11 @@ $dockerFileList = @(
 	@{
 		Tag = $baseName + 'parking'
 		File =  $path+'\src\Parking\FreeParkingSystem.Parking.API\Dockerfile'
-	}#,
-#    @{
-#        Tag = $baseName + 'orders'
-#        File =  $path+'\src\Orders\FreeParkingSystem.Orders.API\Dockerfile'
-#    },
-
+	},
+    @{
+        Tag = $baseName + 'orders'
+        File =  $path+'\src\Orders\FreeParkingSystem.Orders.API\Dockerfile'
+    }
 );
 
 

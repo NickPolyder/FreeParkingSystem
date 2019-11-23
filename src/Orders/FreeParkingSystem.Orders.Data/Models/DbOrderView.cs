@@ -25,5 +25,6 @@ namespace FreeParkingSystem.Orders.Data.Models
 		public string Tenant { get; set; }
 		public DateTime LeaseStartDate { get; set; }
 		public DateTime? LeaseEndDate { get; set; }
+		public bool IsCancelled { get; set; }
 	}
 }

@@ -91,6 +91,7 @@
     <None Include="FreeParkingSystem.Database.publish.xml" />
     <None Include="Migrations\Add-Favorites.sql" />
     <None Include="Migrations\Add-ParkingSiteView.sql" />
+    <None Include="Migrations\Add-IsCancelled-ToOrders.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\InsertConfiguration.PostDeployment.sql" />

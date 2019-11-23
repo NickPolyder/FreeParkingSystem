@@ -19,9 +19,10 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 				Tenant = input.Tenant,
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,
+				IsCancelled = input.IsCancelled,
 				ParkingSpot = new ParkingSpotView
 				{
-					Id = input.Id,
+					Id = input.ParkingSpotId,
 					IsAvailable = input.IsAvailable,
 					Level = input.Level,
 					Position = input.Position,
@@ -32,7 +33,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 					},
 					ParkingSite = new ParkingSiteView
 					{
-						Id = input.Id,
+						Id = input.ParkingSiteId,
 						Name = input.Parking,
 						IsActive = input.IsActive,
 						Owner = input.Owner,
@@ -58,6 +59,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 				Tenant = input.Tenant,
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,
+				IsCancelled = input.IsCancelled,
 				ParkingSpotId = input.ParkingSpot.Id,
 				IsAvailable = input.ParkingSpot.IsAvailable,
 				Level = input.ParkingSpot.Level,
@@ -71,7 +73,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 				IsActive = input.ParkingSpot.ParkingSite.IsActive,
 				Owner = input.ParkingSpot.ParkingSite.Owner,
 				GeolocationX = input.ParkingSpot.ParkingSite.Geolocation.X,
-				GeolocationY = input.ParkingSpot.ParkingSite.Geolocation.Y
+				GeolocationY = input.ParkingSpot.ParkingSite.Geolocation.Y,
 			};
 		}
 	}

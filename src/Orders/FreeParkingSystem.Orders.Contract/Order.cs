@@ -16,5 +16,7 @@ namespace FreeParkingSystem.Orders.Contract
 		public DateTime LeaseStartDate { get; set; }
 
 		public DateTime? LeaseEndDate { get; set; }
+
+		public bool IsCancelled { get; set; }
 	}
 }

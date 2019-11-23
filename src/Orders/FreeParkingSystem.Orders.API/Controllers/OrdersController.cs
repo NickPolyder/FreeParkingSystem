@@ -36,5 +36,13 @@ namespace FreeParkingSystem.Orders.API.Controllers
 
 			return ActionResult<OrderView>(result);
 		}
+
+		[HttpDelete("{orderId}")]
+		public async Task<IActionResult> Cancel(int orderId)
+		{
+			var result = await _mediator.Send(new CancelLeaseCommand(orderId));
+
+			return ActionResult<OrderView>(result);
+		}
 	}
 }

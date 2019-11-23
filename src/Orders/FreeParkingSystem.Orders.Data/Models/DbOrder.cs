@@ -19,6 +19,8 @@ namespace FreeParkingSystem.Orders.Data.Models
 
 		public DateTime? LeaseEndDate { get; set; }
 
+		public bool IsCancelled { get; set; }
+
 		[ForeignKey(nameof(ParkingSpotId))]
 		public virtual DbParkingSpot ParkingSpot { get; set; }
 	}

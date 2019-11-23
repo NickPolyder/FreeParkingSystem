@@ -4,7 +4,7 @@ using FreeParkingSystem.Common.Data.Models;
 
 namespace FreeParkingSystem.Orders.Data.Models
 {
-	public class DbOrderView: IEntity
+	public class DbOrderView : IEntity
 	{
 		[Key]
 		public int Id { get; set; }
@@ -14,6 +14,7 @@ namespace FreeParkingSystem.Orders.Data.Models
 		public int ParkingTypeId { get; set; }
 		public string ParkingType { get; set; }
 		public bool IsActive { get; set; }
+		public int OwnerId { get; set; }
 		public string Owner { get; set; }
 		public string GeolocationX { get; set; }
 		public string GeolocationY { get; set; }
@@ -22,6 +23,7 @@ namespace FreeParkingSystem.Orders.Data.Models
 		public int Level { get; set; }
 		public bool IsAvailable { get; set; }
 		public string ParkingSpotType { get; set; }
+		public int TenantId { get; set; }
 		public string Tenant { get; set; }
 		public DateTime LeaseStartDate { get; set; }
 		public DateTime? LeaseEndDate { get; set; }

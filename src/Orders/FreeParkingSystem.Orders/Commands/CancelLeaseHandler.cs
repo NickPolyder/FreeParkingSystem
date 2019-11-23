@@ -34,7 +34,7 @@ namespace FreeParkingSystem.Orders.Commands
 
 			_publishBroker.Publish(new EndLeaseOnParkingSpotMessage(order.ParkingSpotId));
 
-			var orderView = _orderServices.GetView(order.Id);
+			var orderView = _orderServices.GetView(order.Id, userId);
 			orderView.ParkingSpot.IsAvailable = true;
 
 			return request.ToSuccessResponse(orderView).AsTask();

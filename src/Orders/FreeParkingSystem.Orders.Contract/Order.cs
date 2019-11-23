@@ -11,7 +11,7 @@ namespace FreeParkingSystem.Orders.Contract
 
 		public ParkingSpot ParkingSpot { get; set; }
 
-		public int UserId { get; set; }
+		public int TenantId { get; set; }
 
 		public DateTime LeaseStartDate { get; set; }
 

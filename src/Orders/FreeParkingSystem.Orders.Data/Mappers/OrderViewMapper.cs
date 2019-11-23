@@ -16,6 +16,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 			return new OrderView
 			{
 				Id = input.Id,
+				TenantId = input.TenantId,
 				Tenant = input.Tenant,
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,
@@ -36,6 +37,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 						Id = input.ParkingSiteId,
 						Name = input.Parking,
 						IsActive = input.IsActive,
+						OwnerId = input.OwnerId,
 						Owner = input.Owner,
 						ParkingType = new ParkingType
 						{
@@ -56,6 +58,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 			return new DbOrderView
 			{
 				Id = input.Id,
+				TenantId = input.TenantId,
 				Tenant = input.Tenant,
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,
@@ -71,6 +74,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 				ParkingType = input.ParkingSpot.ParkingSite.ParkingType.Name,
 				Parking = input.ParkingSpot.ParkingSite.Name,
 				IsActive = input.ParkingSpot.ParkingSite.IsActive,
+				OwnerId = input.ParkingSpot.ParkingSite.OwnerId,
 				Owner = input.ParkingSpot.ParkingSite.Owner,
 				GeolocationX = input.ParkingSpot.ParkingSite.Geolocation.X,
 				GeolocationY = input.ParkingSpot.ParkingSite.Geolocation.Y,

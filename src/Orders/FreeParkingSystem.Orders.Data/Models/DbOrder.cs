@@ -13,7 +13,7 @@ namespace FreeParkingSystem.Orders.Data.Models
 
 		public int ParkingSpotId { get; set; }
 
-		public int UserId { get; set; }
+		public int TenantId { get; set; }
 
 		public DateTime LeaseStartDate { get; set; }
 

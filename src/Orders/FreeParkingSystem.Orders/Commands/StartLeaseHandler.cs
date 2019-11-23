@@ -28,12 +28,12 @@ namespace FreeParkingSystem.Orders.Commands
 		public Task<BaseResponse> Handle(StartLeaseCommand request, CancellationToken cancellationToken)
 		{
 			var userId = _userContextAccessor.GetUserContext().GetUserId();
-			
+
 			var order = _orderServices.StartLease(request.ParkingSpotId, userId);
-			
+
 			_publishBroker.Publish(new StartLeaseOnParkingSpotMessage(request.ParkingSpotId));
 
-			var orderView = _orderServices.GetView(order.Id);
+			var orderView = _orderServices.GetView(order.Id, userId);
 			orderView.ParkingSpot.IsAvailable = false;
 
 			return request.ToSuccessResponse(orderView).AsTask();

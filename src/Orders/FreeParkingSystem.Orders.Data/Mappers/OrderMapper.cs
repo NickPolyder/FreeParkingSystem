@@ -22,7 +22,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 			{
 				Id = input.Id,
 				ParkingSpotId = input.ParkingSpotId,
-				UserId =  input.UserId,
+				TenantId =  input.TenantId,
 				ParkingSpot = _parkingSpotMapper.Map(input.ParkingSpot),
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,
@@ -36,7 +36,7 @@ namespace FreeParkingSystem.Orders.Data.Mappers
 			{
 				Id = input.Id,
 				ParkingSpotId = input.ParkingSpotId,
-				UserId = input.UserId,
+				TenantId = input.TenantId,
 				ParkingSpot = _parkingSpotMapper.Map(input.ParkingSpot),
 				LeaseStartDate = input.LeaseStartDate,
 				LeaseEndDate = input.LeaseEndDate,

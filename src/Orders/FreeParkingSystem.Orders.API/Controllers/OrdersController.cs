@@ -8,6 +8,7 @@ using FreeParkingSystem.Common.ExtensionMethods;
 using FreeParkingSystem.Orders.Contract;
 using FreeParkingSystem.Orders.Contract.Commands;
 using FreeParkingSystem.Orders.Contract.Dtos;
+using FreeParkingSystem.Orders.Contract.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,23 @@ namespace FreeParkingSystem.Orders.API.Controllers
 		{
 			_mediator = mediator;
 			_startLeaseMapper = startLeaseMapper;
+		}
+
+		[HttpGet()]
+		public async Task<IActionResult> Get()
+		{
+			var result = await _mediator.Send(new GetActiveLeasesRequest());
+
+			return ActionResult<List<OrderView>>(result);
+		}
+
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> Get(int id)
+		{
+			var result = await _mediator.Send(new GetActiveLeaseByIdRequest(id));
+
+			return ActionResult<OrderView>(result);
 		}
 
 		[HttpPost]
